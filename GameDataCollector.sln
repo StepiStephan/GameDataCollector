@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDataCollector.Android", "GameDataCollector\GameDataCollector.Android\GameDataCollector.Android.csproj", "{A9576AC2-1B8B-47E4-B53D-46A888303710}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDataCollector", "GameDataCollector\GameDataCollector\GameDataCollector.csproj", "{E1DAB6EE-23C2-41FA-86B9-C196DC2D8131}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameDataCollector", "GameDataCollector\GameDataCollector\GameDataCollector.csproj", "{E1DAB6EE-23C2-41FA-86B9-C196DC2D8131}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestKonsole", "TestKonsole\TestKonsole.csproj", "{C1E80201-013B-4DC5-8804-A7F63CF106EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestKonsole", "TestKonsole\TestKonsole.csproj", "{C1E80201-013B-4DC5-8804-A7F63CF106EE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C911243C-3E54-4CDB-B6B4-391E25AA2581}"
 EndProject
@@ -19,7 +19,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{411D91
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{8AB47340-C6AA-42DB-87E9-69CE8339DA5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataClasses", "DataClasses\DataClasses.csproj", "{983491C8-13CE-4074-9A07-3C737FD365E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataClasses", "DataClasses\DataClasses.csproj", "{983491C8-13CE-4074-9A07-3C737FD365E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDataCollectorWorkflow", "GameDataCollectorWorkflow\GameDataCollectorWorkflow.csproj", "{0608774B-98EA-4170-A47B-5D59E7D641D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDataCollectorWorkflow.Contract", "GameDataCollectorWorkflow.Contract\GameDataCollectorWorkflow.Contract.csproj", "{9D675C27-F9E9-4424-BB35-5BA0AFD2F5B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandling", "DataHandling\DataHandling.csproj", "{543DEDEB-AF7C-48B3-B2C3-FDCBCDF7A1CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandling.Contract", "DataHandling.Contract\DataHandling.Contract.csproj", "{467EA014-46B4-4899-81A9-8C8DA7871198}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +55,22 @@ Global
 		{983491C8-13CE-4074-9A07-3C737FD365E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{983491C8-13CE-4074-9A07-3C737FD365E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{983491C8-13CE-4074-9A07-3C737FD365E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0608774B-98EA-4170-A47B-5D59E7D641D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0608774B-98EA-4170-A47B-5D59E7D641D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0608774B-98EA-4170-A47B-5D59E7D641D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0608774B-98EA-4170-A47B-5D59E7D641D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D675C27-F9E9-4424-BB35-5BA0AFD2F5B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D675C27-F9E9-4424-BB35-5BA0AFD2F5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D675C27-F9E9-4424-BB35-5BA0AFD2F5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D675C27-F9E9-4424-BB35-5BA0AFD2F5B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{543DEDEB-AF7C-48B3-B2C3-FDCBCDF7A1CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543DEDEB-AF7C-48B3-B2C3-FDCBCDF7A1CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543DEDEB-AF7C-48B3-B2C3-FDCBCDF7A1CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543DEDEB-AF7C-48B3-B2C3-FDCBCDF7A1CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{467EA014-46B4-4899-81A9-8C8DA7871198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{467EA014-46B4-4899-81A9-8C8DA7871198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{467EA014-46B4-4899-81A9-8C8DA7871198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{467EA014-46B4-4899-81A9-8C8DA7871198}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +82,10 @@ Global
 		{031B5FC0-6496-43B8-BC18-977213D4061D} = {4EF80E51-2C8B-4F3D-9456-58ECA667B1CA}
 		{411D915E-5136-4791-BD0A-AD69694220D4} = {4EF80E51-2C8B-4F3D-9456-58ECA667B1CA}
 		{983491C8-13CE-4074-9A07-3C737FD365E3} = {8AB47340-C6AA-42DB-87E9-69CE8339DA5A}
+		{0608774B-98EA-4170-A47B-5D59E7D641D8} = {031B5FC0-6496-43B8-BC18-977213D4061D}
+		{9D675C27-F9E9-4424-BB35-5BA0AFD2F5B5} = {031B5FC0-6496-43B8-BC18-977213D4061D}
+		{543DEDEB-AF7C-48B3-B2C3-FDCBCDF7A1CB} = {411D915E-5136-4791-BD0A-AD69694220D4}
+		{467EA014-46B4-4899-81A9-8C8DA7871198} = {411D915E-5136-4791-BD0A-AD69694220D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60C749EC-87B3-4760-A488-C0952807AB30}
