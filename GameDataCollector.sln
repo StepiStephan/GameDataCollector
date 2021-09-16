@@ -21,13 +21,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{8AB47340-C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataClasses", "DataClasses\DataClasses.csproj", "{983491C8-13CE-4074-9A07-3C737FD365E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDataCollectorWorkflow", "GameDataCollectorWorkflow\GameDataCollectorWorkflow.csproj", "{0608774B-98EA-4170-A47B-5D59E7D641D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameDataCollectorWorkflow", "GameDataCollectorWorkflow\GameDataCollectorWorkflow.csproj", "{0608774B-98EA-4170-A47B-5D59E7D641D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDataCollectorWorkflow.Contract", "GameDataCollectorWorkflow.Contract\GameDataCollectorWorkflow.Contract.csproj", "{9D675C27-F9E9-4424-BB35-5BA0AFD2F5B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameDataCollectorWorkflow.Contract", "GameDataCollectorWorkflow.Contract\GameDataCollectorWorkflow.Contract.csproj", "{9D675C27-F9E9-4424-BB35-5BA0AFD2F5B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandling", "DataHandling\DataHandling.csproj", "{543DEDEB-AF7C-48B3-B2C3-FDCBCDF7A1CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataHandling", "DataHandling\DataHandling.csproj", "{543DEDEB-AF7C-48B3-B2C3-FDCBCDF7A1CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandling.Contract", "DataHandling.Contract\DataHandling.Contract.csproj", "{467EA014-46B4-4899-81A9-8C8DA7871198}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataHandling.Contract", "DataHandling.Contract\DataHandling.Contract.csproj", "{467EA014-46B4-4899-81A9-8C8DA7871198}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandling.Test", "DataHandling.Test\DataHandling.Test.csproj", "{7B67C2B3-9035-4A5A-8BF1-01280D43D7A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDataCollectorWorkflow.Test", "GameDataCollectorWorkflow.Test\GameDataCollectorWorkflow.Test.csproj", "{B0920885-0251-490A-989C-52746490BA56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,14 @@ Global
 		{467EA014-46B4-4899-81A9-8C8DA7871198}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{467EA014-46B4-4899-81A9-8C8DA7871198}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{467EA014-46B4-4899-81A9-8C8DA7871198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B67C2B3-9035-4A5A-8BF1-01280D43D7A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B67C2B3-9035-4A5A-8BF1-01280D43D7A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B67C2B3-9035-4A5A-8BF1-01280D43D7A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B67C2B3-9035-4A5A-8BF1-01280D43D7A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0920885-0251-490A-989C-52746490BA56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0920885-0251-490A-989C-52746490BA56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0920885-0251-490A-989C-52746490BA56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0920885-0251-490A-989C-52746490BA56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +98,8 @@ Global
 		{9D675C27-F9E9-4424-BB35-5BA0AFD2F5B5} = {031B5FC0-6496-43B8-BC18-977213D4061D}
 		{543DEDEB-AF7C-48B3-B2C3-FDCBCDF7A1CB} = {411D915E-5136-4791-BD0A-AD69694220D4}
 		{467EA014-46B4-4899-81A9-8C8DA7871198} = {411D915E-5136-4791-BD0A-AD69694220D4}
+		{7B67C2B3-9035-4A5A-8BF1-01280D43D7A8} = {411D915E-5136-4791-BD0A-AD69694220D4}
+		{B0920885-0251-490A-989C-52746490BA56} = {031B5FC0-6496-43B8-BC18-977213D4061D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60C749EC-87B3-4760-A488-C0952807AB30}

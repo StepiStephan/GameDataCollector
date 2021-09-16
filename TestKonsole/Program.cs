@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GameDataCollectorWorkflow;
+using GameDataCollectorWorkflow.Contract;
+using System;
 
 namespace TestKonsole
 {
@@ -6,7 +8,7 @@ namespace TestKonsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
