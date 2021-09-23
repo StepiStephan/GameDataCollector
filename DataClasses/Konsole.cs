@@ -15,12 +15,15 @@ namespace DataClasses
         public string Id { get => id; }
         public List<Storage> Storages { get => storages; }
 
-        public Konsole(string consoleName, string name, string id)
+        public Konsole(string consoleName, string name, float spaceIntern)
         {
             this.consoleName = consoleName;
             this.name = name;
-            this.id = id;
-            this.storages = new List<Storage>();
+            this.id = Guid.NewGuid().ToString();
+            this.storages = new List<Storage>()
+            {
+                new Storage(spaceIntern, "InternerSpeicher")
+            };
         }
 
         public void AddStorage(Storage storage)

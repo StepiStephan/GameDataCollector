@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DataClasses
 {
@@ -14,12 +15,12 @@ namespace DataClasses
         public string Id { get => id; }
         public List<Genre> GameGenre { get => gameGenres; }
 
-        public Game(string name, List<Genre> gameGenres, float spaceOnSorage, string id)
+        public Game(string name, List<Genre> gameGenres, float spaceOnSorage)
         {
             this.name = name;
             this.gameGenres = gameGenres;
             this.spaceOnSorage = spaceOnSorage;
-            this.id = id;
+            this.id = Guid.NewGuid().ToString();
         }
 
         public override string ToString()

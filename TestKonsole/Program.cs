@@ -11,16 +11,15 @@ namespace TestKonsole
         static void Main(string[] args)
         {
 
-            Konsole konsole = new Konsole("Switch", "SwitchMH" , Guid.NewGuid().ToString());
-            Storage storage = new Storage(36f, "InternerSpeicher", Guid.NewGuid().ToString());
+            Konsole konsole = new Konsole("Switch", "SwitchMH", 32f);
+            Storage storage = new Storage(36f, "InternerSpeicher");
             Game game = new Game(
                 "Zelda:BotW",
                 new System.Collections.Generic.List<Genre>()
                 {
                     Genre.SingelPlayer
                 },
-                16f,
-                Guid.NewGuid().ToString());
+                16f);
             konsole.AddStorage(storage);
             storage.AddGame(game);
 
