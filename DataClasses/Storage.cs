@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DataClasses
 {
@@ -14,12 +15,30 @@ namespace DataClasses
         public string Id { get => id; }
         public List<Game> Games { get => games; }
 
-        public Storage(float space, string name, string id, List<Game> games)
+        public Storage(float space, string name, string id)
         {
             this.space = space;
             this.name = name;
             this.id = id;
-            this.games = games;
+            this.games = new List<Game>();
+        }
+
+        public void AddGame(Game game)
+        {
+            if(game != null)
+            {
+                games.Add(game);
+            }
+        }
+
+        public override string ToString()
+        {
+            string result = "Name: " + name + "; ID: " + id + "; Speicherplatz: " + space + "; Games: "+ Environment.NewLine;
+            foreach(var game in games)
+            {
+                result += game.ToString() + Environment.NewLine;
+            }
+            return result;
         }
     }
 }

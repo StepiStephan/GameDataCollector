@@ -21,5 +21,16 @@ namespace DataClasses
             this.spaceOnSorage = spaceOnSorage;
             this.id = id;
         }
+
+        public override string ToString()
+        {
+            string result = string.Empty;
+            result += "Name: " + name + "; ID:" + id + "; Speicherbedarf: " + spaceOnSorage + " ; Genres:";
+            foreach(var genre in gameGenres)
+            {
+                result += genre.ToString() + "; ";
+            }
+            return result;
+        }
     }
 }

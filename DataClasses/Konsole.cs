@@ -15,12 +15,30 @@ namespace DataClasses
         public string Id { get => id; }
         public List<Storage> Storages { get => storages; }
 
-        public Konsole(string consoleName, string name, string id, List<Storage> storages)
+        public Konsole(string consoleName, string name, string id)
         {
             this.consoleName = consoleName;
             this.name = name;
             this.id = id;
-            this.storages = storages;
+            this.storages = new List<Storage>();
+        }
+
+        public void AddStorage(Storage storage)
+        {
+            if (storage != null)
+            {
+                storages.Add(storage);
+            }
+        }
+
+        public override string ToString()
+        {
+            string result = "Name: " + name + "; ConsolenName: " + consoleName + "; ID: " + id + "; Festplatten: "+ Environment.NewLine;
+            foreach(var storage in storages)
+            {
+                result += storage.ToString() + " ; " + Environment.NewLine;
+            }
+            return result;
         }
     }
 }
