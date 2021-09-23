@@ -1,4 +1,4 @@
-﻿using DataClasses;
+﻿using Enums;
 using System;
 using System.Collections.Generic;
 
@@ -16,8 +16,8 @@ namespace GameDataCollectorWorkflow.Contract
         void DeleteConsole();
         void EditGame();
         void EditStorage();
-        Game GetGame();
-        Storage GetStorage();
-        DataClasses.Konsole GetConsole();
+        string GetGame();
+        string GetStorage();
+        string GetConsole();
     }
 }

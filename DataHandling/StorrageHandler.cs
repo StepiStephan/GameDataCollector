@@ -22,6 +22,11 @@ namespace DataHandling
             throw new NotImplementedException();
         }
 
+        public Game GetGame(string id, string gameName)
+        {
+            throw new NotImplementedException();
+        }
+
         public void MoveGame(string fromId, string toId, string gameId)
         {
             throw new NotImplementedException();

@@ -1,4 +1,6 @@
-﻿namespace DataClasses
+﻿using System;
+
+namespace Enums
 {
     public enum Genre
     {

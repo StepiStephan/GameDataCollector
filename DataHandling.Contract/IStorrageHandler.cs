@@ -11,6 +11,6 @@ namespace DataHandling
         void DeleteGame(string storageId, string gameId);
         void AddGame(string storageId, Game game);
         void MoveGame(string fromId, string toId, string gameId);
-        Game GetGame(string id, string gameName);
+        string GetGame(string id, string gameName);
     }
 }

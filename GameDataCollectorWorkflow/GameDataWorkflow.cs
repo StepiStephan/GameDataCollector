@@ -1,4 +1,4 @@
-﻿using DataClasses;
+﻿using Enums;
 using GameDataCollectorWorkflow.Contract;
 using System;
 using System.Collections.Generic;
@@ -57,17 +57,17 @@ namespace GameDataCollectorWorkflow
             throw new NotImplementedException();
         }
 
-        public DataClasses.Konsole GetConsole()
+        public string GetConsole()
         {
             throw new NotImplementedException();
         }
 
-        public Game GetGame()
+        public string GetGame()
         {
             throw new NotImplementedException();
         }
 
-        public Storage GetStorage()
+        public string GetStorage()
         {
             throw new NotImplementedException();
         }
