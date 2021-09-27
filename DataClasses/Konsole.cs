@@ -25,6 +25,16 @@ namespace DataClasses
                 new Storage(spaceIntern, "InternerSpeicher")
             };
         }
+        public Konsole(string consoleName, string name, float spaceIntern, string id)
+        {
+            this.consoleName = consoleName;
+            this.name = name;
+            this.id = id;
+            this.storages = new List<Storage>()
+            {
+                new Storage(spaceIntern, "InternerSpeicher")
+            };
+        }
 
         public void AddStorage(Storage storage)
         {

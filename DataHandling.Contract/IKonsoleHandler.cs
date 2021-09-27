@@ -7,8 +7,8 @@ namespace DataClasses
 {
     public interface IKonsoleHandler
     {
-        void RanameKonsole(string id, string name);
-        string GetKonsole(string name, string consloeName);
-        void AddStorage();
+        void RanameKonsole(string name);
+        Storage GetStorage(string id);
+        void AddStorage(Storage storage);
     }
 }

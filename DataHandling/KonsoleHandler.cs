@@ -8,25 +8,23 @@ namespace DataHandling
 {
     public class KonsoleHandler : IKonsoleHandler
     {
-        private List<Konsole> consoles;
+        private Konsole consoles;
 
-        public List<Konsole> Consoles { get => consoles; private set => consoles = value; }
-
-        public void AddConsole(Konsole console)
+        public void AddStorage(Storage storage)
         {
-            Consoles.Add(console);
+            consoles.AddStorage(storage);
         }
-        public Konsole GetConsole(string id)
+
+        public Storage GetStorage(string id)
         {
-            var console = Consoles.Where(x => x.Id == id).FirstOrDefault();
-            if (console != null)
-            {
-                return console;
-            }
-            else
-            {
-                return null;
-            }
+            var result = consoles.Storages.Where(x => x.Id == id).FirstOrDefault();
+            return result;
+        }
+
+        public void RanameKonsole(string name)
+        {
+            Konsole console = new Konsole(consoles.Name, name, consoles.Storages.First().Space, consoles.Id);
+            consoles = console;
         }
     }
 }

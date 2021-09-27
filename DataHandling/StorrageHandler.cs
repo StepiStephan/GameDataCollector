@@ -1,35 +1,57 @@
 ﻿using DataClasses;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataHandling
 {
     public class StorrageHandler : IStorrageHandler
     {
-        public void AddGame(string storageId, Game game)
+        private Storage storage;
+        public void AddGame(Game game)
         {
-            throw new NotImplementedException();
+            var containingGame = storage.Games.Where(x => x.Id == game.Id).FirstOrDefault();
+            if (containingGame == null)
+            {
+                storage.AddGame(game);
+            }
         }
 
-        public void DeleteGame(string storageId, string gameId)
+        public void DeleteGame(string gameId)
         {
-            throw new NotImplementedException();
+            var containingGame = storage.Games.Where(x => x.Id == gameId).FirstOrDefault();
+            if (containingGame != null)
+            {
+                storage.Games.Remove(containingGame);
+            }
         }
 
-        public void EditStorage(string id, string name, float space)
+        public void EditStorage(string name, float space)
         {
-            throw new NotImplementedException();
+            if(name == string.Empty)
+            {
+                name = storage.Name;
+            }
+            if(space == 0f)
+            {
+                space = storage.Space;
+            }
+
+            var newStorage = new Storage(space, name);
+
+            foreach (var game in storage.Games)
+            {
+                newStorage.AddGame(game);
+            }
+
+            storage = newStorage;
         }
 
-        public Game GetGame(string id, string gameName)
+        public Game GetGame(string id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void MoveGame(string fromId, string toId, string gameId)
-        {
-            throw new NotImplementedException();
+            var resultgame = storage.Games.Where(x => x.Id == id).FirstOrDefault();
+            return resultgame;
         }
     }
 }

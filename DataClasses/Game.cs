@@ -23,6 +23,13 @@ namespace DataClasses
             this.spaceOnSorage = spaceOnSorage;
             this.id = Guid.NewGuid().ToString();
         }
+        public Game(string name, List<Genre> gameGenres, float spaceOnSorage, string id)
+        {
+            this.name = name;
+            this.gameGenres = gameGenres;
+            this.spaceOnSorage = spaceOnSorage;
+            this.id = id;
+        }
 
         public override string ToString()
         {
