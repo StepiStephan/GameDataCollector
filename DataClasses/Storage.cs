@@ -8,26 +8,26 @@ namespace DataClasses
         private float space;
         private string name;
         private string id;
-        private List<Game> games;
+        private List<string> games;
 
         public float Space { get => space; }
         public string Name { get => name; }
         public string Id { get => id; }
-        public List<Game> Games { get => games; }
+        public List<string> Games { get => games; }
 
         public Storage(float space, string name)
         {
             this.space = space;
             this.name = name;
             this.id = Guid.NewGuid().ToString();
-            this.games = new List<Game>();
+            this.games = new List<string>();
         }
 
-        public void AddGame(Game game)
+        public void AddGame(string gameId)
         {
-            if(game != null)
+            if(gameId != null)
             {
-                games.Add(game);
+                games.Add(gameId);
             }
         }
 

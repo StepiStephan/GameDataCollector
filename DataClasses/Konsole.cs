@@ -8,39 +8,40 @@ namespace DataClasses
         private string consoleName;
         private string name;
         private string id;
-        private List<Storage> storages;
+        private List<string> storages;
 
         public string ConsoleName { get => consoleName; }
         public string Name { get => name; }
         public string Id { get => id; }
-        public List<Storage> Storages { get => storages; }
+        public List<string> Storages { get => storages; }
 
-        public Konsole(string consoleName, string name, float spaceIntern)
+        public Konsole(string consoleName, string name, float spaceIntern, string interneStorageId)
         {
             this.consoleName = consoleName;
             this.name = name;
             this.id = Guid.NewGuid().ToString();
-            this.storages = new List<Storage>()
+
+            this.storages = new List<string>()
             {
-                new Storage(spaceIntern, "InternerSpeicher")
+                interneStorageId
             };
         }
-        public Konsole(string consoleName, string name, float spaceIntern, string id)
+        public Konsole(string consoleName, string name, float spaceIntern, string interneStorageId, string id)
         {
             this.consoleName = consoleName;
             this.name = name;
             this.id = id;
-            this.storages = new List<Storage>()
+            this.storages = new List<string>()
             {
-                new Storage(spaceIntern, "InternerSpeicher")
+                interneStorageId
             };
         }
 
-        public void AddStorage(Storage storage)
+        public void AddStorage(string storageId)
         {
-            if (storage != null)
+            if (storageId != null)
             {
-                storages.Add(storage);
+                storages.Add(storageId);
             }
         }
 
