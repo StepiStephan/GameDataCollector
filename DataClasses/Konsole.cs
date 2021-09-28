@@ -15,26 +15,21 @@ namespace DataClasses
         public string Id { get => id; }
         public List<string> Storages { get => storages; }
 
-        public Konsole(string consoleName, string name, float spaceIntern, string interneStorageId)
+        public Konsole(string consoleName, string name)
         {
-            this.consoleName = consoleName;
-            this.name = name;
-            this.id = Guid.NewGuid().ToString();
-
-            this.storages = new List<string>()
-            {
-                interneStorageId
-            };
+            var id = Guid.NewGuid().ToString();
+            Initialze(consoleName, name, id);
         }
-        public Konsole(string consoleName, string name, float spaceIntern, string interneStorageId, string id)
+        public Konsole(string consoleName, string name, string id)
+        {
+            Initialze(consoleName, name, id);
+        }
+        private void Initialze(string consoleName, string name, string id)
         {
             this.consoleName = consoleName;
             this.name = name;
             this.id = id;
-            this.storages = new List<string>()
-            {
-                interneStorageId
-            };
+            this.storages = new List<string>();
         }
 
         public void AddStorage(string storageId)
@@ -47,11 +42,7 @@ namespace DataClasses
 
         public override string ToString()
         {
-            string result = "Name: " + name + "; ConsolenName: " + consoleName + "; ID: " + id + "; Festplatten: "+ Environment.NewLine;
-            foreach(var storage in storages)
-            {
-                result += storage.ToString() + " ; " + Environment.NewLine;
-            }
+            string result = "Name: " + name + "; ConsolenName: " + consoleName +  "\n\r";
             return result;
         }
     }

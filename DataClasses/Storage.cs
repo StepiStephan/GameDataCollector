@@ -17,9 +17,19 @@ namespace DataClasses
 
         public Storage(float space, string name)
         {
+            var id = Guid.NewGuid().ToString();
+            Initialzie(space, name, id);
+            
+        }
+        public Storage(float space, string name, string id)
+        {
+            Initialzie(space, name, id);
+        }
+        private void Initialzie(float space, string name, string id)
+        {
             this.space = space;
             this.name = name;
-            this.id = Guid.NewGuid().ToString();
+            this.id = id;
             this.games = new List<string>();
         }
 
@@ -33,11 +43,7 @@ namespace DataClasses
 
         public override string ToString()
         {
-            string result = "Name: " + name + "; ID: " + id + "; Speicherplatz: " + space + "; Games: "+ Environment.NewLine;
-            foreach(var game in games)
-            {
-                result += game.ToString() + Environment.NewLine;
-            }
+            string result = "Name: " + name + "; Speicherplatz: " + space + "; Games: \n\r";
             return result;
         }
     }
