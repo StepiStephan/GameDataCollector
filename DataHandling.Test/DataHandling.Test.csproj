@@ -15,8 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataClasses\DataClasses.csproj" />
-    <ProjectReference Include="..\DataHandling.Contract\DataHandling.Contract.csproj" />
-    <ProjectReference Include="..\DataHandling\DataHandling.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,6 +9,7 @@ namespace DataHandling
     public class StorrageHandler : IStorrageHandler
     {
         private Storage storage;
+        public string ID { get => storage.Id; }
         public void AddGame(Game game)
         {
             var containingGame = storage.Games.Where(x => x.Id == game.Id).FirstOrDefault();

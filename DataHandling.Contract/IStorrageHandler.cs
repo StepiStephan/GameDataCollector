@@ -7,6 +7,7 @@ namespace DataHandling
 {
     public interface IStorrageHandler
     {
+        string ID { get; }
         void EditStorage(string name, float space);
         void DeleteGame(string gameId);
         void AddGame(Game game);
