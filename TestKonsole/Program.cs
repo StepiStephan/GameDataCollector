@@ -15,16 +15,37 @@ namespace TestKonsole
         static void Main(string[] args)
         {
             IDataManager dataManager = new DataManager();
-            var konsole = dataManager.CreateKonsole("Switch", "Alte Switch", 32);
-            dataManager.CreateGame(konsole.Storages.First(), "Zelda BOTW", new List<Genre>() { Genre.SingelPlayer }, 7);
-            var storage = dataManager.GetStorage(konsole.Storages.First());
-            var game = dataManager.GetGame(storage.Games.First());            
             
-            Console.Write(konsole);
-            Console.Write(storage);
-            Console.Write(game);
-            Console.Read();
+            FillWithNewData(dataManager);
+            PrintAllData(dataManager);
 
+            Console.Read();
+        }
+
+        private static void FillWithNewData(IDataManager dataManager)
+        {
+            var konsoleToAdd = dataManager.Konsolen.First();
+            var kart128 = dataManager.CreateStorage(konsoleToAdd.Id, "Multiplayer Karte", 128);
+            dataManager.CreateGame(konsoleToAdd.Storages.First(), "DOOM 2016", new List<Genre> { Genre.SingelPlayer, Genre.Egoshooter }, 20);
+            dataManager.CreateGame(kart128.Id, "Mario Party", new List<Genre>() { Genre.Coop, Genre.Party }, 5);
+        }
+
+        private static void PrintAllData(IDataManager dataManager)
+        {
+            foreach (var konsole in dataManager.Konsolen)
+            {
+                Console.Write(konsole);
+                foreach (var storageId in konsole.Storages)
+                {
+                    var storage = dataManager.GetStorage(storageId);
+                    Console.Write("\t" + storage);
+                    foreach (var gameId in storage.Games)
+                    {
+                        var game = dataManager.GetGame(gameId);
+                        Console.Write(" \t\t" + game);
+                    }
+                }
+            }
         }
     }
 }

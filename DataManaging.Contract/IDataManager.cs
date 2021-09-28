@@ -7,6 +7,7 @@ namespace DataManaging.Contract
 {
     public interface IDataManager
     {
+        List<Konsole> Konsolen { get; }
         void AddGame(string storageId, Game game);
         void AddGenre(string gameId, List<Genre> genre);
         void AddKonsole(Konsole konsole);
@@ -21,5 +22,6 @@ namespace DataManaging.Contract
         Game GetGame(string gameId);
         Storage GetStorage(string storageId);
         void RanameKonsole(string konsoleId, string name);
+        void SaveData();
     }
 }

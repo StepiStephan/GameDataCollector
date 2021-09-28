@@ -9,17 +9,18 @@ namespace DataManaging
 {
     public class DataLoader<T> : DataSaverLoaderBase<T>, IDataLoader<T>
     {
-        public DataLoader() : base()
+        private readonly string path;
+        public DataLoader(string name) : base()
         {
-
+            path = Path.Combine(PathToSave, name + ".txt");
         }
-
+        
         public T LoadObject()
         {
             string dataString = string.Empty;
-            if (File.Exists(PathToSave))
+            if (File.Exists(path))
             {
-                dataString = File.ReadAllText(PathToSave);
+                dataString = File.ReadAllText(path);
             }
 
             return JsonConvert.DeserializeObject<T>(dataString);

@@ -10,11 +10,15 @@ namespace DataClasses
         private string id;
         private List<string> storages;
 
-        public string ConsoleName { get => consoleName; }
-        public string Name { get => name; }
-        public string Id { get => id; }
-        public List<string> Storages { get => storages; }
+        public string ConsoleName { get => consoleName; set => consoleName = value; }
+        public string Name { get => name; set => name = value;}
+        public string Id { get => id; set => id = value; }
+        public List<string> Storages { get => storages; set => storages = value; }
 
+        public Konsole()
+        {
+
+        }
         public Konsole(string consoleName, string name)
         {
             var id = Guid.NewGuid().ToString();

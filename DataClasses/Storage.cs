@@ -10,11 +10,15 @@ namespace DataClasses
         private string id;
         private List<string> games;
 
-        public float Space { get => space; }
-        public string Name { get => name; }
-        public string Id { get => id; }
-        public List<string> Games { get => games; }
+        public float Space { get => space; set => space = value; }
+        public string Name { get => name; set => name = value; }
+        public string Id { get => id; set => id = value; }
+        public List<string> Games { get => games; set => games = value; }
 
+        public Storage()
+        {
+
+        }
         public Storage(float space, string name)
         {
             var id = Guid.NewGuid().ToString();

@@ -11,11 +11,15 @@ namespace DataClasses
         private float spaceOnSorage;
         private string id;
 
-        public string Name { get => name; }
-        public float SpaceOnSorage { get => spaceOnSorage; }
-        public string Id { get => id; }
-        public List<Genre> GameGenre { get => gameGenres; }
+        public string Name { get => name; set => name = value; }
+        public float SpaceOnSorage { get => spaceOnSorage; set => spaceOnSorage = value; }
+        public string Id { get => id; set => id = value; }
+        public List<Genre> GameGenre { get => gameGenres; set => gameGenres = value; }
 
+        public Game()
+        {
+
+        }
         public Game(string name, List<Genre> gameGenres, float spaceOnSorage)
         {
             var id = Guid.NewGuid().ToString();

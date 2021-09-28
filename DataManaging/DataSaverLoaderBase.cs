@@ -11,7 +11,6 @@ namespace DataManaging
         public DataSaverLoaderBase()
         {
             PathToSave = Environment.CurrentDirectory;
-            PathToSave = Path.Combine(PathToSave, typeof(T).ToString());
         }
     }
 }

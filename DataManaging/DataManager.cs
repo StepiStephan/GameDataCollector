@@ -9,27 +9,44 @@ namespace DataManaging
 {
     public class DataManager : IDataManager
     {
-        private List<Game> games;
-        private List<Storage> storages;
-        private List<Konsole> konsoles;
-        private IDataSaver<List<Game>> dataSaverGame = new DataSaver<List<Game>>();
-        private IDataSaver<List<Storage>> dataSaverStorage = new DataSaver<List<Storage>>();
-        private IDataSaver<List<Konsole>> dataSaverKonsole = new DataSaver<List<Konsole>>();
-        private IDataLoader<List<Game>> dataLoaderGame = new DataLoader<List<Game>>();
-        private IDataLoader<List<Storage>> dataLoaderStorage = new DataLoader<List<Storage>>();
-        private IDataLoader<List<Konsole>> dataLoaderKonsole = new DataLoader<List<Konsole>>();
+        private readonly List<Game> games;
+        private readonly List<Storage> storages;
+        private readonly List<Konsole> konsoles;
+
+        private const string gameName = "GameList";
+        private const string storageName = "StorageList";
+        private const string konsoleName = "KonsoleList";
+
+        private readonly IDataSaver<List<Game>> dataSaverGame = new DataSaver<List<Game>>(gameName);
+        private readonly IDataSaver<List<Storage>> dataSaverStorage = new DataSaver<List<Storage>>(storageName);
+        private readonly IDataSaver<List<Konsole>> dataSaverKonsole = new DataSaver<List<Konsole>>(konsoleName);
+        private readonly IDataLoader<List<Game>> dataLoaderGame = new DataLoader<List<Game>>(gameName);
+        private readonly IDataLoader<List<Storage>> dataLoaderStorage = new DataLoader<List<Storage>>(storageName);
+        private readonly IDataLoader<List<Konsole>> dataLoaderKonsole = new DataLoader<List<Konsole>>(konsoleName);
+
+        public List<Konsole> Konsolen { get => konsoles; }
+
         public DataManager()
         {
             games = dataLoaderGame.LoadObject();
             storages = dataLoaderStorage.LoadObject();
             konsoles = dataLoaderKonsole.LoadObject();
 
-            if(games == null)
+            if (games == null)
+            {
                 games = new List<Game>();
-            if(storages == null)
+                dataSaverGame.SaveObject(games);
+            }
+            if (storages == null)
+            {
                 storages = new List<Storage>();
-            if(konsoles == null)
+                dataSaverStorage.SaveObject(storages);
+            }
+            if (konsoles == null)
+            {
                 konsoles = new List<Konsole>();
+                dataSaverKonsole.SaveObject(konsoles);
+            }
         }
         public void AddGame(string storageId, Game game)
         {
@@ -167,6 +184,13 @@ namespace DataManaging
                     newKonsole.AddStorage(storage);
                 }
             }
+        }
+
+        public void SaveData()
+        {
+            dataSaverGame.SaveObject(games);
+            dataSaverKonsole.SaveObject(konsoles);
+            dataSaverStorage.SaveObject(storages);
         }
     }
 }
