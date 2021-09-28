@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataClasses\DataClasses.csproj" />
+    <ProjectReference Include="..\DataManaging.Contract\DataManaging.Contract.csproj" />
+    <ProjectReference Include="..\DataManaging\DataManaging.csproj" />
     <ProjectReference Include="..\GameDataCollectorWorkflow.Contract\GameDataCollectorWorkflow.Contract.csproj" />
     <ProjectReference Include="..\GameDataCollectorWorkflow\GameDataCollectorWorkflow.csproj" />
   </ItemGroup>
