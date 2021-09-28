@@ -12,11 +12,24 @@ namespace DataManaging
         private List<Game> games;
         private List<Storage> storages;
         private List<Konsole> konsoles;
+        private IDataSaver<List<Game>> dataSaverGame = new DataSaver<List<Game>>();
+        private IDataSaver<List<Storage>> dataSaverStorage = new DataSaver<List<Storage>>();
+        private IDataSaver<List<Konsole>> dataSaverKonsole = new DataSaver<List<Konsole>>();
+        private IDataLoader<List<Game>> dataLoaderGame = new DataLoader<List<Game>>();
+        private IDataLoader<List<Storage>> dataLoaderStorage = new DataLoader<List<Storage>>();
+        private IDataLoader<List<Konsole>> dataLoaderKonsole = new DataLoader<List<Konsole>>();
         public DataManager()
         {
-            games = new List<Game>();
-            storages = new List<Storage>();
-            konsoles = new List<Konsole>();
+            games = dataLoaderGame.LoadObject();
+            storages = dataLoaderStorage.LoadObject();
+            konsoles = dataLoaderKonsole.LoadObject();
+
+            if(games == null)
+                games = new List<Game>();
+            if(storages == null)
+                storages = new List<Storage>();
+            if(konsoles == null)
+                konsoles = new List<Konsole>();
         }
         public void AddGame(string storageId, Game game)
         {
