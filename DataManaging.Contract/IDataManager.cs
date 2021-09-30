@@ -17,10 +17,16 @@ namespace DataManaging.Contract
         Storage CreateStorage(string konsoleId, string name, float space);
         void DeleteGame(string gameId);
         void DeleteGenre(string gameId, Genre genre);
+        void DeleteKonsoleWithAllStorages(string id);
+        void DeleteKonsoleWithAllGames(string id);
+        void DeleteKonsole(string id);
+        void DeleteStorageWithGames(string id);
+        void DeleteStorage(string id);
         void EditGame(string gameId, string name, float space);
         void EditStorage(string storageId, string name, float space);
         Game GetGame(string gameId);
         Storage GetStorage(string storageId);
+        Konsole GetKonsole(string KonsoleId);
         void RanameKonsole(string konsoleId, string name);
         void SaveData();
     }

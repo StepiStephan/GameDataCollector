@@ -20,6 +20,7 @@ namespace DataManaging
         private readonly IDataSaver<List<Game>> dataSaverGame = new DataSaver<List<Game>>(gameName);
         private readonly IDataSaver<List<Storage>> dataSaverStorage = new DataSaver<List<Storage>>(storageName);
         private readonly IDataSaver<List<Konsole>> dataSaverKonsole = new DataSaver<List<Konsole>>(konsoleName);
+
         private readonly IDataLoader<List<Game>> dataLoaderGame = new DataLoader<List<Game>>(gameName);
         private readonly IDataLoader<List<Storage>> dataLoaderStorage = new DataLoader<List<Storage>>(storageName);
         private readonly IDataLoader<List<Konsole>> dataLoaderKonsole = new DataLoader<List<Konsole>>(konsoleName);
@@ -191,6 +192,94 @@ namespace DataManaging
             dataSaverGame.SaveObject(games);
             dataSaverKonsole.SaveObject(konsoles);
             dataSaverStorage.SaveObject(storages);
+        }
+
+        public void DeleteKonsoleWithAllStorages(string id)
+        {
+            var konsole = GetKonsole(id);
+            if (konsole != null)
+            {
+                List<string> storageIds = new List<string>();
+
+                foreach (var storage in konsole.Storages)
+                {
+                    storageIds.Add(storage);
+                }
+
+                foreach (var storage in storageIds)
+                {
+                    DeleteStorage(storage);
+                }
+
+                konsoles.Remove(konsole);
+            }
+        }
+        public void DeleteKonsoleWithAllGames(string id)
+        {
+            var konsole = GetKonsole(id);
+            if (konsole != null)
+            {
+                List<string> storageIds = new List<string>();
+
+                foreach (var storage in konsole.Storages)
+                {
+                    storageIds.Add(storage);
+                }
+
+                foreach (var storage in storageIds)
+                {
+                    DeleteStorageWithGames(storage);
+                }
+
+                konsoles.Remove(konsole);
+            }
+        }
+
+        public void DeleteKonsole(string id)
+        {
+            var konsole = GetKonsole(id);
+
+            if (konsole != null)
+            {
+                DeleteStorageWithGames(konsole.Storages.First());
+                konsoles.Remove(konsole);
+            }
+        }
+
+        public void DeleteStorageWithGames(string id)
+        {
+            var storage = storages.Where(x => x.Id == id).FirstOrDefault();
+
+            if (storage != null)
+            {
+                List<string> gameIds = new List<string>();
+
+                foreach(var game in storage.Games)
+                {
+                    gameIds.Add(game);
+                }
+
+                foreach(var gameId in gameIds)
+                {
+                    DeleteGame(gameId);
+                }
+
+                storages.Remove(storage);
+            }
+        }
+        public void DeleteStorage(string id)
+        {
+            var storage = storages.Where(x => x.Id == id).FirstOrDefault();
+
+            if (storage != null)
+            {
+                storages.Remove(storage);
+            }
+        }
+
+        public Konsole GetKonsole(string konsoleId)
+        {
+            return konsoles.Where(x => x.Id == konsoleId).FirstOrDefault();
         }
     }
 }
