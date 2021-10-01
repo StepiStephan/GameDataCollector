@@ -44,6 +44,18 @@ namespace DataClasses
             }
         }
 
+        public Konsole Copy()
+        {
+            var result = new Konsole(ConsoleName, Name, Id);
+            
+            foreach(var storageId in Storages)
+            {
+                result.AddStorage(storageId);
+            }
+
+            return result;
+        }
+
         public override string ToString()
         {
             string result = "Name: " + name + "; ConsolenName: " + consoleName +  "\n\r";

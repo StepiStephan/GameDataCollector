@@ -45,6 +45,18 @@ namespace DataClasses
             }
         }
 
+        public Storage Copy()
+        {
+            var result = new Storage(Space, Name, Id);
+
+            foreach(var gameID in Games)
+            {
+                result.AddGame(gameID);
+            }
+
+            return result;
+        }
+
         public override string ToString()
         {
             string result = "Name: " + name + "; Speicherplatz: " + space + "; Games: \n\r";

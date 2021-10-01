@@ -38,6 +38,11 @@ namespace DataClasses
             this.id = id;
         }
 
+        public Game Copy()
+        {
+            return new Game(name, gameGenres, spaceOnSorage, id);
+        }
+
         public override string ToString()
         {
             string result = string.Empty;

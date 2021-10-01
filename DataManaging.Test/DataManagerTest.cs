@@ -25,8 +25,73 @@ namespace DataManaging.Test
         }
 
         [Test]
+        public void CopyElementTest()
+        {
+            var editGame = game.Copy();
+
+            if (editGame.Name != game.Name)
+                Assert.Fail("GameName Falsch");
+
+            if(editGame.Id != game.Id)
+                Assert.Fail("GameID Falsch");
+
+            if (editGame.SpaceOnSorage != game.SpaceOnSorage)
+                Assert.Fail("GameSpace Falsch");
+
+            var editStorage = newStorage.Copy();
+
+            if (editStorage.Id != newStorage.Id)
+                Assert.Fail("newStorage.Id Falsch");
+
+            if (editStorage.Name != newStorage.Name)
+                Assert.Fail("newStorage.Name Falsch");
+
+            if (editStorage.Space != newStorage.Space)
+                Assert.Fail("newStorage.Space Falsch");
+
+            if (editStorage.Games.Count != newStorage.Games.Count)
+                Assert.Fail("newStorage.Games Falsch");
+
+            var editKonsole = konsole.Copy();
+
+            if (editKonsole.Id != konsole.Id)
+                Assert.Fail("konsole.Id Falsch");
+
+            if (editKonsole.Name != konsole.Name)
+                Assert.Fail("konsole.Name Falsch");
+
+            if (editKonsole.Storages.Count != konsole.Storages.Count)
+                Assert.Fail("konsole.Storages Falsch");
+
+            if (editKonsole.ConsoleName != konsole.ConsoleName)
+                Assert.Fail("konsole.ConsoleName Falsch");
+        }
+        [Test]
         public void EditTest()
         {
+            var editGame = game.Copy();
+            dataManager.EditGame(game.Id, game.Name, 200);
+            if(dataManager.GetGame(game.Id).SpaceOnSorage != 200)
+                Assert.Fail("Gamespace nicht editiert");
+            
+            dataManager.EditGame(game.Id, "Dishonored", game.SpaceOnSorage);
+            if(dataManager.GetGame(game.Id).Name != "Dishonored")
+                Assert.Fail("Gamename nicht editiert");
+
+            dataManager.EditGame(game.Id, editGame.Name, editGame.SpaceOnSorage);
+
+            var editStorage = newStorage.Copy();
+            dataManager.EditStorage(newStorage.Id, "TestName", newStorage.Space);
+
+            if (dataManager.GetStorage(newStorage.Id).Name != "TestName")
+                Assert.Fail("Storagename wurde nicht geändert");
+
+            dataManager.EditStorage(newStorage.Id, newStorage.Name, 632);
+
+            if (dataManager.GetStorage(newStorage.Id).Space != 632)
+                Assert.Fail("Storagespace wurde nicht geändert");
+
+            dataManager.EditStorage(newStorage.Id, editStorage.Name, editStorage.Space);
 
             Assert.Pass();
         }
