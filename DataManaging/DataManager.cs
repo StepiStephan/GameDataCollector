@@ -70,42 +70,14 @@ namespace DataManaging
                 game.GameGenre.AddRange(genre);
             }
         }
-        public void AddKonsole(Konsole konsole)
-        {
-            konsoles.Add(konsole);
-        }
-        public void AddStorage(string konsoleId, Storage storage)
-        {
-            var konsole = konsoles.Where(x => x.Id == konsoleId).FirstOrDefault();
-            if (konsole != null)
-            {
-                konsole.AddStorage(storage.Id);
-                storages.Add(storage);
-            }
-        }
+
+
         public Game CreateGame(string storageId, string name, List<Genre> genres, float space)
         {
             var game = new Game(name, genres, space);
             AddGame(storageId, game);
 
             return game;
-        }
-        public Storage CreateStorage(string konsoleId, string name, float space)
-        {
-            var storage = new Storage(space, name);
-            AddStorage(konsoleId, storage);
-
-            return storage;
-        }
-        public Konsole CreateKonsole(string konsoleName, string name, float internerSpeicher)
-        {
-            var storage = new Storage(internerSpeicher, "Interner Speicher von " + konsoleName);
-            var konsole = new Konsole(konsoleName, name);
-
-            AddKonsole(konsole);
-            AddStorage(konsole.Id, storage);
-
-            return konsole;
         }
         public void DeleteGame(string gameId)
         {
@@ -143,6 +115,61 @@ namespace DataManaging
                 games.Add(newGame);
             }
         }
+        public Game GetGame(string gameId)
+        {
+            return games.Where(x => x.Id == gameId).FirstOrDefault();
+        }
+
+        public void SaveData()
+        {
+            dataSaverGame.SaveObject(games);
+            dataSaverKonsole.SaveObject(konsoles);
+            dataSaverStorage.SaveObject(storages);
+        }
+
+        public void AddStorage(string konsoleId, Storage storage)
+        {
+            var konsole = konsoles.Where(x => x.Id == konsoleId).FirstOrDefault();
+            if (konsole != null)
+            {
+                konsole.AddStorage(storage.Id);
+                storages.Add(storage);
+            }
+        }
+        public void DeleteStorageWithGames(string id)
+        {
+            var storage = storages.Where(x => x.Id == id).FirstOrDefault();
+
+            if (storage != null)
+            {
+                List<string> gameIds = new List<string>();
+
+                foreach(var game in storage.Games)
+                {
+                    gameIds.Add(game);
+                }
+
+                foreach(var gameId in gameIds)
+                {
+                    DeleteGame(gameId);
+                }
+
+                storages.Remove(storage);
+            }
+        }
+        public void DeleteStorage(string id)
+        {
+            var storage = storages.Where(x => x.Id == id).FirstOrDefault();
+
+            if (storage != null)
+            {
+                storages.Remove(storage);
+            }
+        }
+        public Storage GetStorage(string storageId)
+        {
+            return storages.Where(x => x.Id == storageId).FirstOrDefault();
+        }
         public void EditStorage(string storageId, string name, float space)
         {
             var storage = storages.Where(x => x.Id == storageId).FirstOrDefault();
@@ -166,34 +193,24 @@ namespace DataManaging
                 storages.Add(newStorage);
             }
         }
-        public Game GetGame(string gameId)
+        public Storage CreateStorage(string konsoleId, string name, float space)
         {
-            return games.Where(x => x.Id == gameId).FirstOrDefault();
-        }
-        public Storage GetStorage(string storageId)
-        {
-            return storages.Where(x => x.Id == storageId).FirstOrDefault();
-        }
-        public void RanameKonsole(string konsoleId, string name)
-        {
-            var konsole = konsoles.Where(x => x.Id == konsoleId).FirstOrDefault();
-            if (konsole != null)
-            {
-                var newKonsole = new Konsole(konsole.ConsoleName, name, konsole.Id);
-                foreach (var storage in konsole.Storages)
-                {
-                    newKonsole.AddStorage(storage);
-                }
-            }
+            var storage = new Storage(space, name);
+            AddStorage(konsoleId, storage);
+
+            return storage;
         }
 
-        public void SaveData()
+        public Konsole CreateKonsole(string konsoleName, string name, float internerSpeicher)
         {
-            dataSaverGame.SaveObject(games);
-            dataSaverKonsole.SaveObject(konsoles);
-            dataSaverStorage.SaveObject(storages);
-        }
+            var storage = new Storage(internerSpeicher, "Interner Speicher von " + konsoleName);
+            var konsole = new Konsole(konsoleName, name);
 
+            AddKonsole(konsole);
+            AddStorage(konsole.Id, storage);
+
+            return konsole;
+        }
         public void DeleteKonsoleWithAllStorages(string id)
         {
             var konsole = GetKonsole(id);
@@ -234,7 +251,6 @@ namespace DataManaging
                 konsoles.Remove(konsole);
             }
         }
-
         public void DeleteKonsole(string id)
         {
             var konsole = GetKonsole(id);
@@ -245,41 +261,32 @@ namespace DataManaging
                 konsoles.Remove(konsole);
             }
         }
-
-        public void DeleteStorageWithGames(string id)
+        public void EditKonsole(string konsoleId, string consoleName, string name)
         {
-            var storage = storages.Where(x => x.Id == id).FirstOrDefault();
-
-            if (storage != null)
+            var konsole = konsoles.Where(x => x.Id == konsoleId).FirstOrDefault();
+            if (konsole != null)
             {
-                List<string> gameIds = new List<string>();
-
-                foreach(var game in storage.Games)
+                if (name == null || name == string.Empty)
                 {
-                    gameIds.Add(game);
+                    name = konsole.Name;
+                }
+                if (consoleName == null || consoleName == string.Empty)
+                {
+                    consoleName = konsole.ConsoleName;
                 }
 
-                foreach(var gameId in gameIds)
-                {
-                    DeleteGame(gameId);
-                }
-
-                storages.Remove(storage);
+                var newKonsole = new Konsole(consoleName, name, konsole.Id);
+                konsoles.Remove(konsole);
+                konsoles.Add(newKonsole);
             }
         }
-        public void DeleteStorage(string id)
-        {
-            var storage = storages.Where(x => x.Id == id).FirstOrDefault();
-
-            if (storage != null)
-            {
-                storages.Remove(storage);
-            }
-        }
-
         public Konsole GetKonsole(string konsoleId)
         {
             return konsoles.Where(x => x.Id == konsoleId).FirstOrDefault();
+        }
+        public void AddKonsole(Konsole konsole)
+        {
+            konsoles.Add(konsole);
         }
     }
 }

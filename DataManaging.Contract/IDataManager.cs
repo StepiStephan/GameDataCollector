@@ -24,10 +24,10 @@ namespace DataManaging.Contract
         void DeleteStorage(string id);
         void EditGame(string gameId, string name, float space);
         void EditStorage(string storageId, string name, float space);
+        void EditKonsole(string storageId, string name, string consoleName);
         Game GetGame(string gameId);
         Storage GetStorage(string storageId);
         Konsole GetKonsole(string KonsoleId);
-        void RanameKonsole(string konsoleId, string name);
         void SaveData();
     }
 }

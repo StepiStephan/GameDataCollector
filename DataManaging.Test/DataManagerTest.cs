@@ -70,28 +70,60 @@ namespace DataManaging.Test
         public void EditTest()
         {
             var editGame = game.Copy();
-            dataManager.EditGame(game.Id, game.Name, 200);
+            dataManager.EditGame(game.Id, null, 200);
             if(dataManager.GetGame(game.Id).SpaceOnSorage != 200)
                 Assert.Fail("Gamespace nicht editiert");
-            
-            dataManager.EditGame(game.Id, "Dishonored", game.SpaceOnSorage);
+
+            if (dataManager.GetGame(game.Id).Name != editGame.Name)
+                Assert.Fail("GameName wurde editiert");
+
+            dataManager.EditGame(game.Id, "Dishonored", 0);
+
             if(dataManager.GetGame(game.Id).Name != "Dishonored")
                 Assert.Fail("Gamename nicht editiert");
+
+            if (dataManager.GetGame(game.Id).SpaceOnSorage != 200)
+                Assert.Fail("Gamespace wurde editiert");
 
             dataManager.EditGame(game.Id, editGame.Name, editGame.SpaceOnSorage);
 
             var editStorage = newStorage.Copy();
-            dataManager.EditStorage(newStorage.Id, "TestName", newStorage.Space);
+            dataManager.EditStorage(newStorage.Id, "TestName", 0);
 
             if (dataManager.GetStorage(newStorage.Id).Name != "TestName")
                 Assert.Fail("Storagename wurde nicht geändert");
 
-            dataManager.EditStorage(newStorage.Id, newStorage.Name, 632);
+            if (dataManager.GetStorage(newStorage.Id).Space != editStorage.Space)
+                Assert.Fail("Storagespace wurde nicht geändert");
+
+            dataManager.EditStorage(newStorage.Id, null, 632);
 
             if (dataManager.GetStorage(newStorage.Id).Space != 632)
                 Assert.Fail("Storagespace wurde nicht geändert");
 
+            if (dataManager.GetStorage(newStorage.Id).Name != "TestName")
+                Assert.Fail("Storagename wurde geändert");
+
             dataManager.EditStorage(newStorage.Id, editStorage.Name, editStorage.Space);
+
+            var editKonsole = konsole.Copy();
+            dataManager.EditKonsole(konsole.Id, "TestXBox", null);
+
+            if (dataManager.GetKonsole(konsole.Id).Name != editKonsole.Name)
+                Assert.Fail("Konsolename wurde geändert");
+
+            if (dataManager.GetKonsole(konsole.Id).ConsoleName != "TestXBox")
+                Assert.Fail("ConsoleName wurde nicht geändert");
+
+            dataManager.EditKonsole(konsole.Id, null, "MyTestXBox");
+
+            if (dataManager.GetKonsole(konsole.Id).ConsoleName != "TestXBox")
+                Assert.Fail("ConsoleName wurde geändert");
+
+            if (dataManager.GetKonsole(konsole.Id).Name != "MyTestXBox")
+                Assert.Fail("Konsolename wurde nicht geändert");
+
+            dataManager.EditKonsole(newStorage.Id, editKonsole.ConsoleName, editKonsole.Name);
 
             Assert.Pass();
         }
