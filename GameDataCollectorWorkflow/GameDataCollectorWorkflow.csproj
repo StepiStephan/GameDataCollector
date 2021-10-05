@@ -10,6 +10,7 @@
 	</PropertyGroup>
 	
   <ItemGroup>
+    <ProjectReference Include="..\DataManaging\DataManaging.csproj" />
     <ProjectReference Include="..\GameDataCollectorWorkflow.Contract\GameDataCollectorWorkflow.Contract.csproj" />
   </ItemGroup>
 

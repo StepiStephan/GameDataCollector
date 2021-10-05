@@ -1,75 +1,135 @@
-﻿using Enums;
+﻿using DataClasses;
+using DataManaging;
+using Enums;
 using GameDataCollectorWorkflow.Contract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameDataCollectorWorkflow
 {
     public class GameDataWorkflow : IGameDataWorkflow
     {
-        public void AddGameToStorage()
+        private readonly GameManager gameManager = new GameManager();
+        private readonly StorageManager storageManager = new StorageManager();
+        private readonly KonsoleManager konsoleManager = new KonsoleManager();
+
+        public List<Konsole> Konsolen { get => konsoleManager.Konsoles.ToList(); }
+
+        public Game CreateGame(string storageId, string name, List<Genre> genres, float space)
         {
-            throw new NotImplementedException();
+            var game = new Game(name, genres, space);
+            gameManager.AddGame(storageId, game, konsoleManager, storageManager);
+
+            return game;
+        }
+        public Storage CreateStorage(string konsoleId, string name, float space)
+        {
+            var storage = new Storage(space, name);
+            storageManager.AddStorage(konsoleId, storage, konsoleManager);
+
+            return storage;
+        }
+        public Konsole CreateKonsole(string konsoleName, string name, float internerSpeicher)
+        {
+            var storage = new Storage(internerSpeicher, "Interner Speicher von " + konsoleName);
+            var konsole = new Konsole(konsoleName, name);
+
+            konsoleManager.AddKonsole(konsole);
+            storageManager.AddStorage(konsole.Id, storage, konsoleManager);
+
+            return konsole;
+        }
+        public void SaveData()
+        {
+            gameManager.SaveData();
+            konsoleManager.SaveData();
+            storageManager.SaveData();
         }
 
-        public void AddStorgeToConsole()
+        public void AddGame(string storageId, Game game)
         {
-            throw new NotImplementedException();
+            gameManager.AddGame(storageId, game, konsoleManager, storageManager);
         }
 
-        public void DeleteConsole()
+        public void AddGenre(string gameId, List<Genre> genre)
         {
-            throw new NotImplementedException();
+            gameManager.AddGenre(gameId, genre);
         }
 
-        public void DeleteGame()
+        public void AddKonsole(Konsole konsole)
         {
-            throw new NotImplementedException();
+            konsoleManager.AddKonsole(konsole);
         }
 
-        public void DeleteStorage()
+        public void AddStorage(string konsoleId, Storage storage)
         {
-            throw new NotImplementedException();
+            storageManager.AddStorage(konsoleId, storage, konsoleManager);
         }
 
-        public void EditGame()
+        public void DeleteGame(string gameId)
         {
-            throw new NotImplementedException();
+            gameManager.DeleteGame(gameId, storageManager);
         }
 
-        public void EditStorage()
+        public void DeleteGenre(string gameId, Genre genre)
         {
-            throw new NotImplementedException();
+            gameManager.DeleteGenre(gameId, genre);
         }
 
-        public string GenerateConsole(string name, float size, List<Genre> genres)
+        public void DeleteKonsoleWithAllStorages(string id)
         {
-            throw new NotImplementedException();
+            konsoleManager.DeleteKonsoleWithAllStorages(id, storageManager);
         }
 
-        public string GenerateGame(string name, float size, List<Genre> genres)
+        public void DeleteKonsoleWithAllGames(string id)
         {
-            throw new NotImplementedException();
+            konsoleManager.DeleteKonsoleWithAllGames(id, storageManager, gameManager);
         }
 
-        public string GenerateStorage(string name, float size, List<Genre> genres)
+        public void DeleteKonsole(string id)
         {
-            throw new NotImplementedException();
+            konsoleManager.DeleteKonsole(id, storageManager, gameManager);
         }
 
-        public string GetConsole()
+        public void DeleteStorageWithGames(string id)
         {
-            throw new NotImplementedException();
+            storageManager.DeleteStorageWithGames(id, gameManager);
         }
 
-        public string GetGame()
+        public void DeleteStorage(string id)
         {
-            throw new NotImplementedException();
+            storageManager.DeleteStorage(id);
         }
 
-        public string GetStorage()
+        public void EditGame(string gameId, string name, float space)
         {
-            throw new NotImplementedException();
+            gameManager.EditGame(gameId, name, space);
+        }
+
+        public void EditStorage(string storageId, string name, float space)
+        {
+            storageManager.EditStorage(storageId, name, space);
+        }
+
+        public void EditKonsole(string konsoleId, string name, string consoleName)
+        {
+            konsoleManager.EditKonsole(konsoleId, consoleName, name);
+        }
+
+        public Game GetGame(string gameId)
+        {
+            return gameManager.GetGame(gameId);
+        }
+
+        public Storage GetStorage(string storageId)
+        {
+            return storageManager.GetStorage(storageId);
+        }
+
+        public Konsole GetKonsole(string konsoleId)
+        {
+            return konsoleManager.GetKonsole(konsoleId);
         }
     }
 }

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataClasses\DataClasses.csproj" />
+    <ProjectReference Include="..\DataManaging.Contract\DataManaging.Contract.csproj" />
+    <ProjectReference Include="..\DataManaging.Test\DataManaging.Test.csproj" />
+    <ProjectReference Include="..\DataManaging\DataManaging.csproj" />
+    <ProjectReference Include="..\Enums\Enums.csproj" />
+    <ProjectReference Include="..\GameDataCollectorWorkflow.Contract\GameDataCollectorWorkflow.Contract.csproj" />
+    <ProjectReference Include="..\GameDataCollectorWorkflow\GameDataCollectorWorkflow.csproj" />
+    <ProjectReference Include="..\GameDataCollector\GameDataCollector.Android\GameDataCollector.Android.csproj" />
+    <ProjectReference Include="..\GameDataCollector\GameDataCollector\GameDataCollector.csproj" />
+    <ProjectReference Include="..\TestKonsole\TestKonsole.csproj" />
+  </ItemGroup>
+
+</Project>

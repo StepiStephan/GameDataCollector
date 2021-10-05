@@ -8,7 +8,7 @@ namespace DataManaging.Test
 {
     public class DataManagerTest
     {
-        DataManager dataManager;
+        GameDataCollectorWorkflow.GameDataWorkflow dataManager;
         Konsole konsole;
         Storage newStorage;
         Storage intern;
@@ -17,7 +17,7 @@ namespace DataManaging.Test
         [SetUp]
         public void Setup()
         {
-            dataManager = new DataManager();
+            dataManager = new GameDataCollectorWorkflow.GameDataWorkflow();
             konsole = dataManager.CreateKonsole("XBoxX-alt", "XBox Sieres X", 500);
             intern = dataManager.GetStorage(konsole.Storages.First());
             newStorage = dataManager.CreateStorage(konsole.Id, "MultiplayerKarte", 1000);
@@ -109,19 +109,19 @@ namespace DataManaging.Test
             var editKonsole = konsole.Copy();
             dataManager.EditKonsole(konsole.Id, "TestXBox", null);
 
-            if (dataManager.GetKonsole(konsole.Id).Name != editKonsole.Name)
-                Assert.Fail("Konsolename wurde geändert");
+            if (dataManager.GetKonsole(konsole.Id).Name == editKonsole.Name)
+                Assert.Fail("Konsolename wurde nicht geändert");
 
-            if (dataManager.GetKonsole(konsole.Id).ConsoleName != "TestXBox")
-                Assert.Fail("ConsoleName wurde nicht geändert");
+            if (dataManager.GetKonsole(konsole.Id).ConsoleName != editKonsole.ConsoleName)
+                Assert.Fail("ConsoleName wurde geändert");
 
             dataManager.EditKonsole(konsole.Id, null, "MyTestXBox");
 
-            if (dataManager.GetKonsole(konsole.Id).ConsoleName != "TestXBox")
-                Assert.Fail("ConsoleName wurde geändert");
+            if (dataManager.GetKonsole(konsole.Id).Name != "TestXBox")
+                Assert.Fail("Konsolename wurde geändert");
 
-            if (dataManager.GetKonsole(konsole.Id).Name != "MyTestXBox")
-                Assert.Fail("Konsolename wurde nicht geändert");
+            if (dataManager.GetKonsole(konsole.Id).ConsoleName != "MyTestXBox")
+                Assert.Fail("ConsoleName wurde nicht geändert");
 
             dataManager.EditKonsole(newStorage.Id, editKonsole.ConsoleName, editKonsole.Name);
 

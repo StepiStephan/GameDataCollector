@@ -12,9 +12,9 @@ namespace TestKonsole
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            IDataManager dataManager = new DataManager();
+            IGameDataWorkflow dataManager = new GameDataWorkflow();
             
             FillWithNewData(dataManager);
             PrintAllData(dataManager);
@@ -22,7 +22,7 @@ namespace TestKonsole
             Console.Read();
         }
 
-        private static void FillWithNewData(IDataManager dataManager)
+        private static void FillWithNewData(IGameDataWorkflow dataManager)
         {
             var konsoleToAdd = dataManager.Konsolen.First();
             var kart128 = dataManager.CreateStorage(konsoleToAdd.Id, "Multiplayer Karte", 128);
@@ -30,7 +30,7 @@ namespace TestKonsole
             dataManager.CreateGame(kart128.Id, "Mario Party", new List<Genre>() { Genre.Coop, Genre.Party }, 5);
         }
 
-        private static void PrintAllData(IDataManager dataManager)
+        private static void PrintAllData(IGameDataWorkflow dataManager)
         {
             foreach (var konsole in dataManager.Konsolen)
             {
