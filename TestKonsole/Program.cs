@@ -12,6 +12,7 @@ namespace TestKonsole
 {
     class Program
     {
+        const int countOfGenres = 23;
         static void Main()
         {
             IGameDataWorkflow dataManager = new GameDataWorkflow();
@@ -28,6 +29,7 @@ namespace TestKonsole
             bool run = true;
             while (run)
             {
+                Console.WriteLine("Komando eingeben: ");
                 var input = Console.ReadLine().Replace(Environment.NewLine, "").Replace(" ", "");
 
                 switch (input)
@@ -63,33 +65,29 @@ namespace TestKonsole
                         break;
 
                     case "--ug":
-                        GetKonsoleNumber(dataManager, out bool success, out int konsoleNumber);
-                        if (success)
-                        {
-                            dataManager.EditGame();
-                        }
+                        EditGame(dataManager);
                         break;
 
                     case "--dkc":
-                        dataManager.DeleteKonsoleWithAllGames();
+                        DeleteCompleteKonsole(dataManager);
                         break;
                     case "--dks":
-                        dataManager.DeleteKonsoleWithAllStorages();
+                        DeleteKonsoleStorage(dataManager);
                         break;
 
                     case "--dk":
-                        dataManager.DeleteKonsole();
+                        DeleteKonsole(dataManager);
                         break;
 
                     case "--ds":
-                        dataManager.DeleteStorage();
+                        DeleteStorage(dataManager);
                         break;
                     case "--dsc":
-                        dataManager.DeleteStorageWithGames();
+                        DeleteCompleteStorage(dataManager);
                         break;
 
                     case "--dg":
-                        dataManager.DeleteGame();
+                        DeleteGame(dataManager);
                         break;
 
                     case "--ec":
@@ -104,6 +102,120 @@ namespace TestKonsole
                         break;
                 }
             }
+        }
+
+        private static void DeleteGame(IGameDataWorkflow dataManager)
+        {
+            GetKonsoleNumber(dataManager, out bool success, out int konsoleNumber);
+            if (success)
+            {
+                GetStorageNumber(dataManager, dataManager.Konsolen[konsoleNumber].Id, out bool storageSuccess, out int storageNumber);
+                if (storageSuccess)
+                {
+                    GetGameNumber(dataManager, dataManager.Storages[storageNumber].Id, out bool gameSuccess, out int gameNumber);
+                    if (gameSuccess)
+                    {
+                        dataManager.DeleteGame(dataManager.Games[gameNumber].Id);
+                    }
+                }
+            }
+        }
+
+        private static void DeleteCompleteStorage(IGameDataWorkflow dataManager)
+        {
+            GetKonsoleNumber(dataManager, out bool success, out int konsoleNumber);
+            if (success)
+            {
+                GetStorageNumber(dataManager, dataManager.Konsolen[konsoleNumber].Id, out bool storageSuccess, out int storageNumber);
+                if (storageSuccess)
+                {
+                    dataManager.DeleteStorageWithGames(dataManager.Storages[storageNumber].Id);
+                }
+            }
+        }
+
+        private static void DeleteStorage(IGameDataWorkflow dataManager)
+        {
+            GetKonsoleNumber(dataManager, out bool success, out int konsoleNumber);
+            if (success)
+            {
+                GetStorageNumber(dataManager, dataManager.Konsolen[konsoleNumber].Id, out bool storageSuccess, out int storageNumber);
+                if (storageSuccess)
+                {
+                    dataManager.DeleteStorage(dataManager.Storages[storageNumber].Id);
+                }
+            }
+        }
+
+        private static void DeleteKonsole(IGameDataWorkflow dataManager)
+        {
+            GetKonsoleNumber(dataManager, out bool konsoleSuccess, out int konsoleNumber);
+            if (konsoleSuccess)
+            {
+                dataManager.DeleteKonsole(dataManager.Konsolen[konsoleNumber].Id);
+            }
+        }
+
+        private static void DeleteKonsoleStorage(IGameDataWorkflow dataManager)
+        {
+            GetKonsoleNumber(dataManager, out bool konsoleSuccess, out int konsoleNumber);
+            if (konsoleSuccess)
+            {
+                dataManager.DeleteKonsoleWithAllStorages(dataManager.Konsolen[konsoleNumber].Id);
+            }
+        }
+
+        private static void DeleteCompleteKonsole(IGameDataWorkflow dataManager)
+        {
+            GetKonsoleNumber(dataManager, out bool konsoleSuccess, out int konsoleNumber);
+            if (konsoleSuccess)
+            {
+                dataManager.DeleteKonsoleWithAllGames(dataManager.Konsolen[konsoleNumber].Id);
+            }
+        }
+
+        private static void EditGame(IGameDataWorkflow dataManager)
+        {
+            GetKonsoleNumber(dataManager, out bool success, out int konsoleNumber);
+            if (success)
+            {
+                GetStorageNumber(dataManager, dataManager.Konsolen[konsoleNumber].Id, out bool storageSuccess, out int storageNumber);
+                if (storageSuccess)
+                {
+                    GetGameNumber(dataManager, dataManager.Storages[storageNumber].Id, out bool gameSuccess, out int gameNumber);
+                    if (gameSuccess)
+                    {
+                        float space;
+                        var name = ConsoleAbfrage("Name eingeben, falls nicht zu ändern leer lassen:");
+                        var spaceString = ConsoleAbfrage("Speicer eingeben, falls nicht zu ändern leer lassen:");
+                        if (spaceString == "")
+                        {
+                            space = 0;
+                        }
+                        else
+                        {
+                            float.TryParse(spaceString, out space);
+                        }
+                        dataManager.EditGame(dataManager.Games[gameNumber].Id, name, space);
+                    }
+                }
+            }
+        }
+
+        private static void GetGameNumber(IGameDataWorkflow dataManager, string storageId, out bool gameSuccess, out int gameNumber)
+        {
+            var storage = dataManager.GetStorage(storageId);
+
+            for (int i = 0; i < dataManager.Games.Count; i++)
+            {
+                var game = dataManager.Games[i];
+                if (storage.Games.Contains(game.Id))
+                {
+                    Console.WriteLine($"[{i}] => GameName: {game.Name}");
+                }
+            }
+            var gameNumberString = ConsoleAbfrage("Wähle ein Spiel: ");
+            gameSuccess = int.TryParse(gameNumberString, out gameNumber);
         }
 
         private static void EditStorage(IGameDataWorkflow dataManager)
@@ -165,7 +277,7 @@ namespace TestKonsole
         {
             List<Genre> genres = new List<Genre>();
             bool run = true;
-            for(int i = 0; i <= 9; i++)
+            for(int i = 0; i < countOfGenres; i++)
             {
                 Console.WriteLine( $"{i} => " + (Genre)i);
             }
@@ -194,7 +306,8 @@ namespace TestKonsole
             GetKonsoleNumber(dataManager, out bool succsess, out int konsoleNumber);
             if (succsess)
             {
-                var succsessSpace = float.TryParse("", out float space);
+                string spaceString = ConsoleAbfrage("Speicherplatz: ");
+                var succsessSpace = float.TryParse(spaceString, out float space);
                 if (succsessSpace)
                 {
                     var name = ConsoleAbfrage("Speichername: ");
@@ -214,7 +327,7 @@ namespace TestKonsole
             succsess = int.TryParse(konsoleNumberString, out konsoleNumber);
         }
 
-        private static void GetStorageNumber(IGameDataWorkflow dataManager, string konsoleID, out bool succsess, out int konsoleNumber)
+        private static void GetStorageNumber(IGameDataWorkflow dataManager, string konsoleID, out bool succsess, out int storageNumber)
         {
             var konsole = dataManager.GetKonsole(konsoleID);
 
@@ -223,11 +336,11 @@ namespace TestKonsole
                 var storage = dataManager.Storages[i];
                 if (konsole.Storages.Contains(storage.Id))
                 {
-                    Console.WriteLine($"[{i}] => StorageName: {konsole.ConsoleName}");
+                    Console.WriteLine($"[{i}] => StorageName: {storage.Name}");
                 }
             }
             var konsoleNumberString = ConsoleAbfrage("Wähle ein Speicher: ");
-            succsess = int.TryParse(konsoleNumberString, out konsoleNumber);
+            succsess = int.TryParse(konsoleNumberString, out storageNumber);
         }
 
         private static void HelpContent()
@@ -244,6 +357,7 @@ namespace TestKonsole
             Console.WriteLine("--ds  => Speicher löschen");
             Console.WriteLine("--dsc => Speicher mit allen Spielen löschen");
             Console.WriteLine("--dg  => Spiel löschenlöschen");
+            Console.WriteLine("--pd  => Daten anzeigen");
             Console.WriteLine("--save=> Speichen");
             Console.WriteLine("--ec  => Anwendung beenden");
         }
@@ -263,16 +377,8 @@ namespace TestKonsole
         private static string ConsoleAbfrage(string test)
         {
             Console.WriteLine(test);
-            var name = Console.ReadLine().Replace(Environment.NewLine, "").Replace(" ", "");
+            var name = Console.ReadLine().Replace(Environment.NewLine, "");
             return name;
-        }
-
-        private static void FillWithNewData(IGameDataWorkflow dataManager)
-        {
-            var konsoleToAdd = dataManager.Konsolen.First();
-            var kart128 = dataManager.CreateStorage(konsoleToAdd.Id, "Multiplayer Karte", 128);
-            dataManager.CreateGame(konsoleToAdd.Storages.First(), "DOOM 2016", new List<Genre> { Genre.SingelPlayer, Genre.Egoshooter }, 20);
-            dataManager.CreateGame(kart128.Id, "Mario Party", new List<Genre>() { Genre.Coop, Genre.Party }, 5);
         }
 
         private static void PrintAllData(IGameDataWorkflow dataManager)

@@ -12,6 +12,20 @@ namespace Enums
         Party,
         Coop,
         Competitive,
-        SingelPlayer
+        SingelPlayer,
+        Sport,
+        Strategie,
+        TowerDefence,
+        Horror,
+        Survival,
+        SurvivalHorror,
+        JumpAndRun,
+        Plattformer,
+        LightgunShooter,
+        Musik,
+        LernSpiel,
+        OpenWorld,
+        ActionRPG,
+        MMORPG
     }
 }
