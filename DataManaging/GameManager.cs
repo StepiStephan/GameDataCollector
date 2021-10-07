@@ -15,6 +15,8 @@ namespace DataManaging
         private readonly IDataSaver<List<Game>> dataSaverGame = new DataSaver<List<Game>>(gameName);
         private readonly IDataLoader<List<Game>> dataLoaderGame = new DataLoader<List<Game>>(gameName);
 
+        public IEnumerable<Game> Games => games;
+
         public void AddGenre(string gameId, List<Genre> genre)
         {
             var game = games.Where(x => x.Id == gameId).FirstOrDefault();

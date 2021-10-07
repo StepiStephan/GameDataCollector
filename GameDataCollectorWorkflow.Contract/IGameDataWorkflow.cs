@@ -7,6 +7,8 @@ namespace GameDataCollectorWorkflow.Contract
     public interface IGameDataWorkflow
     {
         List<Konsole> Konsolen { get; }
+        List<Storage> Storages { get; }
+        List<Game> Games { get; }
 
         void AddGame(string storageId, Game game);
         void AddGenre(string gameId, List<Genre> genre);

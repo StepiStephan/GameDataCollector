@@ -14,7 +14,11 @@ namespace GameDataCollectorWorkflow
         private readonly StorageManager storageManager = new StorageManager();
         private readonly KonsoleManager konsoleManager = new KonsoleManager();
 
-        public List<Konsole> Konsolen { get => konsoleManager.Konsoles.ToList(); }
+        public List<Konsole> Konsolen => konsoleManager.Konsoles.ToList();
+
+        public List<Storage> Storages => storageManager.Storages.ToList();
+
+        public List<Game> Games => gameManager.Games.ToList();
 
         public Game CreateGame(string storageId, string name, List<Genre> genres, float space)
         {

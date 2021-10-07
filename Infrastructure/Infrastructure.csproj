@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,8 +12,6 @@
     <ProjectReference Include="..\Enums\Enums.csproj" />
     <ProjectReference Include="..\GameDataCollectorWorkflow.Contract\GameDataCollectorWorkflow.Contract.csproj" />
     <ProjectReference Include="..\GameDataCollectorWorkflow\GameDataCollectorWorkflow.csproj" />
-    <ProjectReference Include="..\GameDataCollector\GameDataCollector.Android\GameDataCollector.Android.csproj" />
-    <ProjectReference Include="..\GameDataCollector\GameDataCollector\GameDataCollector.csproj" />
     <ProjectReference Include="..\TestKonsole\TestKonsole.csproj" />
   </ItemGroup>
 
