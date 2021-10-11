@@ -1,18 +1,27 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>$(SolutionDir)\bin</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ninject" Version="3.3.4"/>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DataClasses\DataClasses.csproj" />
     <ProjectReference Include="..\DataManaging.Contract\DataManaging.Contract.csproj" />
-    <ProjectReference Include="..\DataManaging.Test\DataManaging.Test.csproj" />
     <ProjectReference Include="..\DataManaging\DataManaging.csproj" />
     <ProjectReference Include="..\Enums\Enums.csproj" />
     <ProjectReference Include="..\GameDataCollectorWorkflow.Contract\GameDataCollectorWorkflow.Contract.csproj" />
     <ProjectReference Include="..\GameDataCollectorWorkflow\GameDataCollectorWorkflow.csproj" />
-    <ProjectReference Include="..\TestKonsole\TestKonsole.csproj" />
   </ItemGroup>
 
 </Project>

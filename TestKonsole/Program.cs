@@ -4,9 +4,12 @@ using DataManaging.Contract;
 using Enums;
 using GameDataCollectorWorkflow;
 using GameDataCollectorWorkflow.Contract;
+using Infrastructure;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace TestKonsole
 {
@@ -15,7 +18,10 @@ namespace TestKonsole
         const int countOfGenres = 23;
         static void Main()
         {
-            IGameDataWorkflow dataManager = new GameDataWorkflow();
+            StandardKernel kernel = new StandardKernel();
+            DIKernal dIKernal = new DIKernal();
+            dIKernal.SetDI(kernel);
+            IGameDataWorkflow dataManager = kernel.Get<IGameDataWorkflow>();
 
             RunConsole(dataManager);
             //FillWithNewData(dataManager);

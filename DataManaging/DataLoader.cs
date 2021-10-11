@@ -9,11 +9,7 @@ namespace DataManaging
 {
     public class DataLoader<T> : DataSaverLoaderBase<T>, IDataLoader<T>
     {
-        private readonly string path;
-        public DataLoader(string name) : base()
-        {
-            path = Path.Combine(PathToSave, name + ".txt");
-        }
+        private string path;
         
         public T LoadObject()
         {
@@ -24,6 +20,11 @@ namespace DataManaging
             }
 
             return JsonConvert.DeserializeObject<T>(dataString);
+        }
+
+        public void SetName(string name)
+        {
+            path = Path.Combine(PathToSave, name + ".txt");
         }
     }
 }

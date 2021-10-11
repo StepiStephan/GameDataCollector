@@ -3,6 +3,7 @@ using DataManaging.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace DataManaging
 {
@@ -10,13 +11,17 @@ namespace DataManaging
     {
         private readonly List<Konsole> konsoles;
         private const string konsoleName = "KonsoleList";
-        private readonly IDataSaver<List<Konsole>> dataSaverKonsole = new DataSaver<List<Konsole>>(konsoleName);
-        private readonly IDataLoader<List<Konsole>> dataLoaderKonsole = new DataLoader<List<Konsole>>(konsoleName);
+        private readonly IDataSaver<List<Konsole>> dataSaverKonsole;
+        private readonly IDataLoader<List<Konsole>> dataLoaderKonsole;
 
         public IEnumerable<Konsole> Konsoles { get => konsoles; }
 
-        public KonsoleManager()
+        public KonsoleManager(IDataSaver<List<Konsole>> dataSaverKonsole, IDataLoader<List<Konsole>> dataLoaderKonsole)
         {
+            this.dataLoaderKonsole = dataLoaderKonsole;
+            this.dataSaverKonsole = dataSaverKonsole;
+            this.dataSaverKonsole.SetName(konsoleName);
+            this.dataLoaderKonsole.SetName(konsoleName);
             konsoles = dataLoaderKonsole.LoadObject();
             if (konsoles == null)
             {

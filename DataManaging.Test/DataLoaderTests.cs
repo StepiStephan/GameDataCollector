@@ -12,8 +12,10 @@ namespace DataManaging.Test
         [SetUp]
         public void Setup()
         {
-            dataLoader = new DataLoader<List<string>>("TestLoader");
-            dataSaver = new DataSaver<List<string>>("TestLoader");
+            dataLoader = new DataLoader<List<string>>();
+            dataLoader.SetName("TestLoader");
+            dataSaver = new DataSaver<List<string>>();
+            dataSaver.SetName("TestLoader");
             testList = new List<string>()
             {
                 "das",

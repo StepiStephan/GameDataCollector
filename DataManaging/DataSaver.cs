@@ -10,11 +10,7 @@ namespace DataManaging
 {
     public class DataSaver<T> : DataSaverLoaderBase<T>, IDataSaver<T>
     {
-        private readonly string path;
-        public DataSaver(string name) : base()
-        {
-            path = Path.Combine(PathToSave, name + ".txt");
-        }
+        private string path;
         public void SaveObject(T data)
         {
             try
@@ -27,6 +23,11 @@ namespace DataManaging
                 Task.Delay(500).GetAwaiter().GetResult();
                 SaveObject(data);
             }
+        }
+
+        public void SetName(string name)
+        {
+            path = Path.Combine(PathToSave, name + ".txt");
         }
     }
 }

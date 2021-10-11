@@ -1,18 +1,26 @@
 ﻿using DataClasses;
 using DataManaging;
+using DataManaging.Contract;
 using Enums;
 using GameDataCollectorWorkflow.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace GameDataCollectorWorkflow
 {
     public class GameDataWorkflow : IGameDataWorkflow
     {
-        private readonly GameManager gameManager = new GameManager();
-        private readonly StorageManager storageManager = new StorageManager();
-        private readonly KonsoleManager konsoleManager = new KonsoleManager();
+        private readonly IGameManager gameManager;
+        private readonly IStorageManager storageManager;
+        private readonly IKonsoleManager konsoleManager;
+        public GameDataWorkflow(IGameManager gameManager, IStorageManager storageManager, IKonsoleManager konsoleManager)
+        {
+            this.gameManager = gameManager;
+            this.storageManager = storageManager;
+            this.konsoleManager = konsoleManager;
+        }
 
         public List<Konsole> Konsolen => konsoleManager.Konsoles.ToList();
 

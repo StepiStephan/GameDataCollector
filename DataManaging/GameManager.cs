@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
 
 namespace DataManaging
 {
@@ -12,8 +13,8 @@ namespace DataManaging
     {
         private readonly List<Game> games;
         private const string gameName = "GameList";
-        private readonly IDataSaver<List<Game>> dataSaverGame = new DataSaver<List<Game>>(gameName);
-        private readonly IDataLoader<List<Game>> dataLoaderGame = new DataLoader<List<Game>>(gameName);
+        private readonly IDataSaver<List<Game>> dataSaverGame; //new DataSaver<List<Game>>(gameName);
+        private readonly IDataLoader<List<Game>> dataLoaderGame; //new DataLoader<List<Game>>(gameName);
 
         public IEnumerable<Game> Games => games;
 
@@ -26,8 +27,12 @@ namespace DataManaging
             }
         }
 
-        public GameManager()
+        public GameManager(IDataSaver<List<Game>> dataSaver, IDataLoader<List<Game>> dataLoader)
         {
+            dataLoaderGame = dataLoader;
+            dataSaverGame = dataSaver;
+            dataLoaderGame.SetName(gameName);
+            dataSaverGame.SetName(gameName);
             games = dataLoaderGame.LoadObject();
 
             if (games == null)

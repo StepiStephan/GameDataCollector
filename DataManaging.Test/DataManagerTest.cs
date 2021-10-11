@@ -17,7 +17,13 @@ namespace DataManaging.Test
         [SetUp]
         public void Setup()
         {
-            dataManager = new GameDataCollectorWorkflow.GameDataWorkflow();
+            dataManager = new GameDataCollectorWorkflow.GameDataWorkflow(
+                new GameManager(
+                    new DataSaver<List<Game>>(), new DataLoader<List<Game>>()),
+                new StorageManager(
+                    new DataSaver<List<Storage>>(), new DataLoader<List<Storage>>()),
+                new KonsoleManager(
+                    new DataSaver<List<Konsole>>(), new DataLoader<List<Konsole>>()))                ;
             konsole = dataManager.CreateKonsole("XBoxX-alt", "XBox Sieres X", 500);
             intern = dataManager.GetStorage(konsole.Storages.First());
             newStorage = dataManager.CreateStorage(konsole.Id, "MultiplayerKarte", 1000);
