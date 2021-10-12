@@ -1,5 +1,9 @@
 ﻿using GameDataCollector.Services;
 using GameDataCollector.Views;
+using GameDataCollectorWorkflow;
+using GameDataCollectorWorkflow.Contract;
+using Infrastructure;
+using Ninject;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,6 +16,9 @@ namespace GameDataCollector
         public App()
         {
             InitializeComponent();
+
+            DIKernal  dIKernal= new DIKernal();
+            dIKernal.SetXamarinDI();
 
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();

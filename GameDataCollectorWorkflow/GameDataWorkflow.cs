@@ -1,12 +1,9 @@
 ﻿using DataClasses;
-using DataManaging;
 using DataManaging.Contract;
 using Enums;
 using GameDataCollectorWorkflow.Contract;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xamarin.Forms;
 
 namespace GameDataCollectorWorkflow
 {

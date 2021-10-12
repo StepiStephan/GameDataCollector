@@ -1,15 +1,9 @@
-﻿using DataClasses;
-using DataManaging;
-using DataManaging.Contract;
-using Enums;
-using GameDataCollectorWorkflow;
+﻿using Enums;
 using GameDataCollectorWorkflow.Contract;
 using Infrastructure;
 using Ninject;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Xamarin.Forms;
 
 namespace TestKonsole
 {
@@ -24,9 +18,6 @@ namespace TestKonsole
             IGameDataWorkflow dataManager = kernel.Get<IGameDataWorkflow>();
 
             RunConsole(dataManager);
-            //FillWithNewData(dataManager);
-            //PrintAllData(dataManager);
-
             Console.Read();
         }
 

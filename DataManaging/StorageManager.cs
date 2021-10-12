@@ -2,7 +2,6 @@
 using DataManaging.Contract;
 using System.Collections.Generic;
 using System.Linq;
-using Xamarin.Forms;
 
 namespace DataManaging
 {

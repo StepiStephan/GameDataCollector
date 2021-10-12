@@ -4,9 +4,7 @@ using DataManaging.Contract;
 using GameDataCollectorWorkflow;
 using GameDataCollectorWorkflow.Contract;
 using Ninject;
-using System;
 using System.Collections.Generic;
-using Xamarin.Forms;
 
 namespace Infrastructure
 {
@@ -24,6 +22,20 @@ namespace Infrastructure
             kernel.Bind<IKonsoleManager>().To<KonsoleManager>();
             kernel.Bind<IStorageManager>().To<StorageManager>();
             kernel.Bind<IGameDataWorkflow>().To<GameDataWorkflow>();
+        }
+
+        public void SetXamarinDI()
+        {
+            Xamarin.Forms.DependencyService.Register<DataLoader<List<Game>>>();
+            Xamarin.Forms.DependencyService.Register<DataLoader<List<Konsole>>>();
+            Xamarin.Forms.DependencyService.Register<DataLoader<List<Storage>>>();
+            Xamarin.Forms.DependencyService.Register<DataSaver<List<Game>>>();
+            Xamarin.Forms.DependencyService.Register<DataSaver<List<Konsole>>>();
+            Xamarin.Forms.DependencyService.Register<DataSaver<List<Storage>>>();
+            Xamarin.Forms.DependencyService.Register<GameManager>();
+            Xamarin.Forms.DependencyService.Register<KonsoleManager>();
+            Xamarin.Forms.DependencyService.Register<StorageManager>();
+            Xamarin.Forms.DependencyService.Register<GameDataWorkflow>();
         }
     }
 }
