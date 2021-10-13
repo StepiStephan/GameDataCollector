@@ -26,16 +26,16 @@ namespace Infrastructure
 
         public void SetXamarinDI()
         {
-            Xamarin.Forms.DependencyService.Register<DataLoader<List<Game>>>();
-            Xamarin.Forms.DependencyService.Register<DataLoader<List<Konsole>>>();
-            Xamarin.Forms.DependencyService.Register<DataLoader<List<Storage>>>();
-            Xamarin.Forms.DependencyService.Register<DataSaver<List<Game>>>();
-            Xamarin.Forms.DependencyService.Register<DataSaver<List<Konsole>>>();
-            Xamarin.Forms.DependencyService.Register<DataSaver<List<Storage>>>();
-            Xamarin.Forms.DependencyService.Register<GameManager>();
-            Xamarin.Forms.DependencyService.Register<KonsoleManager>();
-            Xamarin.Forms.DependencyService.Register<StorageManager>();
-            Xamarin.Forms.DependencyService.Register<GameDataWorkflow>();
+            Xamarin.Forms.DependencyService.Register<IDataLoader<List<Game>> ,DataLoader <List<Game>>>();
+            Xamarin.Forms.DependencyService.Register<IDataLoader<List<Konsole>> ,DataLoader <List<Konsole>>>();
+            Xamarin.Forms.DependencyService.Register<IDataLoader<List<Storage>>, DataLoader<List<Storage>>>();
+            Xamarin.Forms.DependencyService.Register<IDataSaver<List<Game>>, DataSaver<List<Game>>>();
+            Xamarin.Forms.DependencyService.Register<IDataSaver<List<Konsole>>, DataSaver<List<Konsole>>>();
+            Xamarin.Forms.DependencyService.Register<IDataSaver<List<Storage>>, DataSaver<List<Storage>>>();
+            Xamarin.Forms.DependencyService.Register<IGameManager, GameManager>();
+            Xamarin.Forms.DependencyService.Register<IKonsoleManager, KonsoleManager>();
+            Xamarin.Forms.DependencyService.Register<IStorageManager, StorageManager>();
+            Xamarin.Forms.DependencyService.Register<IGameDataWorkflow, GameDataWorkflow>();
         }
     }
 }

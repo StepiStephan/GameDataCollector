@@ -8,6 +8,10 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<OutputPath>$(SolutionDir)\bin</OutputPath>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
+	</ItemGroup>
 	
   <ItemGroup>
     <ProjectReference Include="..\DataManaging\DataManaging.csproj" />

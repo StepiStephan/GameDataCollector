@@ -20,6 +20,8 @@ namespace GameDataCollector
             DIKernal  dIKernal= new DIKernal();
             dIKernal.SetXamarinDI();
 
+
+            var workflow = DependencyService.Get<IGameDataWorkflow>();
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }

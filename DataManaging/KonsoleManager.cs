@@ -2,6 +2,7 @@
 using DataManaging.Contract;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace DataManaging
 {
@@ -14,6 +15,19 @@ namespace DataManaging
 
         public IEnumerable<Konsole> Konsoles { get => konsoles; }
 
+        public KonsoleManager()
+        {
+            dataSaverKonsole = DependencyService.Get<IDataSaver<List<Konsole>>>();
+            dataLoaderKonsole = DependencyService.Get<IDataLoader<List<Konsole>>>();
+            this.dataSaverKonsole.SetName(konsoleName);
+            this.dataLoaderKonsole.SetName(konsoleName);
+            konsoles = dataLoaderKonsole.LoadObject();
+            if (konsoles == null)
+            {
+                konsoles = new List<Konsole>();
+                dataSaverKonsole.SaveObject(konsoles);
+            }
+        }
         public KonsoleManager(IDataSaver<List<Konsole>> dataSaverKonsole, IDataLoader<List<Konsole>> dataLoaderKonsole)
         {
             this.dataLoaderKonsole = dataLoaderKonsole;

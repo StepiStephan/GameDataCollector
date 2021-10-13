@@ -2,6 +2,7 @@
 using DataManaging.Contract;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace DataManaging
 {
@@ -12,7 +13,19 @@ namespace DataManaging
         private readonly IDataSaver<List<Storage>> dataSaverStorage;
         private readonly IDataLoader<List<Storage>> dataLoaderStorage;
 
-
+        public StorageManager()
+        {
+            dataSaverStorage = DependencyService.Get<IDataSaver<List<Storage>>>();
+            dataLoaderStorage = DependencyService.Get<IDataLoader<List<Storage>>>();
+            this.dataSaverStorage.SetName(storageName);
+            this.dataLoaderStorage.SetName(storageName);
+            storages = dataLoaderStorage.LoadObject();
+            if (storages == null)
+            {
+                storages = new List<Storage>();
+                dataSaverStorage.SaveObject(storages);
+            }
+        }
         public StorageManager(IDataSaver<List<Storage>> dataSaverStorage, IDataLoader<List<Storage>> dataLoaderStorage)
         {
             this.dataLoaderStorage = dataLoaderStorage;

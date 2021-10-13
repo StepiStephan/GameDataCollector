@@ -4,6 +4,7 @@ using Enums;
 using GameDataCollectorWorkflow.Contract;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace GameDataCollectorWorkflow
 {
@@ -12,6 +13,13 @@ namespace GameDataCollectorWorkflow
         private readonly IGameManager gameManager;
         private readonly IStorageManager storageManager;
         private readonly IKonsoleManager konsoleManager;
+
+        public GameDataWorkflow()
+        {
+            gameManager = DependencyService.Get<IGameManager>();
+            storageManager = DependencyService.Get<IStorageManager>();
+            konsoleManager = DependencyService.Get<IKonsoleManager>();
+        }
         public GameDataWorkflow(IGameManager gameManager, IStorageManager storageManager, IKonsoleManager konsoleManager)
         {
             this.gameManager = gameManager;
