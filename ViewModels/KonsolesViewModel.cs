@@ -4,7 +4,7 @@ using ViewModels.Contract;
 
 namespace ViewModels
 {
-    public class KonsolesViewModel : IViewModel<Konsole>
+    public class KonsolesViewModel : IKonsoleViewModel
     {
         private readonly IGameDataWorkflow workflow;
 

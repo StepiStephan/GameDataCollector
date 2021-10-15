@@ -1,6 +1,6 @@
 ﻿namespace ViewModels.Contract
 {
-    public interface IViewModel<T>
+    public interface IGameViewModel
     {
     }
 }

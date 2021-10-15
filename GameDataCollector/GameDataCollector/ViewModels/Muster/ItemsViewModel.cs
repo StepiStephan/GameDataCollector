@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace GameDataCollector.ViewModels.Muster
+namespace GameDataCollector.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {

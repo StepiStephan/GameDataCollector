@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace GameDataCollector.ViewModels.Muster
+namespace GameDataCollector.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
