@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace GameDataCollector.ViewModels
+namespace GameDataCollector.ViewModels.Muster
 {
     public class AboutViewModel : BaseViewModel
     {

@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
-namespace GameDataCollector.ViewModels
+namespace GameDataCollector.ViewModels.Muster
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

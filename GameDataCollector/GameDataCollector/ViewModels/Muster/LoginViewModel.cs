@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace GameDataCollector.ViewModels
+namespace GameDataCollector.ViewModels.Muster
 {
     public class LoginViewModel : BaseViewModel
     {

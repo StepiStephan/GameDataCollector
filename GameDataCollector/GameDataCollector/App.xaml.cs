@@ -1,28 +1,19 @@
-﻿using GameDataCollector.Services;
-using GameDataCollector.Views;
-using GameDataCollectorWorkflow;
-using GameDataCollectorWorkflow.Contract;
-using Infrastructure;
-using Ninject;
+﻿using Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace GameDataCollector
 {
     public partial class App : Application
     {
-
+        public static IServiceProvider ServiceProvider { get; set; }
         public App()
         {
             InitializeComponent();
-
-            DIKernal  dIKernal= new DIKernal();
-            dIKernal.SetXamarinDI();
-
-
-            var workflow = DependencyService.Get<IGameDataWorkflow>();
-            DependencyService.Register<MockDataStore>();
+            var services = new ServiceCollection();
+            ServiceProvider = DIKernal.SetDIMicrosoft(services);
+            
             MainPage = new AppShell();
         }
 

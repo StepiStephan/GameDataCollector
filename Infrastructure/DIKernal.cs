@@ -3,14 +3,17 @@ using DataManaging;
 using DataManaging.Contract;
 using GameDataCollectorWorkflow;
 using GameDataCollectorWorkflow.Contract;
+using Microsoft.Extensions.DependencyInjection;
 using Ninject;
 using System.Collections.Generic;
+using ViewModels;
+using ViewModels.Contract;
 
 namespace Infrastructure
 {
-    public class DIKernal
+    public static class DIKernal
     {
-        public void SetDI(StandardKernel kernel)
+        public static void SetDI(IKernel kernel)
         {
             kernel.Bind<IDataLoader<List<Game>>>().To<DataLoader<List<Game>>>() ;
             kernel.Bind<IDataLoader<List<Konsole>>>().To<DataLoader<List<Konsole>>>();
@@ -24,18 +27,40 @@ namespace Infrastructure
             kernel.Bind<IGameDataWorkflow>().To<GameDataWorkflow>();
         }
 
-        public void SetXamarinDI()
+        //public static void SetXamarinDI()
+        //{
+        //    Xamarin.Forms.DependencyService.Register<IDataLoader<List<Game>> ,DataLoader <List<Game>>>();
+        //    Xamarin.Forms.DependencyService.Register<IDataLoader<List<Konsole>> ,DataLoader <List<Konsole>>>();
+        //    Xamarin.Forms.DependencyService.Register<IDataLoader<List<Storage>>, DataLoader<List<Storage>>>();
+        //    Xamarin.Forms.DependencyService.Register<IDataSaver<List<Game>>, DataSaver<List<Game>>>();
+        //    Xamarin.Forms.DependencyService.Register<IDataSaver<List<Konsole>>, DataSaver<List<Konsole>>>();
+        //    Xamarin.Forms.DependencyService.Register<IDataSaver<List<Storage>>, DataSaver<List<Storage>>>();
+        //    Xamarin.Forms.DependencyService.Register<IGameManager, GameManager>();
+        //    Xamarin.Forms.DependencyService.Register<IKonsoleManager, KonsoleManager>();
+        //    Xamarin.Forms.DependencyService.Register<IStorageManager, StorageManager>();
+        //    Xamarin.Forms.DependencyService.Register<IGameDataWorkflow, GameDataWorkflow>();
+        //}
+
+        public static ServiceProvider SetDIMicrosoft(IServiceCollection services)
         {
-            Xamarin.Forms.DependencyService.Register<IDataLoader<List<Game>> ,DataLoader <List<Game>>>();
-            Xamarin.Forms.DependencyService.Register<IDataLoader<List<Konsole>> ,DataLoader <List<Konsole>>>();
-            Xamarin.Forms.DependencyService.Register<IDataLoader<List<Storage>>, DataLoader<List<Storage>>>();
-            Xamarin.Forms.DependencyService.Register<IDataSaver<List<Game>>, DataSaver<List<Game>>>();
-            Xamarin.Forms.DependencyService.Register<IDataSaver<List<Konsole>>, DataSaver<List<Konsole>>>();
-            Xamarin.Forms.DependencyService.Register<IDataSaver<List<Storage>>, DataSaver<List<Storage>>>();
-            Xamarin.Forms.DependencyService.Register<IGameManager, GameManager>();
-            Xamarin.Forms.DependencyService.Register<IKonsoleManager, KonsoleManager>();
-            Xamarin.Forms.DependencyService.Register<IStorageManager, StorageManager>();
-            Xamarin.Forms.DependencyService.Register<IGameDataWorkflow, GameDataWorkflow>();
+            services.AddSingleton<IDataLoader<List<Game>>, DataLoader<List<Game>>>();
+            services.AddSingleton<IDataLoader<List<Konsole>>, DataLoader<List<Konsole>>>();
+            services.AddSingleton<IDataLoader<List<Storage>>, DataLoader<List<Storage>>>();
+            services.AddSingleton<IDataSaver<List<Game>>,DataSaver <List<Game>>>();
+            services.AddSingleton<IDataSaver<List<Konsole>>, DataSaver<List<Konsole>>>();
+            services.AddSingleton<IDataSaver<List<Storage>>, DataSaver<List<Storage>>>();
+            services.AddSingleton<IGameManager, GameManager>();
+            services.AddSingleton<IKonsoleManager, KonsoleManager>();
+            services.AddSingleton<IStorageManager, StorageManager>();
+            services.AddSingleton<IGameDataWorkflow, GameDataWorkflow>();
+            services.AddSingleton<IDetailViewModel<Game>, GameDetailViewModel>();
+            services.AddSingleton<IDetailViewModel<Storage>, StorageDetailViewModel>();
+            services.AddSingleton<IDetailViewModel<Konsole>, KonsoleDetailViewModel>();
+            services.AddSingleton<IViewModel<Game>, GamesViewModel>();
+            services.AddSingleton<IViewModel<Storage>, StoragesViewModel>();
+            services.AddSingleton<IViewModel<Konsole>, KonsolesViewModel>();
+
+            return services.BuildServiceProvider();
         }
     }
 }

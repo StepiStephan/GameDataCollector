@@ -3,7 +3,6 @@ using DataManaging.Contract;
 using Enums;
 using System.Collections.Generic;
 using System.Linq;
-using Xamarin.Forms;
 
 namespace DataManaging
 {
@@ -22,21 +21,6 @@ namespace DataManaging
             if (game != null)
             {
                 game.GameGenre.AddRange(genre);
-            }
-        }
-
-        public GameManager()
-        {
-            dataSaverGame = DependencyService.Get<IDataSaver<List<Game>>>();
-            dataLoaderGame =DependencyService.Get<IDataLoader<List<Game>>>();
-            dataLoaderGame.SetName(gameName);
-            dataSaverGame.SetName(gameName);
-            games = dataLoaderGame.LoadObject();
-
-            if (games == null)
-            {
-                games = new List<Game>();
-                dataSaverGame.SaveObject(games);
             }
         }
 

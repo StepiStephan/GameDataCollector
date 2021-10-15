@@ -13,8 +13,7 @@ namespace TestKonsole
         static void Main()
         {
             StandardKernel kernel = new StandardKernel();
-            DIKernal dIKernal = new DIKernal();
-            dIKernal.SetDI(kernel);
+            DIKernal.SetDI(kernel);
             IGameDataWorkflow dataManager = kernel.Get<IGameDataWorkflow>();
 
             RunConsole(dataManager);
