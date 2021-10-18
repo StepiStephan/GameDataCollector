@@ -45,5 +45,10 @@ namespace ViewModels
         {
             return workflow.GetGame(gameId);
         }
+
+        public List<Game> GetGames()
+        {
+            return workflow.GetGames();
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataClasses;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -19,8 +21,17 @@ namespace GameDataCollector.Views
         {
             InitializeComponent();
             BindingContext = viewModel = App.ServiceProvider.GetService<IStorageViewModel>();
-            Items = new ObservableCollection<string>(viewModel.Storages.Select(x => x.Name));
-
+            List<Element> elements = new List<Element>();
+            foreach(var item in viewModel.GetStorages())
+            {
+                elements.Add(new Element()
+                {
+                    ID = item.Id,
+                    Name = item.Name
+                });
+            }
+            Items = new ObservableCollection<string>(elements.Select(x => x.Name));
+            
             MyListView.ItemsSource = Items;
         }
 
