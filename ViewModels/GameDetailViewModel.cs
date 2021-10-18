@@ -4,12 +4,10 @@ using ViewModels.Contract;
 
 namespace ViewModels
 {
-    public class GameDetailViewModel : IDetailViewModel<Game>
+    public class GameDetailViewModel : GamesViewModel, IDetailViewModel<Game>
     {
-        private readonly IGameDataWorkflow workflow;
-        public GameDetailViewModel(IGameDataWorkflow workflow)
+        public GameDetailViewModel(IGameDataWorkflow workflow) : base(workflow)
         {
-            this.workflow = workflow;
         }
     }
 }

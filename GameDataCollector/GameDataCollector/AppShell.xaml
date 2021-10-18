@@ -14,7 +14,7 @@
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.BackgroundColor" Value="IndianRed" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
@@ -79,10 +79,16 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:StartPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Browse" Icon="icon_feed.png">
-        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+    <FlyoutItem Title="Konsolen" Icon="icon_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:KonsolenPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Speicher" Icon="icon_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:StoragePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Spiele" Icon="icon_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:GamePage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

@@ -4,13 +4,10 @@ using ViewModels.Contract;
 
 namespace ViewModels
 {
-    public class StorageDetailViewModel : IDetailViewModel<Storage>
+    public class StorageDetailViewModel :StoragesViewModel, IDetailViewModel<Storage>
     {
-        private readonly IGameDataWorkflow workflow;
-
-        public StorageDetailViewModel(IGameDataWorkflow workflow)
+        public StorageDetailViewModel(IGameDataWorkflow workflow) : base(workflow)
         {
-            this.workflow = workflow;
         }
     }
 }

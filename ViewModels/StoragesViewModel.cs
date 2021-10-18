@@ -1,5 +1,6 @@
 ﻿using DataClasses;
 using GameDataCollectorWorkflow.Contract;
+using System.Collections.Generic;
 using ViewModels.Contract;
 
 namespace ViewModels
@@ -10,6 +11,48 @@ namespace ViewModels
         public StoragesViewModel(IGameDataWorkflow workflow)
         {
             this.workflow = workflow;
+        }
+
+        public List<Storage> Storages => workflow.Storages;
+
+        public void AddGame(string storageId, Game game)
+        {
+            workflow.AddGame(storageId, game);
+        }
+
+        public Storage CreateStorage(string konsoleId, string name, float space)
+        {
+            return workflow.CreateStorage(konsoleId, name, space);
+        }
+
+        public void DeleteStorage(string id)
+        {
+            workflow.DeleteStorage(id);
+        }
+
+        public void DeleteStorageWithGames(string id)
+        {
+            workflow.DeleteStorageWithGames(id);
+        }
+
+        public void EditStorage(string storageId, string name, float space)
+        {
+            workflow.EditStorage(storageId,name,space);
+        }
+
+        public Storage GetStorage(string storageId)
+        {
+            return workflow.GetStorage(storageId);
+        }
+
+        public List<Storage> GetStorages()
+        {
+            return workflow.GetStorages();
+        }
+
+        public void SetStorage(string id)
+        {
+            workflow.SelectStorage(id);
         }
     }
 }

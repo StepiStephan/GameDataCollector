@@ -13,6 +13,9 @@ namespace GameDataCollectorWorkflow
         private readonly IStorageManager storageManager;
         private readonly IKonsoleManager konsoleManager;
 
+        private string selectedKonsoleId;
+        private string selectedStorageID;
+
         public GameDataWorkflow(IGameManager gameManager, IStorageManager storageManager, IKonsoleManager konsoleManager)
         {
             this.gameManager = gameManager;
@@ -140,6 +143,49 @@ namespace GameDataCollectorWorkflow
         public Konsole GetKonsole(string konsoleId)
         {
             return konsoleManager.GetKonsole(konsoleId);
+        }
+
+        public void SelectKonsole(string konsoleId)
+        {
+            selectedKonsoleId = konsoleId;
+        }
+
+        public void SelectStorage(string storageId)
+        {
+            selectedStorageID = storageId;
+        }
+
+        public List<Storage> GetStorages()
+        {
+            if(selectedKonsoleId == null)
+                return Storages;
+            var konsole = GetKonsole(selectedKonsoleId);
+            return Storages.Where(x => konsole.Storages.Contains(x.Id)).ToList();
+        }
+
+        public List<Game> GetGames()
+        {
+            if (selectedStorageID == null && selectedKonsoleId == null)
+                return Games;
+            else
+            {
+                if(selectedStorageID == null && selectedKonsoleId != null)
+                {
+                    var konsole = GetKonsole(selectedKonsoleId);
+                    var result = new List<Game>();
+                    foreach (var storageID in konsole.Storages)
+                    {
+                        result.AddRange(Games.Where(x => GetStorage(storageID).Games.Contains(x.Id)));
+                    }
+                    return result;
+                }
+                else
+                {
+                    var storage = GetStorage(selectedStorageID);
+                    return Games.Where(x => storage.Games.Contains(x.Id)).ToList();
+                }
+            }
+
         }
     }
 }

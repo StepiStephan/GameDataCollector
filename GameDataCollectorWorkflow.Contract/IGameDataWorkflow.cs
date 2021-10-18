@@ -30,6 +30,10 @@ namespace GameDataCollectorWorkflow.Contract
         Game GetGame(string gameId);
         Konsole GetKonsole(string konsoleId);
         Storage GetStorage(string storageId);
+        void SelectKonsole(string konsoleId);
+        void SelectStorage(string storageId);
+        List<Storage> GetStorages();
+        List<Game> GetGames();
         void SaveData();
     }
 }
