@@ -9,7 +9,15 @@
     <!--Built in Cells-->
     <ListView.ItemTemplate>
         <DataTemplate>
-            <TextCell Text="{Binding .}" />
+            <StackLayout>
+                <Label Text="{Binding .}"/>
+                <RelativeLayout>
+                    <Button Text="Update"
+                            Command="{Binding Path=ItemTapped}"/>
+                    <Button Text="Delete"
+                            Command="{Binding Path=ItemTapped}"/>
+                </RelativeLayout>
+            </StackLayout>
         </DataTemplate>
     </ListView.ItemTemplate>
     

@@ -2,5 +2,6 @@
 {
     public interface IDetailViewModel<T>
     {
+        string ItemId { get; set; }
     }
 }

@@ -9,5 +9,7 @@ namespace ViewModels
         public StorageDetailViewModel(IGameDataWorkflow workflow) : base(workflow)
         {
         }
+
+        public string ItemId { get; set; }
     }
 }

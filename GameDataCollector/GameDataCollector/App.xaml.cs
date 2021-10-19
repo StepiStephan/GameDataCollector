@@ -1,4 +1,5 @@
-﻿using Infrastructure;
+﻿using Enums;
+using Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,14 @@ namespace GameDataCollector
             InitializeComponent();
             var services = new ServiceCollection();
             ServiceProvider = DIKernal.SetDIMicrosoft(services);
-            
+            var workflow = ServiceProvider.GetService<GameDataCollectorWorkflow.Contract.IGameDataWorkflow>();
+            var oldSwitch = workflow.CreateKonsole("Switch", "Alte Switch", 32);
+            var newSwitch = workflow.CreateKonsole("Switch OLED", "Neue Switch", 64);
+
+            workflow.CreateGame(oldSwitch.Storages.First(), "DOOM 2016", new List<Genre> { Genre.Egoshooter }, 20);
+            workflow.CreateGame(newSwitch.Storages.First(), "Mario Party", new List<Genre> { Genre.Party }, 10);
+            workflow.SaveData();
+
             MainPage = new AppShell();
         }
 

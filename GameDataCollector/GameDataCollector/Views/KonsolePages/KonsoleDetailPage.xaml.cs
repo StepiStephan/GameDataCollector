@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace GameDataCollector.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EditKonsolePage : ContentPage
+    public partial class KonsoleDetailPage : ContentPage
     {
-        public EditKonsolePage()
+        public KonsoleDetailPage()
         {
             InitializeComponent();
         }
