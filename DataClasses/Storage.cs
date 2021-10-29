@@ -59,8 +59,7 @@ namespace DataClasses
 
         public override string ToString()
         {
-            string result = "Name: " + name + "; Speicherplatz: " + space + "; Games: \n\r";
-            return result;
+            return name;
         }
     }
 }

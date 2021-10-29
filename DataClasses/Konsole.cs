@@ -58,8 +58,7 @@ namespace DataClasses
 
         public override string ToString()
         {
-            string result = "Name: " + name + "; ConsolenName: " + consoleName +  "\n\r";
-            return result;
+            return name;
         }
     }
 }
