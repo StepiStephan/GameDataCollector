@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GameDataCollector.Views.EditStoragePage">
+             x:Class="GameDataCollector.Views.EditKonsolePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Speichername"/>
-            <Editor x:Name="storageName"/>
-            <Label Text="Speichergröße"/>
-            <Editor x:Name="storageSize"
-                    Keyboard="Numeric"/>
+            <Label Text="Konsolenname"/>
+            <Editor x:Name="konsoleName"/>
+            <Label Text="Konsolentyp"/>
+            <Editor x:Name="konsoleType"/>
             <Button x:Name="saveButton"
                     Text="Save"/>
         </StackLayout>

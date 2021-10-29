@@ -2,27 +2,25 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameDataCollector.Views.KonsolenPage">
-  <ListView x:Name="MyListView"
+
+    <ListView x:Name="MyListView"
             ItemsSource="{Binding Items}"
             ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement">
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <StackLayout>
-                <Label Text="{Binding .}"/>
-                <RelativeLayout>
-                    <Button Text="Update"
-                            Command="{Binding Path=ItemTapped}"/>
-                    <Button Text="Delete"
-                            Command="{Binding Path=ItemTapped}"/>
-                </RelativeLayout>
-            </StackLayout>
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
+        <!--Built in Cells-->
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Name}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Footer>
+            <Button Text="Löschen"
+                    x:Name="deleteButton"
+                    TextColor="White"
+                    BackgroundColor="Blue"/>
+        </ListView.Footer>
+        <!--Custom View Cells-->
+        <!--
     <ListView.ItemTemplate>
       <DataTemplate>
         <ViewCell>
@@ -36,5 +34,5 @@
       </DataTemplate>
     </ListView.ItemTemplate>
     -->
-  </ListView>
+    </ListView>
 </ContentPage>

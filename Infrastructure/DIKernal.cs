@@ -59,6 +59,7 @@ namespace Infrastructure
             services.AddSingleton<IGameViewModel, GamesViewModel>();
             services.AddSingleton<IStorageViewModel, StoragesViewModel>();
             services.AddSingleton<IKonsoleViewModel, KonsolesViewModel>();
+            services.AddSingleton<IStatisticViewModel, StatisticViewModel>();
 
             return services.BuildServiceProvider();
         }

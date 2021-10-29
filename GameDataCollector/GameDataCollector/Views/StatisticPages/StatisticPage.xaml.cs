@@ -1,21 +1,20 @@
-﻿using GameDataCollector.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace GameDataCollector.Views
+namespace GameDataCollector.Views.StatisticPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class StatisticPage : ContentPage
     {
-        public LoginPage()
+        public StatisticPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
         }
     }
 }

@@ -1,15 +1,20 @@
 ﻿using DataClasses;
 using Enums;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace GameDataCollectorWorkflow.Contract
 {
-    public interface IGameDataWorkflow
+    public interface IGameDataWorkflow : INotifyPropertyChanged
     {
         List<Konsole> Konsolen { get; }
         List<Storage> Storages { get; }
         List<Game> Games { get; }
 
+        string SelectedKonsole { get; }
+        string SelectedStorage { get; }
+
+        void ClearSelecion();
         void AddGame(string storageId, Game game);
         void AddGenre(string gameId, List<Genre> genre);
         void AddKonsole(Konsole konsole);
@@ -35,5 +40,7 @@ namespace GameDataCollectorWorkflow.Contract
         List<Storage> GetStorages();
         List<Game> GetGames();
         void SaveData();
+        void MoveGame(string oldStorageId, string gameId, string newStorageId);
+        void MoveStorage(string oldKonsoleId, string storageId, string newKonsoleId);
     }
 }

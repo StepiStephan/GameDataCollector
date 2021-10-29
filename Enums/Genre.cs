@@ -5,7 +5,7 @@ namespace Enums
     public enum Genre
     {
         Egoshooter,
-        ThirdPersonSooter,
+        ThirdPersonShooter,
         RPG,
         JRPG,
         Rennspiel,

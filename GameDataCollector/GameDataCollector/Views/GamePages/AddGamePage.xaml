@@ -3,10 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameDataCollector.Views.AddGamePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="20">
+            <Label Text="Konsole auswählen:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Picker x:Name="konsolePicker"
+                    x:DataType="x:String"/>
+            <Label Text="Speicher auswählen:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Picker x:Name="storagePicker"/>
+
+            <Label Text="Name des Spiels:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Editor Placeholder="Doom 2016"
+                    x:Name="gameName"/>
+            <Label Text="Speichergröße in GB:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Editor Placeholder="200"
+                    x:Name="speicherGB"
+                    Keyboard="Numeric"/>
+            <Label Text="Genre auswählen:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Picker x:Name="genrePicker"/>
+
+            <Label Text="Ausgewählte Genres:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <StackLayout Padding="10"
+                         x:Name="SelectedGenres">
+                
+            </StackLayout>
+            <Button Text="Speichern" 
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    x:Name="saveButton"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

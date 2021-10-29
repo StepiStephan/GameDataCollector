@@ -19,26 +19,44 @@ namespace GameDataCollector.Views
         public ObservableCollection<DataClasses.Element> Items { get; set; }
         public Command<DataClasses.Element> ItemTapped { get; set; }
 
+        private Konsole selectedKonsole;
+
         public KonsolenPage()
         {
             InitializeComponent();
             BindingContext = viewModel = App.ServiceProvider.GetService<IKonsoleViewModel>();
-
+            Title = "Konsolen Info";
             Items = new ObservableCollection<DataClasses.Element>(GetElements());
             ItemTapped = new Command<DataClasses.Element>(OpenDeails);
+            deleteButton.Clicked += DeleteButton_Clicked;
             MyListView.ItemsSource = Items;
+        }
+        private void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            viewModel.DeleteKonsole(selectedKonsole.Id);
         }
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
                 return;
-            await Task.Delay(1);
-            //await DisplayAlert($"Item {((DataClasses.Element)e.Item).Name} Tapped", $"The item {((DataClasses.Element)e.Item).Name} was registrated.", "OK");
-            //viewModel.SetKonsole(((DataClasses.Element)e.Item).ID);
+            viewModel.SetKonsole(((DataClasses.Element)e.Item).ID);
 
-            //Deselect Item
-            ((ListView)sender).SelectedItem = null;
+            var konsole = viewModel.Konsoles.Where(x => x.Id == ((DataClasses.Element)e.Item).ID).First();
+            var info = viewModel.GetInfo(konsole);
+
+            var edit = await DisplayAlert($"Info Konsole {konsole.Name}",
+                $"Name: {konsole.Name}" + Environment.NewLine +
+                $"Typ: {konsole.ConsoleName}" + Environment.NewLine +
+                $"Anzahl Speicher: {konsole.Storages.Count}" + Environment.NewLine +
+                $"Anzahl Spiele: {info}", "Bearbeiten", "OK");
+
+            selectedKonsole = konsole;
+
+            if (edit)
+            {
+                await Navigation.PushAsync(new EditKonsolePage(selectedKonsole));
+            }
         }
         protected override void OnAppearing()
         {

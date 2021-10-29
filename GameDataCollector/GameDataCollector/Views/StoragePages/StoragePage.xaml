@@ -12,8 +12,13 @@
             <TextCell Text="{Binding .}" />
         </DataTemplate>
     </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
+        <ListView.Footer>
+            <Button Text="Löschen"
+                    x:Name="deleteButton"
+                    TextColor="White"
+                    BackgroundColor="Blue"/>
+        </ListView.Footer>
+        <!--Custom View Cells-->
     <!--
     <ListView.ItemTemplate>
       <DataTemplate>

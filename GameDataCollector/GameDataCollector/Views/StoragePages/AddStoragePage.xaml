@@ -3,10 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameDataCollector.Views.AddStoragePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="20">
+            <Label Text="Konsole auswählen:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Picker x:Name="konsolePicker"/>
+            <Label Text="Speichername:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Editor Placeholder="Multiplayerspeicher"
+                    x:Name="speicherName"/>
+            <Label Text="Speichergröße in GB:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Editor Placeholder="200"
+                    x:Name="speicherGB"
+                    Keyboard="Numeric"/>
+            <Button Text="Speichern" 
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    x:Name="saveButton"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

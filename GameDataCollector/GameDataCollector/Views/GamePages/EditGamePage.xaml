@@ -4,9 +4,24 @@
              x:Class="GameDataCollector.Views.EditGamePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Spielname"/>
+            <Editor x:Name="gameName"/>
+            <Label Text="Spielgröße"/>
+            <Editor x:Name="gameSize"
+                    Keyboard="Numeric"/>
+            <Label Text="Genres zum hinzufügen"/>
+            <Picker x:Name="genrePicker"/>
+            <ListView x:Name="genres"
+                      ItemsSource="{Binding Genres}"
+                      CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding .}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="saveButton"
+                    Text="Save"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

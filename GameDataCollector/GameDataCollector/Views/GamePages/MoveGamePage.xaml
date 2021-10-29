@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameDataCollector.Views.MoveGamePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Konsole alt:"/>
+            <Picker Title="Konsole auswählen" 
+                    x:Name="konsoleAlt"/>
+            <Label Text="Speicherkarte alt:"/>
+            <Picker Title="Speicherkarte auswählen" 
+                    x:Name="storageAlt"/>
+            <Label Text="Spiel:"/>
+            <Picker Title="Spiel auswählen" 
+                    x:Name="gamePicker"/>
+            <Label Text="Speicherkarte neu:"/>
+            <Picker Title="Speicherkarte auswählen" 
+                    x:Name="storageNeu"/>
+            <Button Text="Speichern"
+                    x:Name="saveButton"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

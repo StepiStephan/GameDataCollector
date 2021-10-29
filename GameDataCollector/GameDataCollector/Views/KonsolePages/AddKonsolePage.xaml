@@ -3,10 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameDataCollector.Views.AddKonsolePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="20">
+            <Label Text="KonsolenTyp:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Editor Placeholder="Switch OLED"
+                    x:Name="konsoleTyp"/>
+            <Label Text="KonsolenName:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Editor Placeholder="Neue Switch"
+                    x:Name="konsoleName"/>
+            <Label Text="Speichergröße in GB:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Editor Placeholder="64"
+                    x:Name="speicherGB"
+                    Keyboard="Numeric"/>
+            <Button Text="Speichern" 
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    x:Name="saveButton"/>
         </StackLayout>
     </ContentPage.Content>
+
 </ContentPage>
