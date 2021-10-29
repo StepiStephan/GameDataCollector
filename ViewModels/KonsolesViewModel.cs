@@ -1,6 +1,7 @@
 ﻿using DataClasses;
 using GameDataCollectorWorkflow.Contract;
 using System.Collections.Generic;
+using System.Linq;
 using ViewModels.Contract;
 
 namespace ViewModels
@@ -23,7 +24,8 @@ namespace ViewModels
 
         public Konsole CreateKonsole(string konsoleName, string name, float internerSpeicher)
         {
-            return workflow.CreateKonsole(konsoleName, name, internerSpeicher);
+            var konsole = workflow.CreateKonsole(konsoleName, name, internerSpeicher);
+            return konsole;
         }
 
         public void DeleteKonsole(string id)
@@ -44,6 +46,17 @@ namespace ViewModels
         public void EditKonsole(string konsoleId, string name, string consoleName)
         {
             workflow.EditKonsole(konsoleId, name, consoleName);
+        }
+
+        public string GetInfo(Konsole konsole)
+        {
+            int count = 0;
+            var storages = workflow.GetStorages().Where(x => konsole.Storages.Contains(x.Id));
+            foreach(var storage in storages)
+            {
+                count += storage.Games.Count();
+            }
+            return count.ToString();
         }
 
         public Konsole GetKonsole(string konsoleId)

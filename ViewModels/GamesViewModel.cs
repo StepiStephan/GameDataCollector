@@ -2,6 +2,7 @@
 using Enums;
 using GameDataCollectorWorkflow.Contract;
 using System.Collections.Generic;
+using System.Linq;
 using ViewModels.Contract;
 
 namespace ViewModels
@@ -16,6 +17,9 @@ namespace ViewModels
 
         public List<Game> Games => workflow.Games;
 
+        public Konsole SelectedKonsole { get => workflow.GetKonsole(workflow.SelectedKonsole) ; set => workflow.SelectKonsole(value.Id); }
+        public Storage SelectedStorage { get => workflow.GetStorage(workflow.SelectedStorage); set => workflow.SelectStorage(value.Id); }
+
         public void AddGenre(string gameId, List<Genre> genre)
         {
             workflow.AddGenre(gameId, genre);
@@ -23,7 +27,9 @@ namespace ViewModels
 
         public Game CreateGame(string storageId, string name, List<Genre> genres, float space)
         {
-            return workflow.CreateGame(storageId, name, genres, space);
+            var game = workflow.CreateGame(storageId, name, genres, space);
+            return game;
+
         }
 
         public void DeleteGame(string gameId)
@@ -49,6 +55,32 @@ namespace ViewModels
         public List<Game> GetGames()
         {
             return workflow.GetGames();
+        }
+
+        public string[] GetInfos(Game game)
+        {
+            var storage = workflow.GetStorages().Where(x => x.Games.Contains(game.Id)).First();
+            var konsole = workflow.Konsolen.Where(x => x.Storages.Contains(storage.Id)).First();
+            return new string[]
+            {
+                konsole.Name,
+                storage.Name
+            };
+        }
+
+        public List<Konsole> GetKonsolen()
+        {
+            return workflow.Konsolen;
+        }
+
+        public List<Storage> GetStorages()
+        {
+            return workflow.GetStorages();
+        }
+
+        public void MoveGame(string oldStorageId, string gameId, string newStorageId)
+        {
+            workflow.MoveGame(oldStorageId, gameId, newStorageId);
         }
     }
 }

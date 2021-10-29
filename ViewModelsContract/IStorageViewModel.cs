@@ -7,6 +7,7 @@ namespace ViewModels.Contract
 {
     public interface IStorageViewModel
     {
+        Konsole SelectedKonsole { get; }
         List<Storage> Storages { get; }
         void AddGame(string storageId, Game game);
         Storage CreateStorage(string konsoleId, string name, float space);
@@ -16,6 +17,8 @@ namespace ViewModels.Contract
         Storage GetStorage(string storageId);
         List<Storage> GetStorages();
         void SetStorage(string id);
-
+        string GetInfos(Storage storage);
+        List<Konsole> Konsolen { get;}
+        void MoveStorage(string oldKonsoleId, string storageId, string newKonsoleId);
     }
 }

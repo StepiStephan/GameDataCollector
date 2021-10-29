@@ -1,6 +1,7 @@
 ﻿using DataClasses;
 using GameDataCollectorWorkflow.Contract;
 using System.Collections.Generic;
+using System.Linq;
 using ViewModels.Contract;
 
 namespace ViewModels
@@ -12,8 +13,11 @@ namespace ViewModels
         {
             this.workflow = workflow;
         }
+        public Konsole SelectedKonsole => workflow.GetKonsole(workflow.SelectedKonsole);
 
         public List<Storage> Storages => workflow.Storages;
+
+        public List<Konsole> Konsolen => workflow.Konsolen;
 
         public void AddGame(string storageId, Game game)
         {
@@ -40,6 +44,12 @@ namespace ViewModels
             workflow.EditStorage(storageId,name,space);
         }
 
+        public string GetInfos(Storage storage)
+        {
+            var konsole = workflow.Konsolen.Where(x => x.Storages.Contains(storage.Id)).First();
+            return konsole.Name;
+        }
+
         public Storage GetStorage(string storageId)
         {
             return workflow.GetStorage(storageId);
@@ -48,6 +58,11 @@ namespace ViewModels
         public List<Storage> GetStorages()
         {
             return workflow.GetStorages();
+        }
+
+        public void MoveStorage(string oldKonsoleId, string storageId, string newKonsoleId)
+        {
+            workflow.MoveStorage(oldKonsoleId, storageId, newKonsoleId);
         }
 
         public void SetStorage(string id)

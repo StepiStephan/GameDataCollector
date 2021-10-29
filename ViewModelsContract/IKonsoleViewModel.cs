@@ -16,5 +16,6 @@ namespace ViewModels.Contract
         Konsole CreateKonsole(string konsoleName, string name, float internerSpeicher);
         void AddStorage(string konsoleId, Storage storage);
         void SetKonsole(string id);
+        string GetInfo(Konsole konsole);
     }
 }
