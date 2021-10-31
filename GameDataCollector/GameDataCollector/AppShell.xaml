@@ -90,6 +90,9 @@
     <FlyoutItem Title="Spiele" Icon="icon_feed.png">
         <ShellContent ContentTemplate="{DataTemplate local:GamePage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Statisticen" Icon="icon_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:StatisticPage}" />
+    </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="LogIn\Out" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">

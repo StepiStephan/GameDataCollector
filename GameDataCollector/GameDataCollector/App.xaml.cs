@@ -17,6 +17,7 @@ namespace GameDataCollector
         public static IServiceProvider ServiceProvider { get; set; }
         public App()
         {
+            DevExpress.XamarinForms.Charts.Initializer.Init();
             AllGenres = new List<Genre>();
             InitializeComponent();
             var services = new ServiceCollection();

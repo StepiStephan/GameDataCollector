@@ -35,9 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataManaging.Test", "DataMa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{057C0030-2C73-4569-8CBC-EEFD4579C480}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{8A7A119A-DD47-4B2F-920D-9A8AFE2B47AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "ViewModels\ViewModels.csproj", "{8A7A119A-DD47-4B2F-920D-9A8AFE2B47AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels.Contract", "ViewModelsContract\ViewModels.Contract.csproj", "{7EF11067-B20C-444C-9316-2BF1AE9FDF7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels.Contract", "ViewModelsContract\ViewModels.Contract.csproj", "{7EF11067-B20C-444C-9316-2BF1AE9FDF7D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModelProj", "ViewModelProj", "{34968BDC-409C-4CB1-B4EE-2396F6A03F1C}"
 EndProject

@@ -16,10 +16,7 @@ namespace GameDataCollector.Views
         public AddMovePage()
         {
             InitializeComponent();
-            Title = "Hinzufügen und Verschieben";
-            PieChartView pieChartView = new PieChartView();
-            stackLayout.Children.Add(pieChartView);
-            
+            Title = "Hinzufügen und Verschieben";            
             addKonsoleButton.Clicked += AddKonsoleButton_Clicked;
             addStorageButton.Clicked += AddStorageButton_Clicked;
             addGameButton.Clicked += AddGameButton_Clicked;

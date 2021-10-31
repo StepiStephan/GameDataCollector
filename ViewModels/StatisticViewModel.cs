@@ -1,11 +1,73 @@
-﻿using System;
+﻿using GameDataCollectorWorkflow.Contract;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using ViewModels.Contract;
+using ViewModels.Contract.DataClasses;
 
 namespace ViewModels
 {
     public class StatisticViewModel : IStatisticViewModel
     {
+        public List<InfoClass> Data => GetData();
+        private readonly IGameDataWorkflow workflow;
+
+        public StatisticViewModel(IGameDataWorkflow workflow)
+        {
+            this.workflow = workflow;
+        }
+
+
+        private List<InfoClass> GetData()
+        {
+            List<InfoClass> result = new List<InfoClass>();
+            if (workflow.SelectedStorage != null)
+            {
+                GetGamesOnStorage(result);
+            }
+            else 
+            {
+                GetGamesOnKonsole(result);
+            }
+
+            return result;
+        }
+
+        private void GetGamesOnKonsole(List<InfoClass> result)
+        {
+            var storages = workflow.GetStorages();
+            var games = workflow.GetGames();
+            float gamespace = 0;
+            float storageSpace = 0;
+
+            foreach (var storage in storages)
+            {
+                storageSpace += storage.Space;
+            }
+
+            foreach (var game in games)
+            {
+                result.Add(new InfoClass(game.Name, game.SpaceOnSorage));
+                gamespace += game.SpaceOnSorage;
+            }
+
+            result.Add(new InfoClass("Freier Speicher", storageSpace - gamespace));
+        }
+
+        private void GetGamesOnStorage(List<InfoClass> result)
+        {
+            var storage = workflow.GetStorage(workflow.SelectedStorage);
+            var games = workflow.GetGames();
+            float gamespace = 0;
+
+
+            foreach(var game in games)
+            {
+                result.Add(new InfoClass(game.Name, game.SpaceOnSorage));
+                gamespace += game.SpaceOnSorage;
+            }
+
+            result.Add(new InfoClass("Freier Speicher", storage.Space - gamespace));
+        }
     }
 }
