@@ -42,6 +42,10 @@ namespace GameDataCollector.Views
 
         private void StorageAlt_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (storageAlt.SelectedItem != Picker.SelectedItemProperty.DefaultValue)
+            {
+                viewModel.SelectedStorage = (Storage)storageAlt.SelectedItem;
+            }
             var newGames = viewModel.GetGames();
             Games.Clear();
             foreach (var game in newGames)
@@ -52,7 +56,7 @@ namespace GameDataCollector.Views
 
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            if( storageAlt.SelectedItem != null &&
+            if ( storageAlt.SelectedItem != null &&
                 gamePicker.SelectedItem != null &&
                 storageNeu.SelectedItem != null)
             {
@@ -65,6 +69,8 @@ namespace GameDataCollector.Views
 
         private void KonsoleAlt_SelectedIndexChanged(object sender, EventArgs e)
         {
+            viewModel.SelectedKonsole = (Konsole)konsoleAlt.SelectedItem;
+
             var newStorages = viewModel.GetStorages();
             Storages.Clear();
             foreach(var storage in newStorages)

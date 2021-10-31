@@ -35,6 +35,8 @@ namespace GameDataCollector.Views
         private void DeleteButton_Clicked(object sender, EventArgs e)
         {
             viewModel.DeleteGame(selectedGame.Id);
+            Items.Remove(Items.Where(x => x.ID == selectedGame.Id).First());
+
         }
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -48,7 +50,10 @@ namespace GameDataCollector.Views
             {
                 genres += genre.ToString() + Environment.NewLine;
             }
-            genres = genres.Remove(genres.Length - Environment.NewLine.Length);
+            if (genres != string.Empty)
+            {
+                genres = genres.Remove(genres.Length - Environment.NewLine.Length);
+            }
             var edit = await DisplayAlert($"Info Game {game.Name}", 
                 $"Name: {game.Name}" + Environment.NewLine +
                 $"Space: {game.SpaceOnSorage} GB" + Environment.NewLine + 

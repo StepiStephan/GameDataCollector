@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameDataCollector.Views.AddMovePage">
+    <ContentPage.Content>
+        <StackLayout Padding="10"
+                     x:Name="stackLayout">
+            <Button Text="Konsole hinzufügen" 
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    x:Name="addKonsoleButton"/>
+            <Button Text="Speicher hinzufügen" 
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    x:Name="addStorageButton"/>
+            <Button Text="Spiel hinzufügen" 
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    x:Name="addGameButton"/>
+            <Button Text="Speicher verschieben" 
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    x:Name="moveStorageButton"/>
+            <Button Text="Spiel verschieben" 
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    x:Name="moveGameButton"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

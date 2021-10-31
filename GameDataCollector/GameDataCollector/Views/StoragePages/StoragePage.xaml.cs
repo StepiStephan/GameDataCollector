@@ -41,6 +41,8 @@ namespace GameDataCollector.Views
             {
                 viewModel.DeleteStorage(selectedStorage.Id);
             }
+            Items.Remove(Items.Where(x => x.ID == selectedStorage.Id).First());
+
         }
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

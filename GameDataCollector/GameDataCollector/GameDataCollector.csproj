@@ -27,6 +27,9 @@
     <Compile Update="Views\KonsolePages\EditKonsolePage.xaml.cs">
       <DependentUpon>EditKonsolePage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\AddMovePage.xaml.cs">
+      <DependentUpon>AddMovePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\StatisticPages\StatisticPage.xaml.cs">
       <DependentUpon>StatisticPage.xaml</DependentUpon>
     </Compile>
@@ -63,7 +66,7 @@
     <EmbeddedResource Update="Views\KonsolePages\KonsolenPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\StartPage.xaml">
+    <EmbeddedResource Update="Views\AddMovePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\StoragePages\StoragePage.xaml">

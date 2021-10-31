@@ -52,7 +52,7 @@ namespace DataClasses
                 result += genre.ToString() + "; ";
             }
             result += "\n\r";
-            return result;
+            return name;
         }
     }
 }

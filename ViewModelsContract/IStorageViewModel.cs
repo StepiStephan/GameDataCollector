@@ -7,7 +7,7 @@ namespace ViewModels.Contract
 {
     public interface IStorageViewModel
     {
-        Konsole SelectedKonsole { get; }
+        Konsole SelectedKonsole { get; set; }
         List<Storage> Storages { get; }
         void AddGame(string storageId, Game game);
         Storage CreateStorage(string konsoleId, string name, float space);

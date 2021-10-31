@@ -48,6 +48,7 @@ namespace GameDataCollector.Views
 
         private void KonsoleAlt_SelectedIndexChanged(object sender, EventArgs e)
         {
+            viewModel.SelectedKonsole = (Konsole)((Picker)sender).SelectedItem;
             var newStorages = viewModel.GetStorages();
             Storages.Clear();
             foreach (var storage in newStorages)

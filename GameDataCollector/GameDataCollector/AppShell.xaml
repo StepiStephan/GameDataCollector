@@ -79,7 +79,7 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <FlyoutItem Title="Hinzufügen und Verschieben" Icon="icon_about.png">
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:StartPage}" />
+        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AddMovePage}" />
     </FlyoutItem>
     <FlyoutItem Title="Konsolen" Icon="icon_feed.png">
         <ShellContent ContentTemplate="{DataTemplate local:KonsolenPage}" />
@@ -92,7 +92,7 @@
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
+    <MenuItem Text="LogIn\Out" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
     <MenuItem Text="Clear" StyleClass="MenuItemLayoutStyle" Clicked="OnClearTappt">
     </MenuItem>

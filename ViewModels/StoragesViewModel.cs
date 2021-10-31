@@ -13,7 +13,7 @@ namespace ViewModels
         {
             this.workflow = workflow;
         }
-        public Konsole SelectedKonsole => workflow.GetKonsole(workflow.SelectedKonsole);
+        public Konsole SelectedKonsole { get => workflow.GetKonsole(workflow.SelectedKonsole); set => workflow.SelectKonsole(value.Id); }
 
         public List<Storage> Storages => workflow.Storages;
 
