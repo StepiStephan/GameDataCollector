@@ -4,26 +4,39 @@
              x:Class="GameDataCollector.Views.AddMovePage">
     <ContentPage.Content>
         <StackLayout Padding="10"
+                     Spacing="30"
+                     HorizontalOptions="CenterAndExpand"
+                     VerticalOptions="CenterAndExpand"
                      x:Name="stackLayout">
             <Button Text="Konsole hinzufügen" 
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
+                    Padding="20"
+                    FontSize="Medium"
                     x:Name="addKonsoleButton"/>
             <Button Text="Speicher hinzufügen" 
                     VerticalOptions="Center"
-                    HorizontalOptions="Center"
+                    HorizontalOptions="Center"  
+                    FontSize="Medium"
+                    Padding="20"
                     x:Name="addStorageButton"/>
             <Button Text="Spiel hinzufügen" 
                     VerticalOptions="Center"
-                    HorizontalOptions="Center"
+                    HorizontalOptions="Center" 
+                    FontSize="Medium"
+                    Padding="20"
                     x:Name="addGameButton"/>
             <Button Text="Speicher verschieben" 
                     VerticalOptions="Center"
-                    HorizontalOptions="Center"
+                    HorizontalOptions="Center"  
+                    FontSize="Medium"
+                    Padding="20"
                     x:Name="moveStorageButton"/>
             <Button Text="Spiel verschieben" 
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
+                    FontSize="Medium"
+                    Padding="20"
                     x:Name="moveGameButton"/>
         </StackLayout>
     </ContentPage.Content>

@@ -10,13 +10,13 @@
                 <dxc:DonutSeries.Data>
                     <dxc:PieSeriesDataAdapter
                                 x:Name="pieAdapter"
-                                LabelDataMember="CountryName"
-                                ValueDataMember="Area">
+                                LabelDataMember="Name"
+                                ValueDataMember="Space">
                     </dxc:PieSeriesDataAdapter>
                 </dxc:DonutSeries.Data>
             </dxc:DonutSeries>
         </dxc:PieChartView.Series>
-
+        
         <dxc:PieChartView.Legend>
             <dxc:Legend Orientation="TopToBottom"
                         VerticalPosition="BottomOutside"/>

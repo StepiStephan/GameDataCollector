@@ -1,6 +1,7 @@
 ﻿using GameDataCollectorWorkflow.Contract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ViewModels.Contract;
 using ViewModels.Contract.DataClasses;
@@ -10,6 +11,11 @@ namespace ViewModels
     public class StatisticViewModel : IStatisticViewModel
     {
         public List<InfoClass> Data => GetData();
+
+        public string SelectedElementName => selectedName;
+
+        private string selectedName = string.Empty;
+
         private readonly IGameDataWorkflow workflow;
 
         public StatisticViewModel(IGameDataWorkflow workflow)
@@ -27,6 +33,15 @@ namespace ViewModels
             }
             else 
             {
+                if(workflow.SelectedKonsole == null)
+                {
+                    selectedName = "Total";
+                }
+                else
+                {
+                    var konsole = workflow.GetKonsole(workflow.SelectedKonsole);
+                    selectedName = $"Konsole {konsole.ConsoleName}";
+                }
                 GetGamesOnKonsole(result);
             }
 
@@ -47,11 +62,13 @@ namespace ViewModels
 
             foreach (var game in games)
             {
-                result.Add(new InfoClass(game.Name, game.SpaceOnSorage));
+                var storage = storages.Where(x => x.Games.Contains(game.Id)).First();
+                var konsole = workflow.Konsolen.Where(x => x.Storages.Contains(storage.Id)).First();
+                result.Add(new InfoClass(game.Name, game.SpaceOnSorage, konsole.Name + "  -> " + storage.Name ));
                 gamespace += game.SpaceOnSorage;
             }
 
-            result.Add(new InfoClass("Freier Speicher", storageSpace - gamespace));
+            result.Add(new InfoClass("Freier Speicher", storageSpace - gamespace, ""));
         }
 
         private void GetGamesOnStorage(List<InfoClass> result)
@@ -60,14 +77,15 @@ namespace ViewModels
             var games = workflow.GetGames();
             float gamespace = 0;
 
-
+            selectedName = $"Speicher {storage.Name}";
             foreach(var game in games)
             {
-                result.Add(new InfoClass(game.Name, game.SpaceOnSorage));
+                var konsole = workflow.Konsolen.Where(x => x.Storages.Contains(storage.Id)).First();
+                result.Add(new InfoClass(game.Name, game.SpaceOnSorage, konsole.Name + " -> " + storage.Name));
                 gamespace += game.SpaceOnSorage;
             }
 
-            result.Add(new InfoClass("Freier Speicher", storage.Space - gamespace));
+            result.Add(new InfoClass("Freier Speicher", storage.Space - gamespace, ""));
         }
     }
 }

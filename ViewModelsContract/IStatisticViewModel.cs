@@ -8,5 +8,6 @@ namespace ViewModels.Contract
     public interface IStatisticViewModel
     {
         List<InfoClass> Data { get; }
+        string SelectedElementName { get; }
     }
 }
