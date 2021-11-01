@@ -93,10 +93,11 @@
     <FlyoutItem Title="Statistiken" Icon="icon_feed.png">
         <ShellContent ContentTemplate="{DataTemplate local:StatisticPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Suchen" Icon="icon_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
+    </FlyoutItem>
 
-    <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="LogIn\Out" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
-    </MenuItem>
+        <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Clear" StyleClass="MenuItemLayoutStyle" Clicked="OnClearTappt">
     </MenuItem>
 
@@ -107,9 +108,6 @@
         content you can do so by calling 
         await Shell.Current.GoToAsync("//LoginPage");
     -->
-    <TabBar>
-        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
-    </TabBar>
 
     <!-- Optional Templates 
     // These may be provided inline as below or as separate classes.
