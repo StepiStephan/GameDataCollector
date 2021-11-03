@@ -76,9 +76,9 @@ namespace GameDataCollector.Views
         private void ClearList()
         {
             Items.Clear();
-            foreach (var storage in GetElements())
+            foreach (var game in GetElements())
             {
-                Items.Add(storage);
+                Items.Add(game);
             }
         }
 

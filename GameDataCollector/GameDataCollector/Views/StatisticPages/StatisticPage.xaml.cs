@@ -33,7 +33,7 @@ namespace GameDataCollector.Views
         private async void Chart_SelectionChanged(object sender, DevExpress.XamarinForms.Charts.SelectionChangedEventArgs e)
         {
             var data = (InfoClass)((DataSourceKey)e.SelectedObjects.First()).DataObject;
-            await DisplayAlert(data.Name, $"Größe: {data.Space}" + Environment.NewLine + $"Speicherort: {data.SavePoint}", "OK");
+            await DisplayAlert(data.Name, $"Größe: {data.Space}GB" + Environment.NewLine + $"Speicherort: {data.SavePoint}", "OK");
         }
 
         private void StatisticPage_Appearing(object sender, EventArgs e)

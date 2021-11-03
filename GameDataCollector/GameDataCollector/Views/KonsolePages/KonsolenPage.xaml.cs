@@ -61,7 +61,11 @@ namespace GameDataCollector.Views
         }
         protected override void OnAppearing()
         {
-            Items = new ObservableCollection<DataClasses.Element>(GetElements());
+            Items.Clear();
+            foreach (var element in GetElements())
+            {
+                Items.Add(element);
+            }
         }
         private IEnumerable<DataClasses.Element> GetElements()
         {
