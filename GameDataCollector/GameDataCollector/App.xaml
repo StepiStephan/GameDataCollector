@@ -15,17 +15,37 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BackgroundColor" Value="#2196F3" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#332196F3" />
+                                    <Setter Property="BackgroundColor" Value="LightGray" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="Background" Value="LightGray"/>
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="Background" Value="LightGray"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Red"></Setter>
+            </Style>
+            <Style TargetType="CollectionView">
+                <Setter Property="Background" Value="White"/>
+            </Style>
+            <Style TargetType="ListView">
+                <Setter Property="Background" Value="White"/>
+            </Style>
+            <Style TargetType="StackLayout">
+                <Setter Property="Background" Value="White"/>
             </Style>
         </ResourceDictionary>        
     </Application.Resources>

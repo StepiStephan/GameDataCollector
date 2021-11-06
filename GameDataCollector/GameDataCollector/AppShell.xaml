@@ -78,6 +78,9 @@
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
+    <FlyoutItem Title="Start" Icon="icon_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:FirebasePage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Hinzufügen und Verschieben" Icon="icon_about.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AddMovePage}" />
     </FlyoutItem>
@@ -97,7 +100,7 @@
         <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
     </FlyoutItem>
 
-        <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
+    <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Clear" StyleClass="MenuItemLayoutStyle" Clicked="OnClearTappt">
     </MenuItem>
 

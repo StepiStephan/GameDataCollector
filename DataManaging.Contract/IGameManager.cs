@@ -14,5 +14,7 @@ namespace DataManaging.Contract
         void EditGame(string gameId, string name, float space);
         Game GetGame(string gameId);
         void SaveData();
+        Game CreateGame(string gameId, string name, float space, IEnumerable<Genre> genres);
+        Game Copy(Game game);
     }
 }

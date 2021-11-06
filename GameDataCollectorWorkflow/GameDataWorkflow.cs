@@ -51,7 +51,7 @@ namespace GameDataCollectorWorkflow
 
         public Game CreateGame(string storageId, string name, List<Genre> genres, float space)
         {
-            var game = new Game(name, genres, space);
+            var game = gameManager.CreateGame(Guid.NewGuid().ToString(), name, space, genres);
             gameManager.AddGame(storageId, game, konsoleManager, storageManager);
             OnDataChange();
             return game;

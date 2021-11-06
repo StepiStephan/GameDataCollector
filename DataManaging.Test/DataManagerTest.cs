@@ -9,6 +9,7 @@ namespace DataManaging.Test
     public class DataManagerTest
     {
         GameDataCollectorWorkflow.GameDataWorkflow dataManager;
+        GameManager gm;
         Konsole konsole;
         Storage newStorage;
         Storage intern;
@@ -17,9 +18,10 @@ namespace DataManaging.Test
         [SetUp]
         public void Setup()
         {
+            gm = new GameManager(
+                    new DataSaver<List<Game>>(), new DataLoader<List<Game>>());
             dataManager = new GameDataCollectorWorkflow.GameDataWorkflow(
-                new GameManager(
-                    new DataSaver<List<Game>>(), new DataLoader<List<Game>>()),
+                gm,
                 new StorageManager(
                     new DataSaver<List<Storage>>(), new DataLoader<List<Storage>>()),
                 new KonsoleManager(
@@ -33,7 +35,7 @@ namespace DataManaging.Test
         [Test]
         public void CopyElementTest()
         {
-            var editGame = game.Copy();
+            var editGame = gm.Copy(game);
 
             if (editGame.Name != game.Name)
                 Assert.Fail("GameName Falsch");
@@ -75,7 +77,7 @@ namespace DataManaging.Test
         [Test]
         public void EditTest()
         {
-            var editGame = game.Copy();
+            var editGame = gm.Copy(game);
             dataManager.EditGame(game.Id, null, 200);
             if(dataManager.GetGame(game.Id).SpaceOnSorage != 200)
                 Assert.Fail("Gamespace nicht editiert");

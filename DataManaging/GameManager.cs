@@ -90,7 +90,7 @@ namespace DataManaging
                     space = game.SpaceOnSorage;
                 }
 
-                var newGame = new Game(name, game.GameGenre, space, game.Id);
+                var newGame = CreateGame(game.Id, name, space, game.GameGenre);
                 games.Remove(game);
                 games.Add(newGame);
             }
@@ -99,6 +99,21 @@ namespace DataManaging
         public Game GetGame(string gameId)
         {
             return games.Where(x => x.Id == gameId).FirstOrDefault();
+        }
+
+        public Game CreateGame(string gameId, string name, float space, IEnumerable<Genre> genres)
+        {
+            return new Game()
+            {
+                Name = name,
+                GameGenre = genres.ToList(),
+                SpaceOnSorage = space,
+                Id = gameId
+            };
+        }
+        public Game Copy(Game game)
+        {
+            return CreateGame(game.Id, game.Name, game.SpaceOnSorage, game.GameGenre);
         }
     }
 }

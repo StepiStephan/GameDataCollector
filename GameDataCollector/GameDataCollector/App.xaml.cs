@@ -26,14 +26,7 @@ namespace GameDataCollector
             {
                 AllGenres.Add((Genre)i);
             }
-            //var workflow = ServiceProvider.GetService<GameDataCollectorWorkflow.Contract.IGameDataWorkflow>();
-            //var oldSwitch = workflow.CreateKonsole("Switch", "Alte Switch", 32);
-            //var newSwitch = workflow.CreateKonsole("Switch OLED", "Neue Switch", 64);
-
-            //workflow.CreateGame(oldSwitch.Storages.First(), "DOOM 2016", new List<Genre> { Genre.Egoshooter }, 20);
-            //workflow.CreateGame(newSwitch.Storages.First(), "Mario Party", new List<Genre> { Genre.Party }, 10);
-            //workflow.SaveData();
-
+            
             MainPage = new AppShell();
         }
 

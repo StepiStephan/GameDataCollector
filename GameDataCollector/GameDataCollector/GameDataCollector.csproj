@@ -13,8 +13,8 @@
   <ItemGroup>
     <PackageReference Include="DevExpress.XamarinForms.Charts" Version="21.1.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />  
-    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
 	
   <ItemGroup>
@@ -24,6 +24,9 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <Compile Update="Views\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\KonsolePages\EditKonsolePage.xaml.cs">
       <DependentUpon>EditKonsolePage.xaml</DependentUpon>
     </Compile>
@@ -36,6 +39,9 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <EmbeddedResource Update="Views\StartPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\GamePages\AddGamePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

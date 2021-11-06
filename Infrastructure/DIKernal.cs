@@ -33,6 +33,7 @@ namespace Infrastructure
             services.AddSingleton<IKonsoleViewModel, KonsolesViewModel>();
             services.AddSingleton<IStatisticViewModel, StatisticViewModel>();
             services.AddSingleton<ISearchViewModel, SearchViewModel>();
+            services.AddSingleton<IStartPageViewModel, StartPageViewModel>();
 
             return services.BuildServiceProvider();
         }
