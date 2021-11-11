@@ -10,8 +10,8 @@ namespace DataManaging
     {
         private readonly List<Game> games;
         private const string gameName = "GameList";
-        private readonly IDataSaver<List<Game>> dataSaverGame; //new DataSaver<List<Game>>(gameName);
-        private readonly IDataLoader<List<Game>> dataLoaderGame; //new DataLoader<List<Game>>(gameName);
+        private readonly IDataSaver<List<Game>> dataSaverGame; 
+        private readonly IDataLoader<List<Game>> dataLoaderGame;
 
         public IEnumerable<Game> Games => games;
 
@@ -62,7 +62,7 @@ namespace DataManaging
                 if (containigStorageId != null)
                 {
                     var storage = storageManager.Storages.Where(x => x.Id == containigStorageId).First();
-                    storage.AddGame(game.Id);
+                    storage.Games.Add(game.Id);
                     games.Add(game);
                 }
             }

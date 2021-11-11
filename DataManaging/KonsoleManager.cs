@@ -1,5 +1,6 @@
 ﻿using DataClasses;
 using DataManaging.Contract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,7 +56,7 @@ namespace DataManaging
                     consoleName = konsole.ConsoleName;
                 }
 
-                var newKonsole = new Konsole(consoleName, name, konsole.Id);
+                var newKonsole = CreateKonsole(consoleName, name, konsole.Id);
                 konsoles.Remove(konsole);
                 konsoles.Add(newKonsole);
             }
@@ -110,5 +111,35 @@ namespace DataManaging
                 konsoles.Remove(konsole);
             }
         }
+
+        public Konsole CreateKonsole(string consoleName, string name, string id)
+        {
+            return new Konsole()
+            {
+                Id = id,
+                Name = name,
+                ConsoleName = consoleName,
+                Storages = new List<string>()
+            };
+            
+        }
+        public Konsole CreateKonsole(string consoleName, string name)
+        {
+            var id = Guid.NewGuid().ToString();
+            return CreateKonsole(consoleName, name, id);
+        }
+        public Konsole Copy(string id)
+        {
+            var konsole = GetKonsole(id);
+            var result = CreateKonsole(konsole.ConsoleName, konsole.Name, id);
+
+            foreach (var storageId in konsole.Storages)
+            {
+                result.Storages.Add(storageId);
+            }
+
+            return result;
+        }
+
     }
 }

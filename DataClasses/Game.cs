@@ -6,19 +6,9 @@ namespace DataClasses
 {
     public class Game
     {
-        private string name;
-        private List<Genre> gameGenres;
-        private float spaceOnSorage;
-        private string id;
-
-        public string Name { get => name; set => name = value; }
-        public float SpaceOnSorage { get => spaceOnSorage; set => spaceOnSorage = value; }
-        public string Id { get => id; set => id = value; }
-        public List<Genre> GameGenre { get => gameGenres; set => gameGenres = value; }
-
-        public Game()
-        {
-
-        }
+        public string Name { get; set; }
+        public float SpaceOnSorage { get; set; }
+        public string Id { get; set; }
+        public List<Genre> GameGenre { get; set; }
     }
 }

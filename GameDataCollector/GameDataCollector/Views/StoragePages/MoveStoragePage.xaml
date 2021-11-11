@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameDataCollector.Views.MoveStoragePage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="10">
             <Label Text="Konsole alt:"/>
             <Picker Title="Konsole auswählen" 
                     x:Name="konsoleAlt"/>
@@ -15,6 +15,6 @@
                     x:Name="konsoleNeu"/>
             <Button Text="Speichern"
                     x:Name="saveButton"/>
-        </StackLayout>
+        </StackLayoutc>
     </ContentPage.Content>
 </ContentPage>

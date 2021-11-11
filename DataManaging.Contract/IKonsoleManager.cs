@@ -14,5 +14,6 @@ namespace DataManaging.Contract
         void EditKonsole(string konsoleId, string consoleName, string name);
         Konsole GetKonsole(string konsoleId);
         void SaveData();
+        Konsole CreateKonsole(string konsoleName, string name);
     }
 }

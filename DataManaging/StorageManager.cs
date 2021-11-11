@@ -1,5 +1,6 @@
 ﻿using DataClasses;
 using DataManaging.Contract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -82,10 +83,10 @@ namespace DataManaging
                     space = storage.Space;
                 }
 
-                var newStorage = new Storage(space, name, storage.Id);
+                var newStorage = CreateStorage(space, name, storage.Id);
                 foreach (var gameId in storage.Games)
                 {
-                    newStorage.AddGame(gameId);
+                    newStorage.Games.Add(gameId);
                 }
                 storages.Remove(storage);
                 storages.Add(newStorage);
@@ -97,9 +98,36 @@ namespace DataManaging
             var konsole = konsoleManager.Konsoles.Where(x => x.Id == konsoleId).FirstOrDefault();
             if (konsole != null)
             {
-                konsole.AddStorage(storage.Id);
+                konsole.Storages.Add(storage.Id);
                 storages.Add(storage);
             }
+        }
+        public Storage CreateStorage(float space, string name, string id)
+        {
+            return new Storage()
+            {
+                Id = id,
+                Name = name,
+                Space = space,
+                Games = new List<string>()
+            };
+        }
+        public Storage CreateStorage(float space, string name)
+        {
+            var id = Guid.NewGuid().ToString();
+            return CreateStorage(space, name, id);
+        }
+        public Storage Copy(string storageId)
+        {
+            var storage = GetStorage(storageId);
+            var result = CreateStorage(storage.Space, storage.Name, storage.Id);
+
+            foreach (var gameID in storage.Games)
+            {
+                result.Games.Add(gameID);
+            }
+
+            return result;
         }
     }
 }

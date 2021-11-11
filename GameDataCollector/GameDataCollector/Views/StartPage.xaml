@@ -6,7 +6,9 @@
         <StackLayout Padding="10"
                      HorizontalOptions="CenterAndExpand"
                      VerticalOptions="CenterAndExpand">
-            <Label Text=""/>
+            <Label Text="GameDataCollector"
+                   FontSize="Large"
+                   FontAttributes="Bold,Italic"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -58,15 +58,15 @@ namespace GameDataCollectorWorkflow
         }
         public Storage CreateStorage(string konsoleId, string name, float space)
         {
-            var storage = new Storage(space, name);
+            var storage = storageManager.CreateStorage(space, name);
             storageManager.AddStorage(konsoleId, storage, konsoleManager);
             OnDataChange();
             return storage;
         }
         public Konsole CreateKonsole(string konsoleName, string name, float internerSpeicher)
         {
-            var storage = new Storage(internerSpeicher, "Interner Speicher von " + name);
-            var konsole = new Konsole(konsoleName, name);
+            var storage = storageManager.CreateStorage(internerSpeicher, "Interner Speicher von " + name);
+            var konsole = konsoleManager.CreateKonsole(konsoleName, name);
 
             konsoleManager.AddKonsole(konsole);
             storageManager.AddStorage(konsole.Id, storage, konsoleManager);

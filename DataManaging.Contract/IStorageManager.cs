@@ -13,5 +13,6 @@ namespace DataManaging.Contract
         void EditStorage(string storageId, string name, float space);
         Storage GetStorage(string storageId);
         void SaveData();
+        Storage CreateStorage(float internerSpeicher, string v);
     }
 }

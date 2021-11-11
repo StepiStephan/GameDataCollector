@@ -10,6 +10,8 @@ namespace DataManaging.Test
     {
         GameDataCollectorWorkflow.GameDataWorkflow dataManager;
         GameManager gm;
+        KonsoleManager km;
+        StorageManager sm;
         Konsole konsole;
         Storage newStorage;
         Storage intern;
@@ -18,14 +20,11 @@ namespace DataManaging.Test
         [SetUp]
         public void Setup()
         {
-            gm = new GameManager(
-                    new DataSaver<List<Game>>(), new DataLoader<List<Game>>());
-            dataManager = new GameDataCollectorWorkflow.GameDataWorkflow(
-                gm,
-                new StorageManager(
-                    new DataSaver<List<Storage>>(), new DataLoader<List<Storage>>()),
-                new KonsoleManager(
-                    new DataSaver<List<Konsole>>(), new DataLoader<List<Konsole>>()))                ;
+            gm = new GameManager(new DataSaver<List<Game>>(), new DataLoader<List<Game>>());
+            sm = new StorageManager(new DataSaver<List<Storage>>(), new DataLoader<List<Storage>>());
+            km = new KonsoleManager(new DataSaver<List<Konsole>>(), new DataLoader<List<Konsole>>());
+            dataManager = new GameDataCollectorWorkflow.GameDataWorkflow(gm, sm, km);
+
             konsole = dataManager.CreateKonsole("XBoxX-alt", "XBox Sieres X", 500);
             intern = dataManager.GetStorage(konsole.Storages.First());
             newStorage = dataManager.CreateStorage(konsole.Id, "MultiplayerKarte", 1000);
@@ -46,7 +45,7 @@ namespace DataManaging.Test
             if (editGame.SpaceOnSorage != game.SpaceOnSorage)
                 Assert.Fail("GameSpace Falsch");
 
-            var editStorage = newStorage.Copy();
+            var editStorage = sm.Copy(newStorage.Id);
 
             if (editStorage.Id != newStorage.Id)
                 Assert.Fail("newStorage.Id Falsch");
@@ -60,7 +59,7 @@ namespace DataManaging.Test
             if (editStorage.Games.Count != newStorage.Games.Count)
                 Assert.Fail("newStorage.Games Falsch");
 
-            var editKonsole = konsole.Copy();
+            var editKonsole = km.Copy(konsole.Id);
 
             if (editKonsole.Id != konsole.Id)
                 Assert.Fail("konsole.Id Falsch");
@@ -95,7 +94,7 @@ namespace DataManaging.Test
 
             dataManager.EditGame(game.Id, editGame.Name, editGame.SpaceOnSorage);
 
-            var editStorage = newStorage.Copy();
+            var editStorage = sm.Copy(newStorage.Id);
             dataManager.EditStorage(newStorage.Id, "TestName", 0);
 
             if (dataManager.GetStorage(newStorage.Id).Name != "TestName")
@@ -114,7 +113,7 @@ namespace DataManaging.Test
 
             dataManager.EditStorage(newStorage.Id, editStorage.Name, editStorage.Space);
 
-            var editKonsole = konsole.Copy();
+            var editKonsole = km.Copy(konsole.Id);
             dataManager.EditKonsole(konsole.Id, "TestXBox", null);
 
             if (dataManager.GetKonsole(konsole.Id).Name == editKonsole.Name)

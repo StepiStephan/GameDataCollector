@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels.Contract", "View
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModelProj", "ViewModelProj", "{34968BDC-409C-4CB1-B4EE-2396F6A03F1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test.UWP", "test\test.UWP\test.UWP.csproj", "{7A29CA0E-AADA-481F-B3D1-DE006A89CD88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDataCollector.UWP", "test\test.UWP\GameDataCollector.UWP.csproj", "{7A29CA0E-AADA-481F-B3D1-DE006A89CD88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
