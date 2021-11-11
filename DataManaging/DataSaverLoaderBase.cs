@@ -7,7 +7,6 @@ namespace DataManaging
         public string PathToSave { get; private set; }
         public DataSaverLoaderBase()
         {
-            //PathToSave = Environment.CurrentDirectory;
             PathToSave = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
         }
 

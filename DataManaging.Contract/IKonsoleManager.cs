@@ -6,7 +6,6 @@ namespace DataManaging.Contract
     public interface IKonsoleManager
     {
         IEnumerable<Konsole> Konsoles { get; }
-
         void AddKonsole(Konsole konsole);
         void DeleteKonsole(string id, IStorageManager storageManager, IGameManager gameManager);
         void DeleteKonsoleWithAllGames(string id, IStorageManager storageManager, IGameManager gameManager);

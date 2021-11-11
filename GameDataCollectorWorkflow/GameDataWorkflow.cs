@@ -11,6 +11,9 @@ namespace GameDataCollectorWorkflow
 {
     public class GameDataWorkflow : IGameDataWorkflow
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler DataChanged;
+
         private readonly IGameManager gameManager;
         private readonly IStorageManager storageManager;
         private readonly IKonsoleManager konsoleManager;
@@ -18,8 +21,11 @@ namespace GameDataCollectorWorkflow
         private string selectedKonsoleId;
         private string selectedStorageID;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler DataChanged;
+        public List<Konsole> Konsolen => konsoleManager.Konsoles.ToList();
+        public List<Storage> Storages => storageManager.Storages.ToList();
+        public List<Game> Games => gameManager.Games.ToList();
+        public string SelectedKonsole => selectedKonsoleId;
+        public string SelectedStorage => selectedStorageID;
 
         public GameDataWorkflow(IGameManager gameManager, IStorageManager storageManager, IKonsoleManager konsoleManager)
         {
@@ -33,16 +39,6 @@ namespace GameDataCollectorWorkflow
         {
             SaveData();
         }
-
-        public List<Konsole> Konsolen => konsoleManager.Konsoles.ToList();
-
-        public List<Storage> Storages => storageManager.Storages.ToList();
-
-        public List<Game> Games => gameManager.Games.ToList();
-
-        public string SelectedKonsole => selectedKonsoleId;
-
-        public string SelectedStorage => selectedStorageID;
 
         protected void OnDataChange()
         {

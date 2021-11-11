@@ -23,7 +23,6 @@ namespace ViewModels
             this.workflow = workflow;
         }
 
-
         private List<InfoClass> GetData()
         {
             List<InfoClass> result = new List<InfoClass>();

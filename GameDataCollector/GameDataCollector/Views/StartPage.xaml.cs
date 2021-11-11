@@ -18,12 +18,6 @@ namespace GameDataCollector.Views
         {
             viewModel = App.ServiceProvider.GetService<IStartPageViewModel>();
             InitializeComponent();
-            Appearing += StartPage_Appearing;
-        }
-
-        private void StartPage_Appearing(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -46,7 +46,5 @@ namespace GameDataCollector.Views
                 Data.Add(info);
             }
         }
-
-
     }
 }

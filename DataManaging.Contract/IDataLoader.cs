@@ -4,6 +4,5 @@
     {
         T LoadObject();
         void SetName(string name);
-
     }
 }

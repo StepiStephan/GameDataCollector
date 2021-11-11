@@ -11,9 +11,7 @@ namespace GameDataCollector
     public partial class App : Application
     {
         private const int GenreCounter = 23;
-        
         public static List<Genre> AllGenres { get; set; }
-
         public static IServiceProvider ServiceProvider { get; set; }
         public App()
         {
