@@ -34,10 +34,8 @@ namespace GameDataCollector.Views
 
         private void DeleteButton_Clicked(object sender, EventArgs e)
         {
-            viewModel.
             viewModel.DeleteGame(selectedGame.Id);
             Items.Remove(Items.Where(x => x.ID == selectedGame.Id).First());
-
         }
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

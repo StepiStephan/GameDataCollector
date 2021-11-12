@@ -15,6 +15,6 @@
                     x:Name="konsoleNeu"/>
             <Button Text="Speichern"
                     x:Name="saveButton"/>
-        </StackLayoutc>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
