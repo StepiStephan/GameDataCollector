@@ -20,6 +20,11 @@ namespace ViewModels
         public Konsole SelectedKonsole { get => workflow.GetKonsole(workflow.SelectedKonsole) ; set => workflow.SelectKonsole(value.Id); }
         public Storage SelectedStorage { get => workflow.GetStorage(workflow.SelectedStorage); set => workflow.SelectStorage(value.Id); }
 
+        public void AddDescriptors(string id, List<Descriptor> selectedDescriptors)
+        {
+            workflow.AddDescriptors(id, selectedDescriptors);
+        }
+
         public void AddGenre(string gameId, List<Genre> genre)
         {
             workflow.AddGenre(gameId, genre);
@@ -40,6 +45,11 @@ namespace ViewModels
         public void DeleteGenre(string gameId, Genre genre)
         {
             workflow.DeleteGenre(gameId, genre);
+        }
+
+        public void DeleteDescription(string gameId, Descriptor descriptor)
+        {
+            workflow.DeleteDescriptor(gameId, descriptor);
         }
 
         public void EditGame(string gameId, string name, float space)

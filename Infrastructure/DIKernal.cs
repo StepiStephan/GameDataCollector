@@ -34,6 +34,15 @@ namespace Infrastructure
             services.AddSingleton<IStatisticViewModel, StatisticViewModel>();
             services.AddSingleton<ISearchViewModel, SearchViewModel>();
             services.AddSingleton<IStartPageViewModel, StartPageViewModel>();
+            services.AddSingleton<IRandomGameViewModel, RandomGameViewModel>();
+            services.AddSingleton<IWishListViewModel, WishListViewModel>();
+            services.AddSingleton<IWishListWorkflow, WishListWorkflow>();
+            services.AddSingleton<IDataLoader<List<WishListItem>>, DataLoader<List<WishListItem>>>();
+            services.AddSingleton<IDataSaver<List<WishListItem>>, DataSaver<List<WishListItem>>>();
+            services.AddSingleton<IFireBaseViewModel, FireBaseViewModel>();
+            services.AddSingleton<IFireBaseWorkFlow, FireBaseWorkFlow>();
+            services.AddSingleton<IFireBaseConnector, FireBaseConnector>();
+            services.AddSingleton<IFireBaseDataHandler, FireBaseDataHandler>();
 
             return services.BuildServiceProvider();
         }

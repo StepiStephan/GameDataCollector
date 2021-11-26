@@ -19,6 +19,8 @@ namespace GameDataCollector.Views
     {
         private IGameViewModel viewModel;
         private List<Genre> selectedGenres = new List<Genre>();
+        private List<Descriptor> selectedDescriptors = new List<Descriptor>();
+
         public AddGamePage()
         {
             viewModel = App.ServiceProvider.GetService<IGameViewModel>();
@@ -29,8 +31,24 @@ namespace GameDataCollector.Views
 
             genrePicker.ItemsSource = App.AllGenres;
             genrePicker.SelectedIndexChanged += GenrePicker_SelectedIndexChanged;
+            descriptorPicker.ItemsSource = App.AllDescriptors;
+            descriptorPicker.SelectedIndexChanged += DescriptorPicker_SelectedIndexChanged;
             konsolePicker.SelectedIndexChanged += KonsolePicker_SelectedIndexChanged;
             saveButton.Clicked += SaveButton_Clicked;
+        }
+
+        private void DescriptorPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedItem = (Descriptor)descriptorPicker.SelectedItem;
+            if (!selectedDescriptors.Contains(selectedItem))
+            {
+                Label label = new Label();
+                label.Text = selectedItem.ToString();
+                label.VerticalOptions = LayoutOptions.Center;
+                label.HorizontalOptions = LayoutOptions.Center;
+                selectedDescriptors.Add(selectedItem);
+                SelectedDescriptors.Children.Add(label);
+            }
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
@@ -40,12 +58,16 @@ namespace GameDataCollector.Views
                 var storage = (Storage)storagePicker.SelectedItem;
                 var name = gameName.Text;
                 float.TryParse(speicherGB.Text, out float space);
-                viewModel.CreateGame(storage.Id, name, selectedGenres, space);
+                var game = viewModel.CreateGame(storage.Id, name, selectedGenres, space);
+                viewModel.AddDescriptors(game.Id, selectedDescriptors);
                 await DisplayAlert("Spiel wurde hinzugefügt",$"{name} wurde zur Speicherkarte {storage.Name} hinzugefügt","OK");
                 gameName.Text = string.Empty;
                 speicherGB.Text = string.Empty;
                 selectedGenres.Clear();
                 SelectedGenres.Children.Clear();
+                selectedDescriptors.Clear();
+                SelectedDescriptors.Children.Clear();
+
             }
         }
 

@@ -76,6 +76,23 @@ namespace DataManaging
                 game.GameGenre.Remove(genre);
             }
         }
+
+        public void DeleteDescripton(string gameId, Descriptor descriptor)
+        {
+            var game = games.Where(x => x.Id == gameId).FirstOrDefault();
+            if (game != null)
+            {
+                game.GameDiscriptors.Remove(descriptor);
+            }
+        }
+        public void AddDescripton(string gameId, List<Descriptor> descriptor)
+        {
+            var game = games.Where(x => x.Id == gameId).FirstOrDefault();
+            if (game != null)
+            {
+                game.GameDiscriptors.AddRange(descriptor);
+            }
+        }
         public void EditGame(string gameId, string name, float space)
         {
             var game = games.Where(x => x.Id == gameId).FirstOrDefault();
@@ -91,6 +108,8 @@ namespace DataManaging
                 }
 
                 var newGame = CreateGame(game.Id, name, space, game.GameGenre);
+
+                newGame.GameDiscriptors = game.GameDiscriptors;
                 games.Remove(game);
                 games.Add(newGame);
             }

@@ -20,6 +20,18 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <Label Text="Beschreibung zum hinzufügen"/>
+            <Picker x:Name="descriptorPicker"/>
+            <ListView x:Name="descriptors"
+                      ItemsSource="{Binding Descriptors}"
+                      CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding .}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Button x:Name="saveButton"
                     Text="Save"/>
         </StackLayout>

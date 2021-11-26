@@ -17,6 +17,8 @@ namespace GameDataCollectorWorkflow.Contract
         void ClearSelecion();
         void AddGame(string storageId, Game game);
         void AddGenre(string gameId, List<Genre> genre);
+        void DeleteDescriptor(string gameId, Descriptor descriptor);
+        void AddDescriptors(string gameId, List<Descriptor> descriptors);
         void AddKonsole(Konsole konsole);
         void AddStorage(string konsoleId, Storage storage);
         Game CreateGame(string storageId, string name, List<Genre> genres, float space);

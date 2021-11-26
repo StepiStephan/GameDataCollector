@@ -37,6 +37,16 @@
                          x:Name="SelectedGenres">
                 
             </StackLayout>
+
+            <Picker x:Name="descriptorPicker"/>
+
+            <Label Text="Ausgewählte Beschreibungen:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <StackLayout Padding="10"
+                         x:Name="SelectedDescriptors">
+
+            </StackLayout>
             <Button Text="Speichern" 
                     VerticalOptions="End"
                     HorizontalOptions="Center"

@@ -22,6 +22,7 @@ namespace ViewModels.Contract
         List<Konsole> GetKonsolen();
 
         void MoveGame(string oldStorageId, string gameId, string newStorageId);
-
+        void AddDescriptors(string id, List<Descriptor> selectedDescriptors);
+        void DeleteDescription(string gameId, Descriptor descriptor);
     }
 }

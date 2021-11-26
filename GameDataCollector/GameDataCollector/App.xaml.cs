@@ -11,12 +11,16 @@ namespace GameDataCollector
     public partial class App : Application
     {
         private const int GenreCounter = 23;
+        private const int DescriptorCounter = 10;
         public static List<Genre> AllGenres { get; set; }
+        public static List<Descriptor> AllDescriptors { get; set; }
         public static IServiceProvider ServiceProvider { get; set; }
         public App()
         {
+            DevExpress.XamarinForms.DataGrid.Initializer.Init();
             DevExpress.XamarinForms.Charts.Initializer.Init();
             AllGenres = new List<Genre>();
+            AllDescriptors = new List<Descriptor>();
             InitializeComponent();
             var services = new ServiceCollection();
             ServiceProvider = DIKernal.SetDIMicrosoft(services);
@@ -24,7 +28,11 @@ namespace GameDataCollector
             {
                 AllGenres.Add((Genre)i);
             }
-            
+            for (int i = 0; i < DescriptorCounter; i++)
+            {
+                AllDescriptors.Add((Descriptor)i);
+            }
+
             MainPage = new AppShell();
         }
 

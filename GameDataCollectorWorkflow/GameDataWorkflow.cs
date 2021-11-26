@@ -88,6 +88,12 @@ namespace GameDataCollectorWorkflow
             OnDataChange();
         }
 
+        public void AddDescriptors(string gameId, List<Descriptor> descriptors)
+        {
+            gameManager.AddDescripton(gameId, descriptors);
+            OnDataChange();
+        }
+
         public void AddKonsole(Konsole konsole)
         {
             konsoleManager.AddKonsole(konsole);
@@ -103,6 +109,12 @@ namespace GameDataCollectorWorkflow
         public void DeleteGame(string gameId)
         {
             gameManager.DeleteGame(gameId, storageManager);
+            OnDataChange();
+        }
+
+        public void DeleteDescriptor(string gameId, Descriptor descriptor)
+        {
+            gameManager.DeleteDescripton(gameId, descriptor);
             OnDataChange();
         }
 

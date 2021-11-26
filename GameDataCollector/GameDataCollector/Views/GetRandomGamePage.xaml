@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameDataCollector.Views.GetRandomGamePage">
+    <ContentPage.Content>
+        <StackLayout  Padding="10">
+            <Label Text="Anzahl:"/>
+            <Editor Keyboard="Numeric"
+                    x:Name="countGames"/>
+            <Label Text="Genre Auswählen:"/>
+            <Picker x:Name="genrePicker"/>
+
+            <Label Text="Ausgewählte Genre:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <ListView x:Name="genres"
+                      ItemsSource="{Binding Genres}"
+                      CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding .}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label Text="Beschreibung zum hinzufügen"/>
+            <Picker x:Name="descriptorPicker"/>
+            <ListView x:Name="descriptors"
+                      ItemsSource="{Binding Descriptors}"
+                      CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding .}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Würfeln"
+                    x:Name="getRandomGames"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

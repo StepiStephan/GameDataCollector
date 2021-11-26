@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameDataCollector.Views.FireBaseControllPages.FireBaseLoginPage">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="Email:"/>
+            <Entry x:Name="email"/>
+            <Label Text="Passwort:"/>
+            <Entry x:Name="passwort" 
+                   IsPassword="true"/>
+            <Button Text="LogIn"
+                    x:Name="logIn" 
+                    Padding="10" 
+                    HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand"/>
+            <Button Text="LogOut"
+                    x:Name="logOut" 
+                    Padding="10" 
+                    HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand"/>
+            <Button Text="Registrieren"
+                    x:Name="register" 
+                    Padding="10" 
+                    HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

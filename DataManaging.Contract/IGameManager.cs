@@ -16,5 +16,7 @@ namespace DataManaging.Contract
         void SaveData();
         Game CreateGame(string gameId, string name, float space, IEnumerable<Genre> genres);
         Game Copy(Game game);
+        void DeleteDescripton(string gameId, Descriptor descriptor);
+        void AddDescripton(string gameId, List<Descriptor> descriptor);
     }
 }

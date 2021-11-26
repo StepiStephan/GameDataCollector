@@ -18,10 +18,13 @@ namespace GameDataCollector.Views
         Game game;
         IGameViewModel viewModel;
         ObservableCollection<Genre> Genres;
+        ObservableCollection<Descriptor> Descriptors;
 
         public EditGamePage(Game game)
         {
             Genres = new ObservableCollection<Genre>(game.GameGenre);
+            Descriptors = new ObservableCollection<Descriptor>(game.GameDiscriptors);
+
             this.game = game;
             viewModel = App.ServiceProvider.GetService<IGameViewModel>();
             InitializeComponent();
@@ -30,11 +33,37 @@ namespace GameDataCollector.Views
             gameName.Text = game.Name;
             gameSize.Text = game.SpaceOnSorage.ToString();
             genrePicker.ItemsSource = App.AllGenres;
+            descriptorPicker.ItemsSource = App.AllDescriptors;
             genres.ItemsSource = Genres;
+            descriptors.ItemsSource = Descriptors;
             saveButton.Clicked += SaveButton_Clicked;
             genrePicker.SelectedIndexChanged += GenrePicker_SelectedIndexChanged;
             genres.ItemTapped += Genres_ItemTapped;
+            descriptors.ItemTapped += Descriptors_ItemTapped;
+            descriptorPicker.SelectedIndexChanged += DescriptorPicker_SelectedIndexChanged;
 
+        }
+
+        private void DescriptorPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Descriptor descriptors = (Descriptor)descriptorPicker.SelectedItem;
+            if (!game.GameDiscriptors.Contains(descriptors))
+            {
+                viewModel.AddDescriptors(game.Id, new List<Descriptor>() { descriptors });
+                Descriptors.Add(descriptors);
+            }
+        }
+
+        private async void Descriptors_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Descriptor descriptor = (Descriptor)e.Item;
+            var deleteGenre = await DisplayAlert("Beschreibung löschen?", $"Das Genre {descriptor} wurde ausgewählt.", "Löschen", "Abbrechen");
+
+            if (deleteGenre)
+            {
+                viewModel.DeleteDescription(game.Id, descriptor);
+                Descriptors.Remove(descriptor);
+            }
         }
 
         private async void Genres_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -46,7 +75,6 @@ namespace GameDataCollector.Views
             {
                 viewModel.DeleteGenre(game.Id, genre);
                 Genres.Remove(genre);
-                
             }
         }
 
