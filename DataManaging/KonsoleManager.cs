@@ -8,12 +8,17 @@ namespace DataManaging
 {
     public class KonsoleManager : IKonsoleManager
     {
-        private readonly List<Konsole> konsoles;
+        private List<Konsole> konsoles;
         private const string konsoleName = "KonsoleList";
         private readonly IDataSaver<List<Konsole>> dataSaverKonsole;
         private readonly IDataLoader<List<Konsole>> dataLoaderKonsole;
 
-        public IEnumerable<Konsole> Konsoles { get => konsoles; }
+        public IEnumerable<Konsole> Konsoles 
+        { 
+            get => konsoles;
+            set => konsoles = value.ToList();
+
+        }
 
         public KonsoleManager(IDataSaver<List<Konsole>> dataSaverKonsole, IDataLoader<List<Konsole>> dataLoaderKonsole)
         {

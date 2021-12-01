@@ -7,6 +7,8 @@ namespace GameDataCollectorWorkflow.Contract
 {
     public interface IFireBaseWorkFlow
     {
+        event EventHandler DatabaseLoaded;
+        event EventHandler DatabaseSaved;
         bool LoggedIn { get; }
         void LogIn(string email, string passwort);
         void LogOut();

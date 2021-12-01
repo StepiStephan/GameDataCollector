@@ -10,13 +10,18 @@ namespace GameDataCollectorWorkflow
 {
     public class WishListWorkflow : IWishListWorkflow
     {
-        public List<WishListItem> WishList => wishList;
+        public List<WishListItem> WishList
+        {
+            get => wishList;
+            set => wishList = value;
+        }
         private const string saveName = "WishListData";
-        List<WishListItem> wishList;
-        IDataSaver<List<WishListItem>> dataSaver;
-        IDataLoader<List<WishListItem>> dataLoader;
+        private List<WishListItem> wishList;
+        private IDataSaver<List<WishListItem>> dataSaver;
+        private IDataLoader<List<WishListItem>> dataLoader;
+        private IFireBaseWorkFlow fireBaseWorkFlow;
 
-        public event EventHandler LsitChange;
+        public event EventHandler ListChange;
 
         public WishListWorkflow(IDataSaver<List<WishListItem>> dataSaver, IDataLoader<List<WishListItem>> dataLoader)
         {
@@ -24,13 +29,31 @@ namespace GameDataCollectorWorkflow
             this.dataSaver.SetName(saveName);
             this.dataLoader = dataLoader;
             this.dataLoader.SetName(saveName);
+
             wishList = dataLoader.LoadObject();
             if(wishList == null)
             {
                 wishList = new List<WishListItem>();
             }
-
         }
+
+        public void SetIFirebaseWorkflow(IFireBaseWorkFlow fireBaseWorkFlow)
+        {
+            this.fireBaseWorkFlow = fireBaseWorkFlow;
+            fireBaseWorkFlow.DatabaseLoaded += FireBaseWorkFlow_DatabaseLoaded;
+            fireBaseWorkFlow.DatabaseSaved += FireBaseWorkFlow_DatabaseSaved;
+        }
+
+        private void FireBaseWorkFlow_DatabaseSaved(object sender, EventArgs e)
+        {
+            ListChange?.Invoke(fireBaseWorkFlow, new EventArgs());
+        }
+
+        private void FireBaseWorkFlow_DatabaseLoaded(object sender, EventArgs e)
+        {
+            ListChange?.Invoke(fireBaseWorkFlow, new EventArgs());
+        }
+
         public void AddWishListItem(string name, string konsoleType, string store, float amount)
         {
             var wishListItem = new WishListItem()
@@ -74,7 +97,7 @@ namespace GameDataCollectorWorkflow
         private void SaveData()
         {
             dataSaver.SaveObject(wishList);
-            LsitChange?.Invoke(this, new EventArgs());
+            ListChange?.Invoke(this, new EventArgs());
         }
     }
 }

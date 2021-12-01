@@ -20,25 +20,30 @@ namespace GameDataCollector.Views.FireBaseControllPages
             logIn.Clicked += LogIn_Clicked;
             logOut.Clicked += LogOut_Clicked;
             register.Clicked += Register_Clicked;
-            logOut.IsEnabled = false;
-            logIn.IsEnabled = true;
-            register.IsEnabled = true;
+            viewModel.LoggedInStateChanged += ViewModel_LoggedInStateChanged;
+            SetLogInState(true);
+        }
+
+        private void ViewModel_LoggedInStateChanged(object sender, EventArgs e)
+        {
+            SetLogInState(!viewModel.LoggedIn);
+        }
+
+        private void SetLogInState(bool state)
+        {
+            logOut.IsEnabled = !state;
+            logIn.IsEnabled = state;
+            register.IsEnabled = state;
         }
 
         private async void Register_Clicked(object sender, EventArgs e)
         {
-            logOut.IsEnabled = true;
-            logIn.IsEnabled = false;
-            register.IsEnabled = false;
             await  Navigation.PushAsync(new FireBaseRegisterPage());
         }
 
         private void LogOut_Clicked(object sender, EventArgs e)
         {
             viewModel.LogOut();
-            logOut.IsEnabled = false;
-            logIn.IsEnabled = true;
-            register.IsEnabled = true;
         }
 
         private async void LogIn_Clicked(object sender, EventArgs e)
@@ -46,13 +51,10 @@ namespace GameDataCollector.Views.FireBaseControllPages
             try
             {
                 viewModel.LogIn(email.Text, passwort.Text);
-                logOut.IsEnabled = true;
-                logIn.IsEnabled = false;
-                register.IsEnabled = false;
             }
-            catch(Exception ex)
+            catch
             {
-                await DisplayAlert("Login Fehler", "Emailadresse und PAsswort stimmen nicht überein", "OK");
+                await DisplayAlert("Login Fehler", "Emailadresse und Passwort stimmen nicht überein", "OK");
             }
         }
     }

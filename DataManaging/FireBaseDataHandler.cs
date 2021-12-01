@@ -4,6 +4,7 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,16 +31,26 @@ namespace DataManaging
 
         private async Task SaveData<T>(FirebaseClient client, List<T> objectList, string name, string clientID)
         {
-            await client.Child(name).DeleteAsync();
-            await client.Child(name).PostAsync(objectList);
+            try
+            {
+                await client.Child(clientID).Child(name).DeleteAsync();
+            }
+            catch(FirebaseException fe)
+            {
+                await client.Child(clientID).PatchAsync(name);
+            }
+            await client.Child(clientID).Child(name).PostAsync(objectList);
         }
 
         public async Task<object[]> LoadData(FirebaseClient client, string clientID)
         {
-            var games = await GetData<Game>(client, gameChild, clientID);
-            var storages = await GetData<Storage>(client, storageChild,clientID);
-            var konsolen = await GetData<Konsole>(client, konsoleChild, clientID);
-            var wishList = await GetData<WishListItem>(client, wishListChild, clientID);
+            var games = await GetData<List<Game>>(client, gameChild, clientID);
+            var storages = await GetData<List<Storage>>(client, storageChild,clientID);
+            var konsolen = await GetData<List<Konsole>>(client, konsoleChild, clientID);
+            var wishList = await GetData<List<WishListItem>>(client, wishListChild, clientID);
+
+            GameListNullReplace(storages);
+            StorageListNullReplace(konsolen);
 
             object[] objects = new object[]
             {
@@ -50,6 +61,30 @@ namespace DataManaging
             };
 
             return objects;
+        }
+
+        private void StorageListNullReplace(List<List<Konsole>> konsolen)
+        {
+            if(konsolen != null)
+            {
+                var konsoleListe = konsolen[0].Where(x=> x.Storages == null);
+                foreach(var konsole in konsoleListe)
+                {
+                    konsole.Storages = new List<string>();
+                }
+            }
+        }
+
+        private void GameListNullReplace(List<List<Storage>> storages)
+        {
+            if (storages != null)
+            {
+                var storageListe = storages[0].Where(x => x.Games == null);
+                foreach (var storage in storageListe)
+                {
+                    storage.Games = new List<string>();
+                }
+            }
         }
 
         private async Task<List<T>> GetData<T>(FirebaseClient client, string name, string clientID)

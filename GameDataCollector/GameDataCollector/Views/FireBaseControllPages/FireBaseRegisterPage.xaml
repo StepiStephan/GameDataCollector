@@ -5,13 +5,16 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="Email:"/>
-            <Entry x:Name="email"/>
+            <Entry x:Name="email"
+                   BackgroundColor="LightGray"/>
             <Label Text="Passwort:"/>
             <Entry x:Name="passwort" 
-                   IsPassword="True"/>
+                   IsPassword="True"
+                   BackgroundColor="LightGray"/>
             <Label Text="Passwort Widerholen:"/>
             <Entry x:Name="passwortSecond" 
-                   IsPassword="True"/>
+                   IsPassword="True"
+                   BackgroundColor="LightGray"/>
             <Button Text="Registrieren" 
                     x:Name="register"/>
         </StackLayout>

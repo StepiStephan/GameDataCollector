@@ -8,7 +8,7 @@ namespace DataManaging
 {
     public class StorageManager : IStorageManager
     {
-        private readonly List<Storage> storages;
+        private List<Storage> storages;
         private const string storageName = "StorageList";
         private readonly IDataSaver<List<Storage>> dataSaverStorage;
         private readonly IDataLoader<List<Storage>> dataLoaderStorage;
@@ -26,7 +26,11 @@ namespace DataManaging
                 dataSaverStorage.SaveObject(storages);
             }
         }
-        public IEnumerable<Storage> Storages { get => storages; }
+        public IEnumerable<Storage> Storages 
+        { 
+            get => storages;
+            set => storages = value.ToList();
+        }
 
         public void SaveData()
         {
@@ -37,7 +41,7 @@ namespace DataManaging
         {
             var storage = storages.Where(x => x.Id == id).FirstOrDefault();
 
-            if (storage != null)
+            if (storage != null && storage.Games != null)
             {
                 List<string> gameIds = new List<string>();
 

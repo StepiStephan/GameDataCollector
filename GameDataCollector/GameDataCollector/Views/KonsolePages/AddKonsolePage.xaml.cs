@@ -33,6 +33,7 @@ namespace GameDataCollector.Views
                 konsoleName.Text = string.Empty;
                 konsoleTyp.Text = string.Empty;
                 speicherGB.Text = string.Empty;
+                await Navigation.PopToRootAsync();
             }
         }
     }

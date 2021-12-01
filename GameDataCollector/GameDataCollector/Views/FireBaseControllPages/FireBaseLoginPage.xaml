@@ -5,25 +5,31 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="Email:"/>
-            <Entry x:Name="email"/>
+            <Entry x:Name="email"
+                   BackgroundColor="LightGray"/>
             <Label Text="Passwort:"/>
             <Entry x:Name="passwort" 
-                   IsPassword="true"/>
-            <Button Text="LogIn"
-                    x:Name="logIn" 
-                    Padding="10" 
-                    HorizontalOptions="CenterAndExpand" 
-                    VerticalOptions="CenterAndExpand"/>
-            <Button Text="LogOut"
-                    x:Name="logOut" 
-                    Padding="10" 
-                    HorizontalOptions="CenterAndExpand" 
-                    VerticalOptions="CenterAndExpand"/>
-            <Button Text="Registrieren"
+                   IsPassword="true"
+                   BackgroundColor="LightGray"/>
+            <FlexLayout Padding="10">
+                <Button Text="Registrieren"
                     x:Name="register" 
                     Padding="10" 
                     HorizontalOptions="CenterAndExpand" 
                     VerticalOptions="CenterAndExpand"/>
+                <Button Text="LogIn"
+                    x:Name="logIn" 
+                    Padding="10" 
+                    HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand"
+                    TranslationX="10"/>
+                <Button Text="LogOut"
+                    x:Name="logOut" 
+                    Padding="10" 
+                    HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand"
+                    TranslationX="20"/>
+            </FlexLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -29,6 +29,7 @@ namespace GameDataCollector.Views.FireBaseControllPages
                 passwort.IsEnabled = false;
                 passwortSecond.IsEnabled = false;
                 await DisplayAlert("Erfolgreich", "Konto wurde erfolgreich hinzugefügt", "OK");
+                await Navigation.PopToRootAsync();
             }
             else
             {

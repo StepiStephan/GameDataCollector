@@ -33,7 +33,7 @@ namespace GameDataCollector.Views
             saveButton.Clicked += SaveButton_Clicked;
         }
 
-        private void SaveButton_Clicked(object sender, EventArgs e)
+        private async void SaveButton_Clicked(object sender, EventArgs e)
         {
             if (konsoleAlt.SelectedItem != null &&
                 storage.SelectedItem != null &&
@@ -43,6 +43,7 @@ namespace GameDataCollector.Views
                 var selectedStorage = (Storage)storage.SelectedItem;
                 var newKonsole = (Konsole)konsoleNeu.SelectedItem;
                 viewModel.MoveStorage(oldKonsole.Id, selectedStorage.Id, newKonsole.Id);
+                await Navigation.PopToRootAsync();
             }
         }
 

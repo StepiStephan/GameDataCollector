@@ -9,6 +9,7 @@ namespace ViewModels.Contract
     {
         bool LoggedIn { get; }
 
+        event EventHandler LoggedInStateChanged;
         void LogIn(string email, string passwort);
         void LogOut();
         Task SaveData();

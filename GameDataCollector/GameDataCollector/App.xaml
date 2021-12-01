@@ -38,15 +38,6 @@
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="Red"></Setter>
             </Style>
-            <Style TargetType="CollectionView">
-                <Setter Property="Background" Value="White"/>
-            </Style>
-            <Style TargetType="ListView">
-                <Setter Property="Background" Value="White"/>
-            </Style>
-            <Style TargetType="StackLayout">
-                <Setter Property="Background" Value="White"/>
-            </Style>
         </ResourceDictionary>        
     </Application.Resources>
 </Application>

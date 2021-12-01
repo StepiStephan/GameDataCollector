@@ -46,7 +46,11 @@ namespace ViewModels
 
         public string GetInfos(Storage storage)
         {
-            var konsole = workflow.Konsolen.Where(x => x.Storages.Contains(storage.Id)).First();
+            var konsole = workflow.Konsolen.Where(x => x.Storages.Contains(storage.Id)).FirstOrDefault();
+            if(konsole == null)
+            {
+                return "";
+            }
             return konsole.Name;
         }
 

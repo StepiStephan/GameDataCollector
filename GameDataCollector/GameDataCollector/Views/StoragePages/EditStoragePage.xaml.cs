@@ -37,6 +37,7 @@ namespace GameDataCollector.Views
                 await DisplayAlert("Speicher geändert",
                     $"Speicher wurde auf {storageName.Text} mit der Speichergröße {storageSize.Text}GB geändert",
                      "OK");
+                await Navigation.PopToRootAsync();
             }
         }
     }

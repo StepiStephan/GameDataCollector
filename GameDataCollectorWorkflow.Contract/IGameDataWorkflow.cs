@@ -7,13 +7,14 @@ namespace GameDataCollectorWorkflow.Contract
 {
     public interface IGameDataWorkflow : INotifyPropertyChanged
     {
-        List<Konsole> Konsolen { get; }
-        List<Storage> Storages { get; }
-        List<Game> Games { get; }
+        List<Konsole> Konsolen { get; set; }
+        List<Storage> Storages { get; set; }
+        List<Game> Games { get; set; }
 
         string SelectedKonsole { get; }
         string SelectedStorage { get; }
 
+        void SetIFirebaseWorkflow(IFireBaseWorkFlow fireBaseWorkFlow);
         void ClearSelecion();
         void AddGame(string storageId, Game game);
         void AddGenre(string gameId, List<Genre> genre);

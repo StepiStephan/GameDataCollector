@@ -6,7 +6,7 @@ namespace DataManaging.Contract
 {
     public interface IGameManager
     {
-        IEnumerable<Game> Games { get; }
+        IEnumerable<Game> Games { get; set; }
         void AddGame(string storageId, Game game, IKonsoleManager konsoleManager, IStorageManager storageManager);
         void AddGenre(string gameId, List<Genre> genre);
         void DeleteGame(string gameId, IStorageManager storageManager);

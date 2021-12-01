@@ -36,6 +36,7 @@ namespace GameDataCollector.Views
                 await DisplayAlert("Speicherkarte wurde hinzugefügt", $"{name} wurde zur Konsole {konsole.Name} hinzugefügt", "OK");
                 speicherName.Text = string.Empty;
                 speicherGB.Text = string.Empty;
+                await Navigation.PopToRootAsync();
             }
         }
     }

@@ -17,6 +17,10 @@ namespace GameDataCollectorWorkflow
         private IWishListWorkflow wishList;
         private FirebaseClient client;
         private string clientID;
+
+        public event EventHandler DatabaseLoaded;
+        public event EventHandler DatabaseSaved;
+
         public bool LoggedIn { get; private set; }
         public FireBaseWorkFlow(IFireBaseConnector connector, IFireBaseDataHandler dataHandler, IGameDataWorkflow data, IWishListWorkflow wishList)
         {
@@ -31,17 +35,35 @@ namespace GameDataCollectorWorkflow
             if(LoggedIn)
             {
                 var objects = await dataHandler.LoadData(client, clientID);
-                data.Games.Clear();
-                data.Games.AddRange((List<Game>)objects[0]);
 
-                data.Storages.Clear();
-                data.Storages.AddRange((List<Storage>)objects[1]);
+                if (((List<List<Konsole>>)objects[2]).Count > 0)
+                {
+                    data.Konsolen.Clear();
+                    var konsolenListe = ((List<List<Konsole>>)objects[2]);
+                    data.Konsolen = konsolenListe[0];
+                }
 
-                data.Konsolen.Clear();
-                data.Konsolen.AddRange((List<Konsole>)objects[2]);
+                if (((List<List<Storage>>)objects[1]).Count > 0)
+                {
+                    data.Storages.Clear();
+                    var storagesList = (List<List<Storage>>)objects[1];
+                    data.Storages = storagesList[0];
+                }
 
-                wishList.WishList.Clear();
-                wishList.WishList.AddRange((List<WishListItem>)objects[3]);
+                if (((List<List<Game>>)objects[0]).Count != 0)
+                {
+                    data.Games.Clear();
+                    var gameList = ((List<List<Game>>)objects[0]);
+                    data.Games = gameList[0];
+                }
+
+                if (((List<List<WishListItem>>)objects[3]).Count > 0)
+                {
+                    wishList.WishList.Clear();
+                    var wishListList = ((List<List<WishListItem>>)objects[3]);
+                    wishList.WishList = wishListList[0];
+                }
+                OnDatabaseLoaded();
             }
         }
 
@@ -71,6 +93,7 @@ namespace GameDataCollectorWorkflow
                 wishList.WishList
                 };
                 await dataHandler.SaveData(client, objects, clientID);
+                OnDatabaseSaved();
             }
         }
 
@@ -79,6 +102,16 @@ namespace GameDataCollectorWorkflow
             connector.Register(email, passwort);
             clientID = connector.GetClientID();
             LoggedIn = true;
+        }
+
+        private void OnDatabaseLoaded()
+        {
+            DatabaseLoaded?.Invoke(dataHandler, new EventArgs());
+        }
+
+        private void OnDatabaseSaved()
+        {
+            DatabaseSaved?.Invoke(dataHandler, new EventArgs());
         }
     }
 }

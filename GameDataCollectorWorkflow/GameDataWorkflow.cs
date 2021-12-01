@@ -17,13 +17,26 @@ namespace GameDataCollectorWorkflow
         private readonly IGameManager gameManager;
         private readonly IStorageManager storageManager;
         private readonly IKonsoleManager konsoleManager;
+        private IFireBaseWorkFlow fireBaseWorkFlow;
 
         private string selectedKonsoleId;
         private string selectedStorageID;
 
-        public List<Konsole> Konsolen => konsoleManager.Konsoles.ToList();
-        public List<Storage> Storages => storageManager.Storages.ToList();
-        public List<Game> Games => gameManager.Games.ToList();
+        public List<Konsole> Konsolen
+        {
+            get => konsoleManager.Konsoles.ToList();
+            set => konsoleManager.Konsoles = value.AsEnumerable();
+        }
+        public List<Storage> Storages 
+        { 
+            get => storageManager.Storages.ToList();
+            set => storageManager.Storages = value.AsEnumerable();
+        }
+        public List<Game> Games
+        {
+            get => gameManager.Games.ToList();
+            set => gameManager.Games.AsEnumerable();
+        }
         public string SelectedKonsole => selectedKonsoleId;
         public string SelectedStorage => selectedStorageID;
 
@@ -33,6 +46,16 @@ namespace GameDataCollectorWorkflow
             this.storageManager = storageManager;
             this.konsoleManager = konsoleManager;
             DataChanged += GameDataWorkflow_DataChanged;
+        }
+
+        private void FireBaseWorkFlow_DatabaseSaved(object sender, EventArgs e)
+        {
+            OnDataChange();
+        }
+
+        private void FireBaseWorkFlow_DatabaseLoaded(object sender, EventArgs e)
+        {
+            OnDataChange();
         }
 
         private void GameDataWorkflow_DataChanged(object sender, EventArgs e)
@@ -209,6 +232,10 @@ namespace GameDataCollectorWorkflow
             if(selectedKonsoleId == null)
                 return Storages;
             var konsole = GetKonsole(selectedKonsoleId);
+            if(konsole == null)
+            {
+                return Storages;
+            }
             return Storages.Where(x => konsole.Storages.Contains(x.Id)).ToList();
         }
 
@@ -264,6 +291,14 @@ namespace GameDataCollectorWorkflow
                 newKonsole.Storages.Add(storage.Id);
                 OnDataChange();
             }
+        }
+
+        public void SetIFirebaseWorkflow(IFireBaseWorkFlow fireBaseWorkFlow)
+        {
+            this.fireBaseWorkFlow = fireBaseWorkFlow;
+
+            fireBaseWorkFlow.DatabaseLoaded += FireBaseWorkFlow_DatabaseLoaded;
+            fireBaseWorkFlow.DatabaseSaved += FireBaseWorkFlow_DatabaseSaved;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace GameDataCollector.Views.WishListPages
             save.Clicked += Save_Clicked;
         }
 
-        private void Save_Clicked(object sender, EventArgs e)
+        private async void Save_Clicked(object sender, EventArgs e)
         {
             var gameName = name.Text;
             var consoleName = konsole.Text;
@@ -36,6 +36,8 @@ namespace GameDataCollector.Views.WishListPages
             konsole.Text = string.Empty;
             store.Text = string.Empty;
             price.Text = string.Empty;
+
+            await Navigation.PopToRootAsync();
         }
     }
 }

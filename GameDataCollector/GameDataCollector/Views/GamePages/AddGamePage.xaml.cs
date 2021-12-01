@@ -67,7 +67,7 @@ namespace GameDataCollector.Views
                 SelectedGenres.Children.Clear();
                 selectedDescriptors.Clear();
                 SelectedDescriptors.Children.Clear();
-
+                await Navigation.PopToRootAsync();
             }
         }
 

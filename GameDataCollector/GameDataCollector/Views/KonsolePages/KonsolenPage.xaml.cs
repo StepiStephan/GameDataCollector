@@ -30,7 +30,18 @@ namespace GameDataCollector.Views
             ItemTapped = new Command<DataClasses.Element>(OpenDeails);
             deleteButton.Clicked += DeleteButton_Clicked;
             MyListView.ItemsSource = Items;
+            this.Appearing += KonsolenPage_Appearing;
         }
+
+        private void KonsolenPage_Appearing(object sender, EventArgs e)
+        {
+            Items.Clear();
+            foreach (var element in GetElements())
+            {
+                Items.Add(element);
+            }
+        }
+
         private void DeleteButton_Clicked(object sender, EventArgs e)
         {
             viewModel.DeleteKonsole(selectedKonsole.Id);
@@ -61,6 +72,7 @@ namespace GameDataCollector.Views
         }
         protected override void OnAppearing()
         {
+            base.OnAppearing();
             Items.Clear();
             foreach (var element in GetElements())
             {

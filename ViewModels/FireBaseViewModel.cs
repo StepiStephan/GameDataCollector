@@ -11,20 +11,28 @@ namespace ViewModels
     {
         private IFireBaseWorkFlow fireBaseWorkFlow;
 
+        public event EventHandler LoggedInStateChanged;
+
         public bool LoggedIn => fireBaseWorkFlow.LoggedIn;
         public FireBaseViewModel(IFireBaseWorkFlow fireBaseWorkFlow)
         {
             this.fireBaseWorkFlow = fireBaseWorkFlow;
         }
 
+        private void OnLoggedInStateChanged()
+        {
+            LoggedInStateChanged?.Invoke(this, new EventArgs());
+        }
         public void LogIn(string email, string passwort)
         {
             fireBaseWorkFlow.LogIn(email, passwort);
+            OnLoggedInStateChanged();
         }
 
         public void LogOut()
         {
             fireBaseWorkFlow.LogOut();
+            OnLoggedInStateChanged();
         }
 
         public async Task SaveData()
@@ -40,6 +48,7 @@ namespace ViewModels
         public void Register(string email, string passwort)
         {
             fireBaseWorkFlow.Register(email, passwort);
+            OnLoggedInStateChanged();
         }
     }
 }

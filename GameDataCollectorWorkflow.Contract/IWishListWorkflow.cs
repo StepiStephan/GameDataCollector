@@ -7,8 +7,8 @@ namespace GameDataCollectorWorkflow.Contract
 {
     public interface IWishListWorkflow
     {
-        event EventHandler LsitChange;
-        List<WishListItem> WishList { get; }
+        event EventHandler ListChange;
+        List<WishListItem> WishList { get; set; }
         void AddWishListItem(string name, string konsoleType, string store, float amount);
         void RemoveWishListItem(string id);
         void DuplicateForAnoherKonsole(string id, string konsole);

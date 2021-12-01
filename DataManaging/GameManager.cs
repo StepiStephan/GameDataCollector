@@ -8,13 +8,17 @@ namespace DataManaging
 {
     public class GameManager : IGameManager
     {
-        private readonly List<Game> games;
+        private List<Game> games;
         private const string gameName = "GameList";
         private readonly IDataSaver<List<Game>> dataSaverGame; 
         private readonly IDataLoader<List<Game>> dataLoaderGame;
 
-        public IEnumerable<Game> Games => games;
+        public IEnumerable<Game> Games
+        {
+            get => games;
+            set => games = value.ToList();
 
+        }
         public void AddGenre(string gameId, List<Genre> genre)
         {
             var game = games.Where(x => x.Id == gameId).FirstOrDefault();

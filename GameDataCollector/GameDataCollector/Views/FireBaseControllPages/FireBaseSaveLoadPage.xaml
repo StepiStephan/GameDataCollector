@@ -5,10 +5,24 @@
     <ContentPage.Content>
         <StackLayout Padding="10"
                      x:Name="saveLoadArea">
-            <Button Text="Speichern" x:Name="save"/>
-            <Entry x:Name="lastSave"/>
-            <Button Text="Laden" x:Name="load"/>
-            <Entry x:Name="lastLoad"/>
+            <FlexLayout>
+                <Button Text="Speichern" x:Name="save"/>
+                <Button Text="Laden" x:Name="load"
+                        TranslationX="10"/>
+            </FlexLayout>
+            <ActivityIndicator 
+                IsVisible="false" 
+                IsRunning="False" 
+                Color="Red"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                x:Name="spinner"/>
+            <Entry IsReadOnly="True"
+                   TextColor="Green"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"
+                   Text="Erfolgreich Geladen"
+                   x:Name="result"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

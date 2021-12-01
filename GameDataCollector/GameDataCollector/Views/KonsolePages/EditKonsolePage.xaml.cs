@@ -36,6 +36,7 @@ namespace GameDataCollector.Views
                 await DisplayAlert("Konsole geändert",
                     $"Konsole wurde auf {konsoleName.Text} mit dem Konsolentyp {konsoleType.Text} geändert",
                      "OK");
+                await Navigation.PopToRootAsync();
             }
         }
     }

@@ -15,11 +15,14 @@ namespace GameDataCollector
         {
             InitializeComponent();
             workflow = App.ServiceProvider.GetService<IGameDataWorkflow>();
+            var fbWorkFlow = App.ServiceProvider.GetService<IFireBaseWorkFlow>();
+            workflow.SetIFirebaseWorkflow(fbWorkFlow);
         }
 
         private async void OnClearTappt(object sender, EventArgs e)
         {
             await Task.Factory.StartNew(() => workflow.ClearSelecion());
+            await DisplayAlert("Auswahl Geleert", "Die ausgewählte Konsole und der ausgewählte Speicer wurde geleert", "OK");
         }
     }
 }

@@ -55,11 +55,13 @@ namespace GameDataCollector.Views
             //Deselect Item
             var storage = viewModel.GetStorages().Where(x => x.Id == ((DataClasses.Element)e.Item).ID).First();
             var info = viewModel.GetInfos(storage);
+            var games = storage.Games;
+            var gamecount = games != null ? games.Count : 0;
 
             var edit = await DisplayAlert($"Info Storage {storage.Name}",
                 $"Name: {storage.Name}" + Environment.NewLine +
                 $"Space: {storage.Space} GB" + Environment.NewLine +
-                $"Anzahl Spiele: {storage.Games.Count}" + Environment.NewLine +
+                $"Anzahl Spiele: {gamecount}" + Environment.NewLine +
                 $"Konsole: {info}", "Bearbeiten", "OK");
 
             selectedStorage = storage;

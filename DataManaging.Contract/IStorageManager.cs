@@ -5,7 +5,7 @@ namespace DataManaging.Contract
 {
     public interface IStorageManager
     {
-        IEnumerable<Storage> Storages { get; }
+        IEnumerable<Storage> Storages { get; set; }
         void AddStorage(string konsoleId, Storage storage, IKonsoleManager konsoleManager);
         void DeleteStorage(string id);
         void DeleteStorageWithGames(string id, IGameManager gameManager);

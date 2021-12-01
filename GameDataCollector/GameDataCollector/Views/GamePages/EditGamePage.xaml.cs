@@ -97,6 +97,7 @@ namespace GameDataCollector.Views
                 await DisplayAlert("Spiel geändert",
                                     $"Spiel wurde auf {gameName.Text} mit der Speichergröße {gameSize.Text}GB geändert",
                                      "OK");
+                await Navigation.PopToRootAsync();
             }
         }
     }

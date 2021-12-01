@@ -54,7 +54,7 @@ namespace GameDataCollector.Views
             }
         }
 
-        private void SaveButton_Clicked(object sender, EventArgs e)
+        private async void SaveButton_Clicked(object sender, EventArgs e)
         {
             if ( storageAlt.SelectedItem != null &&
                 gamePicker.SelectedItem != null &&
@@ -64,6 +64,8 @@ namespace GameDataCollector.Views
                 var game = (Game)gamePicker.SelectedItem;
                 var newStorage = (Storage)storageNeu.SelectedItem;
                 viewModel.MoveGame(oldStorage.Id, game.Id, newStorage.Id);
+                await Navigation.PopToRootAsync();
+
             }
         }
 
