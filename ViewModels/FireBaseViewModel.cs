@@ -12,11 +12,25 @@ namespace ViewModels
         private IFireBaseWorkFlow fireBaseWorkFlow;
 
         public event EventHandler LoggedInStateChanged;
+        public event EventHandler DatabaseLoaded;
+        public event EventHandler DatabaseSaved;
 
         public bool LoggedIn => fireBaseWorkFlow.LoggedIn;
         public FireBaseViewModel(IFireBaseWorkFlow fireBaseWorkFlow)
         {
             this.fireBaseWorkFlow = fireBaseWorkFlow;
+            fireBaseWorkFlow.DatabaseLoaded += FireBaseWorkFlow_DatabaseLoaded;
+            fireBaseWorkFlow.DatabaseSaved += FireBaseWorkFlow_DatabaseSaved;
+        }
+
+        private void FireBaseWorkFlow_DatabaseSaved(object sender, EventArgs e)
+        {
+            DatabaseSaved?.Invoke(sender, e);
+        }
+
+        private void FireBaseWorkFlow_DatabaseLoaded(object sender, EventArgs e)
+        {
+            DatabaseLoaded?.Invoke(sender, e);
         }
 
         private void OnLoggedInStateChanged()

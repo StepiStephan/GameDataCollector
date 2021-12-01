@@ -1,10 +1,9 @@
-﻿using GameDataCollectorWorkflow.Contract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ViewModels.Contract;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,17 +12,24 @@ namespace GameDataCollector.Views.FireBaseControllPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FireBaseSaveLoadPage : ContentPage
     {
-        private IFireBaseWorkFlow workFlow;
+        private IFireBaseViewModel viewmodel;
         public FireBaseSaveLoadPage()
         {
-            workFlow = App.ServiceProvider.GetService<IFireBaseWorkFlow>();
+            viewmodel = App.ServiceProvider.GetService<IFireBaseViewModel>();
             InitializeComponent();
             result.IsVisible = false;
             save.Clicked += Save_Clicked;
             load.Clicked += Load_Clicked;
-            workFlow.DatabaseLoaded += WorkFlow_DatabaseLoaded;
-            workFlow.DatabaseSaved += WorkFlow_DatabaseSaved;
+            viewmodel.DatabaseLoaded += WorkFlow_DatabaseLoaded;
+            viewmodel.DatabaseSaved += WorkFlow_DatabaseSaved;
+            viewmodel.LoggedInStateChanged += Viewmodel_LoggedInStateChanged;
             Appearing += FireBaseSaveLoadPage_Appearing;
+            SetButtons(viewmodel.LoggedIn);
+        }
+
+        private void Viewmodel_LoggedInStateChanged(object sender, EventArgs e)
+        {
+            SetButtons(viewmodel.LoggedIn);
         }
 
         private void FireBaseSaveLoadPage_Appearing(object sender, EventArgs e)
@@ -47,7 +53,7 @@ namespace GameDataCollector.Views.FireBaseControllPages
         {
             SetSpinner(true);
             SetButtons(false);
-            await workFlow.LoadDataOnFireBase();
+            await viewmodel.LoadData();
             SetButtons(true);
             SetSpinner(false);
         }
@@ -56,7 +62,7 @@ namespace GameDataCollector.Views.FireBaseControllPages
         {
             SetSpinner(true);
             SetButtons(false);
-            await workFlow.SaveDataOnFireBase();
+            await viewmodel.SaveData();
             SetButtons(true);
             SetSpinner(false);
         }
