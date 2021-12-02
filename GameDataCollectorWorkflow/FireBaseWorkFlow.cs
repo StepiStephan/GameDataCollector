@@ -99,7 +99,7 @@ namespace GameDataCollectorWorkflow
 
         public void Register(string email, string passwort)
         {
-            connector.Register(email, passwort);
+            client = connector.Register(email, passwort);
             clientID = connector.GetClientID();
             LoggedIn = true;
         }

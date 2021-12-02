@@ -11,7 +11,6 @@ namespace DataManaging
     public class FireBaseConnector : IFireBaseConnector
     {
         private const string secretKey = "AIzaSyCOqADfqBQS8EZUyoC3qmUQrAGuAhAJMks";
-        private const string database = "gamedatacollector-2eb2f-default-rtdb";
         private const string databaseURL = "https://gamedatacollector-2eb2f-default-rtdb.firebaseio.com/";
         private string clientID;
 
@@ -52,7 +51,7 @@ namespace DataManaging
         {
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(secretKey));
             var auth = authProvider.CreateUserWithEmailAndPasswordAsync(email, passwort).Result;
-
+            
             clientID = auth.User.Email;
 
             var firebaseClient = new FirebaseClient(databaseURL,
