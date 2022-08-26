@@ -12,7 +12,7 @@ namespace Enums
         Party,
         Coop,
         Competitive,
-        SingelPlayer,
+        SinglePlayer,
         Sport,
         Strategie,
         TowerDefence,
@@ -26,6 +26,19 @@ namespace Enums
         LernSpiel,
         OpenWorld,
         ActionRPG,
-        MMORPG
+        MMORPG,
+        BeatmUp,
+        ActionAdventure,
+        ThirdPerson,
+        Crafting,
+        Action,
+        Simulation,
+        ShootmUp,
+        Stealth,
+        Filmspiel,
+        HackAndSlay,
+        PointAndClick,
+        Novel,
+        VR
     }
 }

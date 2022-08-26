@@ -15,7 +15,7 @@ namespace DataManaging
 
         public IEnumerable<Game> Games
         {
-            get => games;
+            get => games.OrderBy(x => x.Name);
             set => games = value.ToList();
 
         }

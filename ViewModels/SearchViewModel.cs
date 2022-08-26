@@ -22,7 +22,7 @@ namespace ViewModels
         {
             List<InfoClass> result = new List<InfoClass>();
 
-            var games = workflow.Games.Where(x => x.Name.Contains(newTextValue));
+            var games = workflow.Games.Where(x => x.Name.ToLower().Contains(newTextValue.ToLower()));
             result = ConvertToInfoClass(games);
 
             return result;
@@ -33,9 +33,13 @@ namespace ViewModels
             List<InfoClass> result = new List<InfoClass>();
             foreach (var game in games)
             {
-                var storage = workflow.Storages.Where(x => x.Games.Contains(game.Id)).First();
-                var konsole = workflow.Konsolen.Where(x => x.Storages.Contains(storage.Id)).First();
-                result.Add(new InfoClass(game.Name, game.SpaceOnSorage, $"{storage.Name} -> {konsole.Name}"));
+                var storages = workflow.Storages.Where(x => x.Games.Contains(game.Id));
+                foreach (var storage in storages)
+                {
+                    var konsoles = workflow.Konsolen.Where(x => x.Storages.Contains(storage.Id));
+                    foreach (var konsole in konsoles)
+                        result.Add(new InfoClass(game.Name, game.SpaceOnSorage, $"{storage.Name} -> {konsole.Name}"));
+                }
             }
             return result;
         }

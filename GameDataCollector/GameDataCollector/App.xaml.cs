@@ -10,8 +10,8 @@ namespace GameDataCollector
 {
     public partial class App : Application
     {
-        private const int GenreCounter = 23;
-        private const int DescriptorCounter = 10;
+        private int GenreCounter = Enum.GetValues(typeof(Genre)).Length;
+        private int DescriptorCounter = Enum.GetValues(typeof(Descriptor)).Length;
         public static List<Genre> AllGenres { get; set; }
         public static List<Descriptor> AllDescriptors { get; set; }
         public static IServiceProvider ServiceProvider { get; set; }

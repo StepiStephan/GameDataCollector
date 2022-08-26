@@ -15,6 +15,27 @@ namespace Enums
         Atmospherisch,
         Lustig,
         Kindheitserinnerung,
-        Fesselnd
+        Fesselnd,
+        Chaotisch,
+        Selbststaendig,
+        Beeindruckend,
+        Berechenbar,
+        Eigenartig,
+        Einfach,
+        Schwer,
+        Erlebnisreich,
+        Unterhaltsam,
+        Innovativ,
+        Intellektuell,
+        Knuffig,
+        Kurios,
+        Lebendig,
+        Objektiv,
+        Paradiesisch,
+        Realistisch,
+        Sachlich,
+        Vollkommen,
+        Wunderschoen,
+        Zaeh
     }
 }

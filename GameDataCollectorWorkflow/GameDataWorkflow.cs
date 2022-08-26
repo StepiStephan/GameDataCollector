@@ -35,7 +35,7 @@ namespace GameDataCollectorWorkflow
         public List<Game> Games
         {
             get => gameManager.Games.ToList();
-            set => gameManager.Games.AsEnumerable();
+            set => gameManager.Games = value.AsEnumerable();
         }
         public string SelectedKonsole => selectedKonsoleId;
         public string SelectedStorage => selectedStorageID;
@@ -241,8 +241,9 @@ namespace GameDataCollectorWorkflow
 
         public List<Game> GetGames()
         {
+            List<Game> games = new List<Game>();
             if (selectedStorageID == null && selectedKonsoleId == null)
-                return Games;
+                games = Games;
             else
             {
                 if(selectedStorageID == null && selectedKonsoleId != null)
@@ -253,16 +254,16 @@ namespace GameDataCollectorWorkflow
                     {
                         result.AddRange(Games.Where(x => GetStorage(storageID).Games.Contains(x.Id)));
                     }
-                    return result;
+                    games = result;
                 }
                 else
                 {
                     var storage = GetStorage(selectedStorageID);
-                    var games = Games.Where(x => storage.Games.Contains(x.Id)).ToList();
-                    return games;
+                    games = Games.Where(x => storage.Games.Contains(x.Id)).ToList();
                 }
             }
 
+            return games.OrderBy(x => x.Name).ToList();
         }
 
         public void MoveGame(string oldStorageId, string gameId, string newStorageId)
