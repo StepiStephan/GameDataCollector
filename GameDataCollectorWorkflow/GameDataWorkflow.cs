@@ -131,7 +131,21 @@ namespace GameDataCollectorWorkflow
 
         public void DeleteGame(string gameId)
         {
-            gameManager.DeleteGame(gameId, storageManager);
+            if(selectedStorageID == null)
+            {
+                if(selectedKonsoleId == null)
+                {
+                    gameManager.DeleteGame(gameId, storageManager);
+                }
+                else
+                {
+                    gameManager.DeleteGame(gameId, storageManager,null, konsoleManager, selectedKonsoleId);
+                }
+            }
+            else
+            {
+                gameManager.DeleteGame(gameId, storageManager, selectedStorageID);
+            }
             OnDataChange();
         }
 
@@ -300,6 +314,19 @@ namespace GameDataCollectorWorkflow
 
             fireBaseWorkFlow.DatabaseLoaded += FireBaseWorkFlow_DatabaseLoaded;
             fireBaseWorkFlow.DatabaseSaved += FireBaseWorkFlow_DatabaseSaved;
+        }
+
+        public void CopyGame(string oldStorageId, string gameId, string newStorageId)
+        {
+            var oldStorage = storageManager.GetStorage(oldStorageId);
+            var newStorage = storageManager.GetStorage(newStorageId);
+            var game = gameManager.GetGame(gameId);
+
+            if (oldStorage != null && newStorage != null && game != null)
+            {
+                newStorage.Games.Add(game.Id);
+                OnDataChange();
+            }
         }
     }
 }

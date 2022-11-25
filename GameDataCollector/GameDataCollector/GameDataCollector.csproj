@@ -25,6 +25,9 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <Compile Update="Views\GamePages\CopyGamePage.xaml.cs">
+      <DependentUpon>CopyGamePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>

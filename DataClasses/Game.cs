@@ -15,7 +15,10 @@ namespace DataClasses
         {
             GameGenre = new List<Genre>();
             GameDiscriptors = new List<Descriptor>();
-
+        }
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

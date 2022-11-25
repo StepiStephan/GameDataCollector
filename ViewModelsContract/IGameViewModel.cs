@@ -24,5 +24,6 @@ namespace ViewModels.Contract
         void MoveGame(string oldStorageId, string gameId, string newStorageId);
         void AddDescriptors(string id, List<Descriptor> selectedDescriptors);
         void DeleteDescription(string gameId, Descriptor descriptor);
+        void CopyGame(string id1, string id2, string id3);
     }
 }

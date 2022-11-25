@@ -38,6 +38,12 @@
                     FontSize="Medium"
                     Padding="20"
                     x:Name="moveGameButton"/>
+            <Button Text="Spiel kopieren" 
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    FontSize="Medium"
+                    Padding="20"
+                    x:Name="copyGameButton"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

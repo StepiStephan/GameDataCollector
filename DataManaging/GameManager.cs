@@ -48,14 +48,39 @@ namespace DataManaging
             dataSaverGame.SaveObject(games);
         }
 
-        public void DeleteGame(string gameId, IStorageManager storageManager)
+        public void DeleteGame(string gameId, IStorageManager storageManager, string storageId = null, IKonsoleManager konsoleManager = null, string konsoleId = null)
         {
-            var storage = storageManager.Storages.Where(x => x.Games.Where(y => y == gameId).FirstOrDefault() != null).FirstOrDefault();
-            if (storage != null)
-            {
-                storage.Games.Remove(gameId);
+
+            if(storageId == null && konsoleId != null && konsoleManager != null)
+            { 
+                var konsole = konsoleManager.Konsoles.Where(x => x.Id == konsoleId).FirstOrDefault();
+                if (konsole != null)
+                {
+                    var storages = storageManager.Storages.Where(x => x.Games.Contains(gameId));
+                    storages = storages.Where(x => konsole.Storages.Contains(x.Id));
+                    foreach (var storage in storages)
+                    {
+                        storage.Games.Remove(gameId);
+                    }
+                }
             }
-            games.Remove(GetGame(gameId));
+            else if(storageId == null && konsoleId == null)
+            {
+                var storage = storageManager.Storages.Where(x => x.Games.Where(y => y == gameId).FirstOrDefault() != null).FirstOrDefault();
+                if (storage != null)
+                {
+                    storage.Games.Remove(gameId);
+                }
+                games.Remove(GetGame(gameId));
+            }
+            else
+            {
+                var storage = storageManager.Storages.Where(x => x.Id == storageId).FirstOrDefault();
+                if(storage != null)
+                {
+                    storage.Games.Remove(gameId);
+                }
+            }
         }
 
         public void AddGame(string storageId, Game game, IKonsoleManager konsoleManager, IStorageManager storageManager)

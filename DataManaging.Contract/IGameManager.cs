@@ -9,7 +9,7 @@ namespace DataManaging.Contract
         IEnumerable<Game> Games { get; set; }
         void AddGame(string storageId, Game game, IKonsoleManager konsoleManager, IStorageManager storageManager);
         void AddGenre(string gameId, List<Genre> genre);
-        void DeleteGame(string gameId, IStorageManager storageManager);
+        void DeleteGame(string gameId, IStorageManager storageManager, string storageId = null, IKonsoleManager konsoleManager = null, string konsoleId = null);
         void DeleteGenre(string gameId, Genre genre);
         void EditGame(string gameId, string name, float space);
         Game GetGame(string gameId);

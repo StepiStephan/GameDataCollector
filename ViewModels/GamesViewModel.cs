@@ -69,13 +69,17 @@ namespace ViewModels
 
         public string[] GetInfos(Game game)
         {
-            var storage = workflow.GetStorages().Where(x => x.Games.Contains(game.Id)).First();
-            var konsole = workflow.Konsolen.Where(x => x.Storages.Contains(storage.Id)).First();
-            return new string[]
-            {
-                konsole.Name,
-                storage.Name
-            };
+            var storage = workflow.GetStorages().Where(x => x.Games.Contains(game.Id)).FirstOrDefault();
+            if(storage != null)
+            { 
+                var konsole = workflow.Konsolen.Where(x => x.Storages.Contains(storage.Id)).First();
+                return new string[]
+                {
+                    konsole.Name,
+                    storage.Name
+                };
+            }
+            return new string[] {string.Empty, string.Empty};
         }
 
         public List<Konsole> GetKonsolen()
@@ -91,6 +95,11 @@ namespace ViewModels
         public void MoveGame(string oldStorageId, string gameId, string newStorageId)
         {
             workflow.MoveGame(oldStorageId, gameId, newStorageId);
+        }
+
+        public void CopyGame(string oldStorageId, string gameId, string newStorageId)
+        {
+            workflow.CopyGame(oldStorageId, gameId, newStorageId);
         }
     }
 }

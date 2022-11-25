@@ -35,7 +35,7 @@ namespace DataManaging
             {
                 await client.Child(clientID).Child(name).DeleteAsync();
             }
-            catch(FirebaseException fe)
+            catch(FirebaseException)
             {
                 await client.Child(clientID).PatchAsync(name);
             }

@@ -22,6 +22,12 @@ namespace GameDataCollector.Views
             addGameButton.Clicked += AddGameButton_Clicked;
             moveGameButton.Clicked += MoveGameButton_Clicked;
             moveStorageButton.Clicked += MoveStorageButton_Clicked;
+            copyGameButton.Clicked += CopyGameButton_Clicked;
+        }
+
+        private async void CopyGameButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CopyGamePage());
         }
 
         private async void MoveStorageButton_Clicked(object sender, EventArgs e)

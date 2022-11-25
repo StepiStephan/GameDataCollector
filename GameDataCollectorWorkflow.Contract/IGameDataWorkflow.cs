@@ -45,5 +45,6 @@ namespace GameDataCollectorWorkflow.Contract
         void SaveData();
         void MoveGame(string oldStorageId, string gameId, string newStorageId);
         void MoveStorage(string oldKonsoleId, string storageId, string newKonsoleId);
+        void CopyGame(string oldStorageId, string gameId, string newStorageId);
     }
 }

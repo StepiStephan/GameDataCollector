@@ -94,7 +94,7 @@ namespace GameDataCollector.Views
                         }
                     }
                     Games.Add(games[value]);
-                    gamesText += games[i] + Environment.NewLine;
+                    gamesText += games[value] + Environment.NewLine;
                 }
 
                 await DisplayAlert("Spiele", gamesText, "OK");
