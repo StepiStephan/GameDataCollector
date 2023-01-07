@@ -21,7 +21,8 @@ namespace test.UWP
         {
             this.InitializeComponent();
 
-            LoadApplication(new GameDataCollector.App());
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments);
+            LoadApplication(new GameDataCollector.App(path));
         }
     }
 }

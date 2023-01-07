@@ -6,16 +6,25 @@
              x:Class="GameDataCollector.Views.WishListPages.WishListPage">
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <FlexLayout HorizontalOptions="Center">
-                <Button Text="Remove"
-                        x:Name="removeEntryButton" Padding="10"/>
-                <Label Text="Wähle eine Konsole"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand" 
-                       Padding="10"/>
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button Text="Add"
-                        x:Name="addEntryButton"/>
-            </FlexLayout>
+                        x:Name="addEntryButton" Padding="10" Margin="5"/>
+
+                <Button Text="Remove"
+                        x:Name="removeEntryButton" Padding="10" Margin="5"/>
+
+                <Button Text="Import"
+                        x:Name="importEntryButton" Padding="10" Margin="5" Clicked="importEntryButton_Clicked"/>
+
+                <Button Text="Export"
+                        x:Name="exportEntryButton" Padding="10" Margin="5" Clicked="exportEntryButton_Clicked"/>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Wähle eine Konsole"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" 
+                       Padding="10"/>
+            </StackLayout>
             <Picker x:Name="konsolePicker"/>
             <!--<ListView x:Name="MyListView"
                       ItemsSource="{Binding WishList}"

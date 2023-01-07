@@ -1,4 +1,5 @@
-﻿using DataClasses;
+﻿using CsvTeDataManagingst;
+using DataClasses;
 using DataManaging;
 using DataManaging.Contract;
 using GameDataCollectorWorkflow;
@@ -43,6 +44,7 @@ namespace Infrastructure
             services.AddSingleton<IFireBaseWorkFlow, FireBaseWorkFlow>();
             services.AddSingleton<IFireBaseConnector, FireBaseConnector>();
             services.AddSingleton<IFireBaseDataHandler, FireBaseDataHandler>();
+            services.AddSingleton<IExternalWishListPaser, CsvParser>();
 
             return services.BuildServiceProvider();
         }

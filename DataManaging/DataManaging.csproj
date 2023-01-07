@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DataClasses\DataClasses.csproj" />
     <ProjectReference Include="..\DataManaging.Contract\DataManaging.Contract.csproj" />
+    <ProjectReference Include="..\Enums\Enums.csproj" />
   </ItemGroup>
 	
 	<ImportGroup>

@@ -10,7 +10,9 @@ namespace ViewModels.Contract
         event EventHandler ItemAdded;
         IEnumerable<string> GetKonsolen();
         IEnumerable<WishListItem> GetItems(string selectedItem);
-        void AddGame(string name, string konsole, string handler, float price);
+        void AddGame(string name, string konsole, List<(string, float)> angebote, DateTime releaseDate);
         void RemoveGame(string iD);
+        List<WishListItem> ImportTableClass(string path);
+        void ExportTableClass(string path, List<WishListItem> table);
     }
 }

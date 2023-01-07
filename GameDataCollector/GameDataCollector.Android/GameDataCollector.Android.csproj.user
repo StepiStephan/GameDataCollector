@@ -2,8 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SelectedDevice>HMD Global Nokia X20</SelectedDevice>
-    <ActiveDebugProfile>HMD Global Nokia X20</ActiveDebugProfile>
-    <DefaultDevice>pixel_3a_xl_r_11_0_-_api_30</DefaultDevice>
+    <ActiveDebugProfile>HMD Global Nokia X20 %28Android 13.0 - API 33%29</ActiveDebugProfile>
+    <DefaultDevice>pixel_5_-_api_33</DefaultDevice>
     <AndroidDesignerPreferredTheme>MainTheme</AndroidDesignerPreferredTheme>
+    <SelectedPlatformGroup>PhysicalDevice</SelectedPlatformGroup>
   </PropertyGroup>
 </Project>

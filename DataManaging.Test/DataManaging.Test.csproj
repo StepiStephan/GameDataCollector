@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataManaging\DataManaging.csproj" />
+    <ProjectReference Include="..\Enums\Enums.csproj" />
     <ProjectReference Include="..\GameDataCollectorWorkflow\GameDataCollectorWorkflow.csproj" />
   </ItemGroup>
 

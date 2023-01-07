@@ -9,8 +9,10 @@ namespace GameDataCollectorWorkflow.Contract
     {
         event EventHandler ListChange;
         List<WishListItem> WishList { get; set; }
-        void AddWishListItem(string name, string konsoleType, string store, float amount);
+        void AddWishListItem(string name, string konsoleType, List<(string store, float amount)> angebote, DateTime releaseDate);
         void RemoveWishListItem(string id);
         void DuplicateForAnoherKonsole(string id, string konsole);
+        void ExportTable(TableClass tableClass , string path);
+        TableClass ImportTable(string path);
     }
 }

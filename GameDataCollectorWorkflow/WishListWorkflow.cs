@@ -20,10 +20,11 @@ namespace GameDataCollectorWorkflow
         private IDataSaver<List<WishListItem>> dataSaver;
         private IDataLoader<List<WishListItem>> dataLoader;
         private IFireBaseWorkFlow fireBaseWorkFlow;
+        private IExternalWishListPaser wishListPaser;
 
         public event EventHandler ListChange;
 
-        public WishListWorkflow(IDataSaver<List<WishListItem>> dataSaver, IDataLoader<List<WishListItem>> dataLoader)
+        public WishListWorkflow(IDataSaver<List<WishListItem>> dataSaver, IDataLoader<List<WishListItem>> dataLoader, IExternalWishListPaser wishListPaser)
         {
             this.dataSaver = dataSaver;
             this.dataSaver.SetName(saveName);
@@ -31,10 +32,12 @@ namespace GameDataCollectorWorkflow
             this.dataLoader.SetName(saveName);
 
             wishList = dataLoader.LoadObject();
-            if(wishList == null)
+            if (wishList == null)
             {
                 wishList = new List<WishListItem>();
             }
+
+            this.wishListPaser = wishListPaser;
         }
 
         public void SetIFirebaseWorkflow(IFireBaseWorkFlow fireBaseWorkFlow)
@@ -54,15 +57,17 @@ namespace GameDataCollectorWorkflow
             ListChange?.Invoke(fireBaseWorkFlow, new EventArgs());
         }
 
-        public void AddWishListItem(string name, string konsoleType, string store, float amount)
+        public void AddWishListItem(string name, string konsoleType, List<(string store, float amount)>angebote, DateTime releaseDate)
         {
             var wishListItem = new WishListItem()
             {
                 ID = Guid.NewGuid().ToString(),
                 Name = name,
                 KonsoleType = konsoleType,
-                Store = store,
-                Ammount = amount
+                Anbieter = angebote,
+                Store = angebote.Where(x => x.amount == angebote.Where(y => y.amount != 0).Min(y => y.amount)).First().store,
+                Ammount = angebote.Where(y => y.amount != 0).Min(x => x.amount),
+                ReleaseDate = releaseDate
             };
             AddItem(wishListItem);
         }
@@ -98,6 +103,16 @@ namespace GameDataCollectorWorkflow
         {
             dataSaver.SaveObject(wishList);
             ListChange?.Invoke(this, new EventArgs());
+        }
+
+        public void ExportTable(TableClass tableClass, string path)
+        {
+            wishListPaser.ParseTable(tableClass, path);
+        }
+
+        public TableClass ImportTable(string path)
+        {
+            return wishListPaser.ParseCsv(path);
         }
     }
 }

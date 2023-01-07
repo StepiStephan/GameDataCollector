@@ -11,6 +11,9 @@ using ViewModels.Contract;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using DevExpress.XamarinForms.DataGrid;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Essentials;
+using System.IO;
 
 namespace GameDataCollector.Views.WishListPages
 {
@@ -29,8 +32,8 @@ namespace GameDataCollector.Views.WishListPages
             WishList = new ObservableCollection<WishListItem>();
             //MyListView.ItemsSource = WishList;
             grid.ItemsSource = WishList;
+            grid.Columns[3].IsVisible = false;
             grid.Columns[0].IsVisible = false;
-            grid.Columns[2].IsVisible = false;
             konsolePicker.ItemsSource = Konsolen;
             konsolePicker.SelectedIndexChanged += KonsolePicker_SelectedIndexChanged;
             addEntryButton.Clicked += AddEntryButton_Clicked;
@@ -90,6 +93,35 @@ namespace GameDataCollector.Views.WishListPages
                 $"Name : {item.Name}" + Environment.NewLine +
                 $"Günstigster Händler: {item.Store}" + Environment.NewLine +
                 $"Günstigster Preis: {item.Ammount}", "OK");
+        }
+
+        private async void importEntryButton_Clicked(object sender, EventArgs e)
+        {
+            var file = await FilePicker.PickAsync();
+
+            if(file != null)
+            {
+                var data = viewmodel.ImportTableClass(file.FullPath);
+                foreach(var item in data)
+                {
+                    var existingItem = WishList.Where(x => x.Name == item.Name && x.KonsoleType == item.KonsoleType).FirstOrDefault();
+                    if (existingItem != null)
+                    {
+                        viewmodel.AddGame(item.Name, item.KonsoleType, item.Anbieter, item.ReleaseDate);
+                    }
+                    else
+                    {
+                        viewmodel.RemoveGame(existingItem.ID);
+                        viewmodel.AddGame(item.Name, item.KonsoleType, item.Anbieter, item.ReleaseDate);
+                    }
+                }
+            }
+        }
+
+        private void exportEntryButton_Clicked(object sender, EventArgs e)
+        {
+            var path = Path.Combine(App.DocumentsPath, "WuenscheSpiele.csv");
+            viewmodel.ExportTableClass(path, WishList.ToList());
         }
     }
 }

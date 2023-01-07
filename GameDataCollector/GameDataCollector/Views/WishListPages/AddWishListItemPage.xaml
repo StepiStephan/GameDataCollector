@@ -4,17 +4,26 @@
              x:Class="GameDataCollector.Views.WishListPages.AddWishListItemPage">
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <Label Text="Spiel:" />
-            <Editor x:Name="name"/>
-            <Label Text="Konsole:" />
-            <Editor x:Name="konsole"/>
-            <Label Text="Anbieter:" />
-            <Editor x:Name="store"/>
-            <Label Text="Kosten:" />
-            <Editor x:Name="price"
-                    Keyboard="Numeric"/>
-            <Button Text="Speichern"
+            <StackLayout x:Name="DataFields" >
+                <Label Text="Spiel:" />
+                <Editor x:Name="name"/>
+                <Label Text="Konsole:" />
+                <Editor x:Name="konsole"/>
+                <Label Text="ReleaseDate:" />
+                <DatePicker x:Name="datePicker" BackgroundColor="LightGray" TextColor="black"/>
+                <Label Text="Anbieter:" />
+                <Editor x:Name="store"/>
+                <Label Text="Kosten:" />
+                <Editor x:Name="price"
+                        Keyboard="Numeric"/>
+                <StackLayout HorizontalOptions="Center">
+                    <Button x:Name="addAnbieter" Text="+"  Clicked="addAnbieter_Clicked"/>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout>
+                <Button Text="Speichern"
                     x:Name="save"/>
+            </StackLayout>  
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

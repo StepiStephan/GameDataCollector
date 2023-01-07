@@ -15,8 +15,10 @@ namespace GameDataCollector
         public static List<Genre> AllGenres { get; set; }
         public static List<Descriptor> AllDescriptors { get; set; }
         public static IServiceProvider ServiceProvider { get; set; }
-        public App()
+        public static string DocumentsPath { get; private set; }
+        public App(string path)
         {
+            DocumentsPath = path;
             DevExpress.XamarinForms.DataGrid.Initializer.Init();
             DevExpress.XamarinForms.Charts.Initializer.Init();
             AllGenres = new List<Genre>();

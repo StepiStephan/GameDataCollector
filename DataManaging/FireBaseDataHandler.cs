@@ -65,7 +65,7 @@ namespace DataManaging
 
         private void StorageListNullReplace(List<List<Konsole>> konsolen)
         {
-            if(konsolen != null)
+            if(konsolen != null && konsolen.Count != 0)
             {
                 var konsoleListe = konsolen[0].Where(x=> x.Storages == null);
                 foreach(var konsole in konsoleListe)
@@ -77,7 +77,7 @@ namespace DataManaging
 
         private void GameListNullReplace(List<List<Storage>> storages)
         {
-            if (storages != null)
+            if (storages != null && storages.Count != 0)
             {
                 var storageListe = storages[0].Where(x => x.Games == null);
                 foreach (var storage in storageListe)
