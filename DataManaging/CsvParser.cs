@@ -14,16 +14,22 @@ namespace CsvTeDataManagingst
         {
             var result = new TableClass();
             var content = File.ReadAllLines(path);
+            ParseLines(result, content);
 
-            foreach(var line in content)
+            return result;
+        }
+
+        public void ParseLines(TableClass result, string[] content)
+        {
+            foreach (var line in content)
             {
-                
+
                 var values = line.Split(';');
 
                 if (values.First() == "Gesamtsumme")
                     break;
 
-                if(line == content.First())
+                if (line == content.First())
                 {
                     result.TableName = values[0];
                 }
@@ -32,59 +38,59 @@ namespace CsvTeDataManagingst
                     var entryCount = values.Where(x => x != string.Empty).Count();
                     if (entryCount != 0)
                     {
-                        if(values.Where(x => float.TryParse(x, out float val)).Count() == 0 && 
+                        if (values.Where(x => float.TryParse(x, out float val)).Count() == 0 &&
                             entryCount == values.Count())
                         {
                             result.ColumnCaptions.AddRange(values);
-                            result.ColumnCaptions.RemoveAt(result.ColumnCaptions.Count-1);
+                            result.ColumnCaptions.RemoveAt(result.ColumnCaptions.Count - 1);
                         }
                         else
-                        { 
+                        {
                             int index = 0;
                             result.Content.Names.Add(values[index].Trim());
                             index++;
 
-                            if (values.Length >= 7)
+                            if (values.Length >= 5)
                             {
-                                result.Content.ConsoleType.Add(values[index]);
-                                index ++;
+                                if (values.Length >= 7)
+                                {
+                                    result.Content.ConsoleType.Add(values[index]);
+                                    index++;
+                                }
+                                else
+                                    result.Content.ConsoleType.Add(string.Empty);
+
+                                result.Content.ReleaseDate.Add(DateTime.TryParse(values[index], out DateTime date) ? date : new DateTime());
+                                index++;
+
+                                if (values[index] != string.Empty)
+                                    result.Content.Pice1.Add(float.TryParse(values[index].Substring(0, values[index].Length - 1), out float val) ? val : 0);
+                                else
+                                    result.Content.Pice1.Add(0);
+                                index++;
+
+                                if (values[index] != string.Empty)
+                                    result.Content.Pice2.Add(float.TryParse(values[index].Substring(0, values[index].Length - 1), out float val) ? val : 0);
+                                else
+                                    result.Content.Pice2.Add(0);
+                                index++;
+
+                                if (values[index] != string.Empty)
+                                    result.Content.Pice3.Add(float.TryParse(values[index].Substring(0, values[index].Length - 1), out float val) ? val : 0);
+                                else
+                                    result.Content.Pice3.Add(0);
+                                index++;
+
+                                if (values.Length >= 6)
+                                    result.Content.Günstigster.Add(float.TryParse(values[index].Substring(0, values[index].Length - 1), out float cheap) ? cheap : 0);
+                                else
+                                    result.Content.Günstigster.Add(0);
+
                             }
-                            else
-                                result.Content.ConsoleType.Add(string.Empty);
-
-                            result.Content.ReleaseDate.Add(DateTime.TryParse(values[index], out DateTime date) ? date : new DateTime());
-                            index++;
-
-                            if (values[index] != string.Empty)
-                                result.Content.Pice1.Add(float.TryParse(values[index].Substring(0, values[index].Length - 1), out float val) ? val : 0);
-                            else
-                                result.Content.Pice1.Add(0);
-                            index++;
-
-                            if (values[index] != string.Empty)
-                                result.Content.Pice2.Add(float.TryParse(values[index].Substring(0, values[index].Length - 1), out float val) ? val : 0);
-                            else
-                                result.Content.Pice2.Add(0);
-                            index++;
-
-                            if (values[index] != string.Empty)
-                                result.Content.Pice3.Add(float.TryParse(values[index].Substring(0, values[index].Length - 1), out float val) ? val : 0);
-                            else 
-                                result.Content.Pice3.Add(0);
-                            index++;
-
-                            if (values.Length >= 6)
-                                result.Content.Günstigster.Add(float.TryParse(values[index].Substring(0, values[index].Length - 1), out float cheap) ? cheap : 0);
-                            else
-                                result.Content.Günstigster.Add(0);
-
-
                         }
                     }
                 }
             }
-
-            return result;
         }
 
         public void ParseTable(TableClass table, string path)

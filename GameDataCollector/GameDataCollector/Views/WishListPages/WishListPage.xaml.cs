@@ -30,7 +30,6 @@ namespace GameDataCollector.Views.WishListPages
             viewmodel = App.ServiceProvider.GetService<IWishListViewModel>();
             Konsolen = new ObservableCollection<string>(viewmodel.GetKonsolen());
             WishList = new ObservableCollection<WishListItem>();
-            //MyListView.ItemsSource = WishList;
             grid.ItemsSource = WishList;
             grid.Columns[3].IsVisible = false;
             grid.Columns[0].IsVisible = false;
@@ -95,7 +94,7 @@ namespace GameDataCollector.Views.WishListPages
                 $"Günstigster Preis: {item.Ammount}", "OK");
         }
 
-        private async void importEntryButton_Clicked(object sender, EventArgs e)
+        private async void ImportEntryButton_Clicked(object sender, EventArgs e)
         {
             var file = await FilePicker.PickAsync();
 
@@ -105,7 +104,7 @@ namespace GameDataCollector.Views.WishListPages
                 foreach(var item in data)
                 {
                     var existingItem = WishList.Where(x => x.Name == item.Name && x.KonsoleType == item.KonsoleType).FirstOrDefault();
-                    if (existingItem != null)
+                    if (existingItem == null)
                     {
                         viewmodel.AddGame(item.Name, item.KonsoleType, item.Anbieter, item.ReleaseDate);
                     }
@@ -118,7 +117,7 @@ namespace GameDataCollector.Views.WishListPages
             }
         }
 
-        private void exportEntryButton_Clicked(object sender, EventArgs e)
+        private void ExportEntryButton_Clicked(object sender, EventArgs e)
         {
             var path = Path.Combine(App.DocumentsPath, "WuenscheSpiele.csv");
             viewmodel.ExportTableClass(path, WishList.ToList());

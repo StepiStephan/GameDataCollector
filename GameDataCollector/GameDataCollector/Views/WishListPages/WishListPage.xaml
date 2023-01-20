@@ -14,10 +14,10 @@
                         x:Name="removeEntryButton" Padding="10" Margin="5"/>
 
                 <Button Text="Import"
-                        x:Name="importEntryButton" Padding="10" Margin="5" Clicked="importEntryButton_Clicked"/>
+                        x:Name="importEntryButton" Padding="10" Margin="5" Clicked="ImportEntryButton_Clicked"/>
 
                 <Button Text="Export"
-                        x:Name="exportEntryButton" Padding="10" Margin="5" Clicked="exportEntryButton_Clicked"/>
+                        x:Name="exportEntryButton" Padding="10" Margin="5" Clicked="ExportEntryButton_Clicked"/>
             </StackLayout>
             <StackLayout>
                 <Label Text="Wähle eine Konsole"

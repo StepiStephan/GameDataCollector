@@ -1,7 +1,9 @@
-﻿using DataClasses;
+﻿using CsvTeDataManagingst;
+using DataClasses;
 using Enums;
 using GameDataCollectorWorkflow;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +19,7 @@ namespace DataManaging.Test
         Storage newStorage;
         Storage intern;
         Game game;
+        CsvParser csvParser;
 
         [SetUp]
         public void Setup()
@@ -24,6 +27,7 @@ namespace DataManaging.Test
             gm = new GameManager(new DataSaver<List<Game>>(), new DataLoader<List<Game>>());
             sm = new StorageManager(new DataSaver<List<Storage>>(), new DataLoader<List<Storage>>());
             km = new KonsoleManager(new DataSaver<List<Konsole>>(), new DataLoader<List<Konsole>>());
+            csvParser= new CsvParser();
             dataManager = new GameDataCollectorWorkflow.GameDataWorkflow(gm, sm, km);
 
             konsole = dataManager.CreateKonsole("XBoxX-alt", "XBox Sieres X", 500);
@@ -376,6 +380,38 @@ namespace DataManaging.Test
             dataManager.DeleteStorage(newStorage.Id);
 
             Assert.Pass();
+        }
+
+        [Test]
+        public void CsvParserTest()
+        {
+            var tableName = "Playstation 5";
+            var tableHeader = "Name;Erscheinungsdatum;Preis(NetGames);Preis(Medimops);Preis(Rebuy)";
+            var game1 = "God Of War;18.10.2022;50;40;30";
+            var game2 = "A Plaque Tale Requiem;2.4.2023;60;;;";
+
+            string[] testCase = new string[] 
+            {
+                tableName,
+                tableHeader,
+                game1,
+                game2
+            };
+            TableClass tableClass = new TableClass();
+            csvParser.ParseLines(tableClass, testCase);
+
+            Assert.AreEqual(tableClass.TableName, tableName);
+            Assert.AreEqual(tableClass.ColumnCaptions[0], "Name");
+            Assert.AreEqual(tableClass.ColumnCaptions[1], "Erscheinungsdatum");
+            Assert.AreEqual(tableClass.ColumnCaptions[2], "NetGames");
+            Assert.AreEqual(tableClass.ColumnCaptions[3], "Medimops");
+            Assert.AreEqual(tableClass.ColumnCaptions[4], "Rebuy");
+            Assert.AreEqual(tableClass.Content.Names[0], "God Of War");
+            Assert.AreEqual(tableClass.Content.Names[1], "A Plaque Tale Requiem");
+            Assert.AreEqual(tableClass.Content.Günstigster[0], 30f);
+            Assert.AreEqual(tableClass.Content.Günstigster[1], 60f);
+            Assert.AreEqual(tableClass.Content.ReleaseDate[0], new DateTime(2022, 10, 18));
+            Assert.AreEqual(tableClass.Content.ReleaseDate[1], new DateTime(2023, 4, 2));
         }
     }
 }
